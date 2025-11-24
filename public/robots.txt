@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://quint-felicity.de/sitemap.xml

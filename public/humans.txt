@@ -1,0 +1,13 @@
+/* TEAM */
+Band: Quint Felicity
+Website: https://quint-felicity.de
+Developer: Finn :) (TeaSpoon Development on teaspoon.de)
+
+/* SOCIALS */
+Instagram: https://instagram.com/quint.felicity
+YouTube: https://www.youtube.com/@QuintFelicity
+
+/* CREDITS */
+Music: Quint Felicity
+Design: In-House
+Server: Self-hosted (LEMP Stack)
