@@ -20,9 +20,11 @@ if (empty($_SESSION["csrf_token"])) {
 require_once __DIR__ . '/../src/Router.php';
 require_once __DIR__ . '/../src/Database.php';
 require_once __DIR__ . '/../src/Controllers/SongController.php';
-require_once __DIR__ . '/../src/Controllers/UserController.php';
 require_once __DIR__ . '/../src/Models/Song.php';
+require_once __DIR__ . '/../src/Controllers/UserController.php';
 require_once __DIR__ . '/../src/Models/User.php';
+require_once __DIR__ . '/../src/Controllers/EventController.php';
+require_once __DIR__ . '/../src/Models/Event.php';
 
 $router = new Router();
 
@@ -48,5 +50,13 @@ $router->get('/songs/{id}', [SongController::class, 'show']);
 $router->get('/songs/{id}/edit', [SongController::class, 'edit']);
 $router->post('/songs/{id}/edit', [SongController::class, 'update']);
 $router->post('/songs/{id}/delete', [SongController::class, 'delete']);
+// Events
+$router->get('/events', [EventController::class, 'index']);
+$router->get('/events/create', [EventController::class, 'create']);
+$router->post('/events', [EventController::class, 'store']);
+$router->get('/events/{id}', [EventController::class, 'show']);
+$router->get('/events/{id}/edit', [EventController::class, 'edit']);
+$router->post('/events/{id}/edit', [EventController::class, 'update']);
+$router->post('/events/{id}/delete', [EventController::class, 'delete']);
 
 $router->run();
