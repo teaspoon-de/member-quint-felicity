@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["username"]) && isset(
         die("User nicht gefunden.");
     } else if (password_verify($_POST["password"], $user["password"])) {
         session_regenerate_id(true);
-        $_SESSION["user"] = $user["username"];
+        $_SESSION["user"] = $user["username"]; // "user_id"
         header("Location: dashboard.php");
         exit;
     } else {

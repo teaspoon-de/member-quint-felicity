@@ -16,7 +16,8 @@ services:
   php:
     image: ghcr.io/teaspoon-de/prod-php:latest
     volumes:
-      - ./public:/var/www/html
+      - ./public:/var/www/html/public
+      - ./src:/var/www/html/src
     working_dir: /var/www/html
     networks:
       - phpnet
@@ -25,13 +26,13 @@ services:
   mysql:
     image: mysql:8.0
     container_name: mysql
-    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root # das kann nicht sicher sein
     volumes:
       - ./mysql/data:/var/lib/mysql
+      - ./db-init.sql:/docker-entrypoint-initdb.d/site1.sql
     ports:
-      - "3306:3306" # unnötog? gui geht prob eh nicht
+      - 3306:3306 # unnötog? gui geht prob eh nicht
     networks:
       - dbnet
 

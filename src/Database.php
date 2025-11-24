@@ -6,7 +6,7 @@ class Database {
 
     public static function getConnection(): PDO {
         if (self::$pdo === null) {
-            $host = "localhost";
+            $host = "mysql";
             $db = "quint_felicity";
             $user = "www_quint_felicity";
             $pass = "YqDW4k6EMKp1lBS8IatiP0lh2Mruvohe";

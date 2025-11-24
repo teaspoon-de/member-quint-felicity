@@ -19,6 +19,14 @@ class Router
         $method = $_SERVER['REQUEST_METHOD'];
         $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
+        if (in_array($method, ['POST', 'PUT', 'DELETE'])) {
+            if (!$this->validCsrfToken()) {
+                http_response_code(403);
+                echo "CSRF validation failed.";
+                return;
+            }
+        }
+
         foreach ($this->routes[$method] ?? [] as [$pattern, $callback]) {
             $regex = preg_replace('#\{[^/]+\}#', '([^/]+)', $pattern);
 
@@ -30,6 +38,13 @@ class Router
 
         http_response_code(404);
         echo "404 – Not found";
+    }
+    
+    private function validCsrfToken() {
+        if (!isset($_POST['csrf_token'], $_SESSION['csrf_token'])) {
+            return false;
+        }
+        return hash_equals($_SESSION['csrf_token'], $_POST['csrf_token']);
     }
 
     private function execute($callback, $params)

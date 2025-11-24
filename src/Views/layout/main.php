@@ -12,6 +12,12 @@
     <nav>
         <a href="/songs">Songs</a>
     </nav>
+    <nav>
+        <a href="/members">Band Mitglieder</a>
+    </nav>
+    <nav>
+        <a href="/account">Konto</a>
+    </nav>
 </header>
 
 <main>

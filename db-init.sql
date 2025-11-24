@@ -24,17 +24,35 @@ CREATE TABLE IF NOT EXISTS site_meta (
 
 -- TABLES
 
-CREATE TABLE IF NOT EXISTS users {
+CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    email VARCHAR(255) NULL,
     username VARCHAR(255) NOT NULL,
     name VARCHAR(255) NULL,
+    email VARCHAR(255) NULL,
     password VARCHAR(255) NOT NULL,
-    intrument VARCHAR(255) NULL,
+    instrument VARCHAR(255) NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-};
+);
 
-CREATE TABLE IF NOT EXISTS events {
+CREATE TABLE IF NOT EXISTS privileges (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    rank INT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS user_privileges (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    privilege_id INT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (privilege_id) REFERENCES privileges(id)
+        ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS events (
     id INT AUTO_INCREMENT PRIMARY KEY,
     type ENUM('show', 'rehearsal', 'other') NOT NULL,
     title VARCHAR(255) NOT NULL,
@@ -45,9 +63,9 @@ CREATE TABLE IF NOT EXISTS events {
     deadline DATETIME NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     -- blogpost Ankündigung/Nachbearbeitung
-};
+);
 
-CREATE TABLE IF NOT EXISTS event_registration {
+CREATE TABLE IF NOT EXISTS event_registration (
     id INT AUTO_INCREMENT PRIMARY KEY,
     event_id INT NOT NULL,
     user_id INT NOT NULL,
@@ -58,9 +76,9 @@ CREATE TABLE IF NOT EXISTS event_registration {
         ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users(id)
         ON DELETE CASCADE
-};
+);
 
-CREATE TABLE IF NOT EXISTS songs {
+CREATE TABLE IF NOT EXISTS songs (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NULL,
     artists VARCHAR(255) NULL,
@@ -72,9 +90,9 @@ CREATE TABLE IF NOT EXISTS songs {
     status ENUM('red', 'orange', 'green') DEFAULT 'red',
     notes TEXT NULL,
     added_at DATETIME DEFAULT CURRENT_TIMESTAMP
-};
+);
 
-CREATE TABLE IF NOT EXISTS song_transitions {
+CREATE TABLE IF NOT EXISTS song_transitions (
     id INT AUTO_INCREMENT PRIMARY KEY,
     from_id INT NOT NULL,
     to_id INT NOT NULL,
@@ -85,17 +103,17 @@ CREATE TABLE IF NOT EXISTS song_transitions {
         ON DELETE CASCADE,
     FOREIGN KEY (to_id) REFERENCES songs(id)
         ON DELETE CASCADE
-};
+);
 
-CREATE TABLE IF NOT EXISTS setlists {
+CREATE TABLE IF NOT EXISTS setlists (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     description TEXT NULL,
     event_id INT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-};
+);
 
-CREATE TABLE IF NOT EXISTS setlist_items {
+CREATE TABLE IF NOT EXISTS setlist_items (
     id INT AUTO_INCREMENT PRIMARY KEY,
     type ENUM('song', 'transition', 'note') NOT NULL,
     setlist_id INT NOT NULL,
@@ -109,9 +127,9 @@ CREATE TABLE IF NOT EXISTS setlist_items {
         ON DELETE CASCADE,
     FOREIGN KEY (song_id) REFERENCES songs(id),
     FOREIGN KEY (transition_id) REFERENCES song_transitions(id)
-};
+);
 
-CREATE TABLE IF NOT EXISTS event_setlist {
+CREATE TABLE IF NOT EXISTS event_setlist (
     id INT AUTO_INCREMENT PRIMARY KEY,
     event_id INT NOT NULL,
     setlist_id INT NOT NULL,
@@ -120,9 +138,9 @@ CREATE TABLE IF NOT EXISTS event_setlist {
         ON DELETE CASCADE,
     FOREIGN KEY (setlist_id) REFERENCES setlists(id)
         ON DELETE CASCADE
-};
+);
 
-CREATE TABLE IF NOT EXISTS rehearsal_songs {
+CREATE TABLE IF NOT EXISTS rehearsal_songs (
     id INT AUTO_INCREMENT PRIMARY KEY,
     event_id INT NOT NULL,
     song_id INT NOT NULL,
@@ -133,4 +151,4 @@ CREATE TABLE IF NOT EXISTS rehearsal_songs {
         ON DELETE CASCADE,
     FOREIGN KEY (song_id) REFERENCES songs(id)
         ON DELETE CASCADE
-};
+);
