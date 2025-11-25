@@ -8,8 +8,8 @@ class Database {
         if (self::$pdo === null) {
             $host = "mysql";
             $db = "quint_felicity";
-            $user = "www_quint_felicity";
-            $pass = "YqDW4k6EMKp1lBS8IatiP0lh2Mruvohe";
+            $user = getenv('DB_USER');
+            $pass = getenv('DB_PASSWORD');
             $charset = "utf8";
 
             $dsn = "mysql:host=$host;dbname=$db;charset=$charset";

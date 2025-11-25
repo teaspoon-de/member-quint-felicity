@@ -25,11 +25,11 @@ class SongController
         $this->render('songs/show', compact('song'));
     }
 
-    public function create()
+    public function add()
     {
-        $this->render('songs/create');
+        $this->render('songs/add');
     }
-
+    
     public function store()
     {
         Song::create($_POST);

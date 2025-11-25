@@ -1,6 +1,6 @@
 <h1>Songs</h1>
 
-<a href="/songs/create">+ Song hinzufügen</a>
+<a href="/songs/add">+ Song hinzufügen</a>
 
 <ul>
     <?php foreach ($songs as $song): ?>

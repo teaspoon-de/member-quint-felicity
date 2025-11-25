@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__ . '/../src/Database.php';
+require_once __DIR__ . '/../src/Controllers/SpotifyController.php';
+SpotifyController::getAccessToken();
 
 if (session_status() === PHP_SESSION_NONE) {
     /*$pdo = Database::getConnection();
@@ -44,8 +46,8 @@ $router->post('/account/edit', [UserController::class, 'update']);
 $router->post('/members/{id}/delete', [UserController::class, 'delete']);
 // Songs
 $router->get('/songs', [SongController::class, 'index']);
-$router->get('/songs/create', [SongController::class, 'create']);
-$router->post('/songs', [SongController::class, 'store']);
+$router->get('/songs/add', [SongController::class, 'add']);
+$router->post('/songs/add', [SongController::class, 'store']);
 $router->get('/songs/{id}', [SongController::class, 'show']);
 $router->get('/songs/{id}/edit', [SongController::class, 'edit']);
 $router->post('/songs/{id}/edit', [SongController::class, 'update']);
