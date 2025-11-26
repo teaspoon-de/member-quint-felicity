@@ -34,11 +34,11 @@ class Song {
         $pdo = Database::getConnection();
         $stmt = $pdo->prepare("UPDATE songs SET original_key=?, transposed_by=?, status=?, notes=?  WHERE id=?");
         return $stmt->execute([
-            $data["title"] ?? null,
-            $data["artists"] ?? null,
-            $data["cover_url"] ?? null,
-            $data["duration"] ?? null,
-            $data["spotify_id"] ?? null
+            $data["original_key"] ?? null,
+            $data["transposed_by"] ?? null,
+            $data["status"] ?? null,
+            $data["notes"] ?? null,
+            $id
         ]);
     }
 

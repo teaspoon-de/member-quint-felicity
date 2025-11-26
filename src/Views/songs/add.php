@@ -7,6 +7,8 @@
 <form id="saveForm" action="/songs/add" method="POST">
     <input type="hidden" id="title" name="title">
     <input type="hidden" id="artists" name="artists">
+    <input type="hidden" id="cover_url" name="cover_url">
+    <input type="hidden" id="duration" name="duration">
     <input type="hidden" id="spotify_id" name="spotify_id">
     <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
 </form>
@@ -28,7 +30,7 @@ async function search(q) {
     li.innerHTML = `
       <img src="${track.album.images[2].url}">
       ${track.name} – ${track.artists[0].name}: ${track.duration_ms}
-      <button onclick="selectTrack('${track.name}', '${track.artists[0].name}', '${track.album.images[0].url}', '${track.duration_ms}', '${track.id}', )">
+      <button onclick="selectTrack('${track.name}', '${track.artists[0].name}', '${track.album.images[0].url}', '${track.duration_ms}', '${track.id}')">
         übernehmen
       </button>
     `;
@@ -37,9 +39,11 @@ async function search(q) {
   });
 }
 
-function selectTrack(name, artists, id) {
+function selectTrack(name, artists, cover_url, duration, id) {
   document.getElementById('title').value = name;
   document.getElementById('artists').value = artists;
+  document.getElementById('cover_url').value = cover_url;
+  document.getElementById('duration').value = duration;
   document.getElementById('spotify_id').value = id;
   document.getElementById('saveForm').submit();
 }

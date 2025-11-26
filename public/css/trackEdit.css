@@ -1,0 +1,250 @@
+#track {
+    z-index: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    top: 64px;
+    margin: 60px;
+    margin-bottom: 184px;
+}
+
+#warn {
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+    border-radius: 15px;
+    background-color: var(--cbglc);
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+#warn svg {
+    height: 40px;
+    width: 40px;
+    min-width: 40px;
+    flex-basis: 40px;
+}
+#warn p {
+    flex-grow: 1;
+    font-size: 23px;
+    font-weight: 400;
+}
+#warn input { 
+    z-index: 100;
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+} 
+
+#track h2 {
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: -20px;
+}
+
+#track .info {
+    position: relative;
+}
+#track .info h1 {
+    text-align: center;
+    width: 100%;
+    font-size: 40px;
+    padding-bottom: 10px;
+    font-weight: 700;
+}
+#track .info h3 {
+    text-align: center;
+    font-size: 23px;
+    font-weight: 300;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+#track .info p {
+    margin-top: -4px;
+    text-align: center;
+    padding: 20px;
+    font-size: 23px;
+    font-weight: 300;
+    color: var(--blue);
+}
+
+#track .transpose {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#track .transpose div {
+    padding: 20px;
+    background-color: var(--cbglc);
+    border-radius: 15px;
+    font-size: 24px;
+}
+#track .transpose .tr {
+    cursor: pointer;
+    height: 24px;
+    width: 24px;
+    text-align: center;
+    font-size: 30px;
+    padding-top: 14px;
+    padding-bottom: 26px;
+}
+#track .transpose div div {
+    padding: 0px;
+}
+#track .transpose input {
+    background-color: var(--cbgc);
+    height: 24px;
+    width: 30px;
+    text-align: center;
+    font-size: 24px;
+    padding: 18px;
+    outline: none;
+    color: var(--ctext);
+    border-style: solid;
+    border-radius: 7px;
+    border-width: 2px;
+    border-color: var(--invis);
+}
+#track .transpose input:focus {
+    border-color: var(--ctextc);
+}
+#track .transpose .input {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+#track .transpose .input #key {
+    display: flex;
+    align-items: center;
+    border-radius: 7px;
+    background-color: var(--cbgc);
+}
+#track .transpose .input #key input {
+    z-index: 100;
+    background-color: var(--invis);
+    width: 32px;
+    padding-left: 18px;
+    padding-right: 8px;
+}
+#track .transpose .input #key #min {
+    padding-left: 8px;
+    padding-right: 40px;
+}
+#track .transpose .input #key #min + p {
+    z-index: 50;
+    margin-left: -40px;
+    padding-right: 20px;
+}
+
+
+
+#track .transpose .transposeb {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    border-radius: 15px;
+    background-color: var(--cbgc);
+    width: fit-content;
+}
+#track .transpose .setlist {
+    background-color: var(--green);
+}
+#track .transpose .transposeb p {
+    font-size: 23px;
+    font-weight: 300;
+}
+#track .transpose .transposeb .by {
+    width: 40px;
+    height: max-content;
+    padding: 10px;
+}
+#track .transpose .transposeb .key {
+    width: 40px;
+    padding-left: 30px;
+    padding-right: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-left-style: solid;
+    border-left-width: 2px;
+    border-left-color: var(--ctextc);
+}
+#track .transpose .transposeb .key .bold {
+    font-weight: 800;
+}
+#track .transpose .transposeb .key minor {
+    border-top-style: solid;
+    border-top-width: 2px;
+    border-top-color: var(--ctextc);
+}
+
+
+
+
+
+
+#track #tonart {
+    cursor: pointer;
+    display: flex;
+    width: fit-content;
+    border-radius: 15px;
+
+}
+#track #tonart p {
+    font-size: 24px;
+    border-radius: 15px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    padding: 18px;
+    background-color: var(--cbglc);
+    border-style: solid;
+    border-width: 2px;
+    border-color: var(--cbglc);
+}
+#track #tonart #moll {
+    border-radius: 0px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+#track #tonart .selected {
+    background-color: var(--cbgc);
+    border-color: var(--ctextc);
+}
+
+
+
+#track .notes {
+    display: flex;
+    background-color: var(--cbglc);
+    border-radius: 15px;
+    align-items: stretch;
+    justify-items: stretch;
+}
+#track .notes textarea {
+    width: 100%;
+    height: 100px;
+    resize: none;
+    padding: 18px;
+    outline: none;
+    background-color: var(--invis);
+    border-radius: 15px;
+    border-style: solid;
+    border-color: var(--invis);
+    border-width: 2px;
+    color: var(--ctext);
+    font-size: 18px;
+    font-family: var(--cfont);
+}
+#track .notes textarea:focus {
+    background-color: var(--cbgc);
+    border-color: var(--ctextc);
+}

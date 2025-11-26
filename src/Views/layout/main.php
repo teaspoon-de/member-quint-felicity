@@ -3,29 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Band App</title>
+    <meta name="viewport" content="width=device-width initial-scale=0.60">
+    <script src="/js/jquery-3.6.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 
 <body>
-<header>
-    <h1>Band App</h1>
-    <nav>
-        <a href="/songs">Songs</a>
-    </nav>
-    <nav>
-        <a href="/members">Band Mitglieder</a>
-    </nav>
-    <nav>
-        <a href="/account">Konto</a>
-    </nav>
-</header>
 
 <main>
     <?= $content ?>
 </main>
 
 <section id="menu">
-    <menu id="mhome" data-link="/repertoire">
+    <menu id="mhome" data-link="/songs">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-fold-icon lucide-calendar-fold"><path d="M3 20a2 2 0 0 0 2 2h10a2.4 2.4 0 0 0 1.706-.706l3.588-3.588A2.4 2.4 0 0 0 21 16V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z"/><path d="M15 22v-5a1 1 0 0 1 1-1h5"/><path d="M8 2v4"/><path d="M16 2v4"/><path d="M3 10h18"/></svg>
+        <h1 class="unselectable">Events</h1>
+    </menu>
+    <menu id="mhome" data-link="/songs">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-library-icon lucide-library"><path d="m16 6 4 14"/><path d="M12 6v14"/><path d="M8 8v12"/><path d="M4 4v16"/></svg>
         <h1 class="unselectable">Repertoire</h1>
     </menu>
@@ -45,7 +42,7 @@
 
     function getLink(link) {
         var bandId = window.location.pathname.substring(1).split("/")[1];
-        return "/bands/" + bandId + link;
+        return link;
     }
 </script>
 
