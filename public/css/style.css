@@ -276,7 +276,7 @@ html, body {
     border-bottom-style: solid;
     border-bottom-width: 2px;
     border-bottom-color: var(--ctextc);
-    padding-bottom: 80px;
+    padding-bottom: 40px;
     line-height: 100px;
 }
 #top p {

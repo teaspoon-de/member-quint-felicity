@@ -55,7 +55,7 @@ $router->post('/songs/{id}/delete', [SongController::class, 'delete']);
 // Events
 $router->get('/events', [EventController::class, 'index']);
 $router->get('/events/create', [EventController::class, 'create']);
-$router->post('/events', [EventController::class, 'store']);
+$router->post('/events/create', [EventController::class, 'store']);
 $router->get('/events/{id}', [EventController::class, 'show']);
 $router->get('/events/{id}/edit', [EventController::class, 'edit']);
 $router->post('/events/{id}/edit', [EventController::class, 'update']);

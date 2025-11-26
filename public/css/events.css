@@ -1,0 +1,153 @@
+.section {
+    padding: 40px;
+    padding-top: 0px;
+}
+
+h3 {
+    font-size: 35px;
+    margin-bottom: 20px;
+}
+
+#registrations .container {
+    margin-top: 30px;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--cbgc);
+    overflow: hidden;
+}
+
+#regArea {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+#regArea .option {
+    background-color: var(--cbglc);
+}
+#regNo {
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+#regArea input {
+    position: absolute;
+    opacity: 0;
+    height: 0;
+    width: 0;
+}
+#regArea input + #regYes {
+    background-color: var(--green);
+}
+#regArea input:checked + #regMaybe {
+    background-color: var(--yellow);
+}
+#regArea input:checked + #regNo {
+    background-color: var(--red);
+}
+
+#regArea svg {
+    height: 50px;
+    width: 50px;
+}
+
+#regArea div {
+    flex-grow: 1;
+    flex-basis: 0;
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#registrations li {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    gap: 20px;
+}
+
+#registrations li ul {
+    display: flex;
+    align-items: stretch;
+    gap: 20px;
+}
+#registrations li ul svg {
+    margin-top: 3px;
+    height: 40px;
+    width: 40px;
+    flex-shrink: 0;
+}
+#registrations li ul h4 {
+    font-size: 25px;
+}
+#registrations li ul p {
+    font-size: 20px;
+}
+#registrations li ul div {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.kvRow {
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--cbgc);
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.kvRow div {
+    flex-grow: 1;
+    flex-basis: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-left-style: solid;
+    border-width: 2px;
+    border-color: var(--ctextc);
+}
+.kvRow > div:first-child {
+    border-left-style: none;
+}
+.kvRow value {
+    font-size: 35px;
+    font-weight: 800;
+}
+.kvRow p {
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--ctextc);
+}
+.kvLong {
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    gap: 10px;
+}
+.kvLong value {
+    font-size: 20px;
+    font-weight: 400;
+}
+.kvLong p {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--ctextc);
+}
+
+#infos .container {
+    border-radius: 30px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--cbgc);
+    gap: 20px;
+    padding-bottom: 30px;
+}
+
+#setlist {
+    margin-bottom: 100px;
+}

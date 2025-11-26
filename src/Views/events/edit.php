@@ -1,36 +1,58 @@
-<h1>Song bearbeiten</h1>
+<?php
+$backURI = "/events/".$event['id'];
+require __DIR__ . "/../layout/topBarEdit.php";
+?>
 
-<form action="/songs/<?= $song['id'] ?>/edit" method="post">
+<form action="/events/<?= $event['id'] ?>/edit" method="post">
     <input type="hidden" name="_method" value="PUT">
-
     <p>
         <label for="title">Titel</label><br>
         <input 
             type="text" 
             id="title" 
             name="title" 
-            value="<?= htmlspecialchars($song['title'] ?? '') ?>"
+            value="<?= htmlspecialchars($event['title'] ?? '') ?>"
             required
         >
     </p>
 
     <p>
-        <label for="artists">Interpret</label><br>
+        <label for="date_begin">Beginn</label><br>
         <input 
-            type="text" 
-            id="artists" 
-            name="artists" 
-            value="<?= htmlspecialchars($song['artists'] ?? '') ?>"
+            type="datetime-local" 
+            id="date_begin" 
+            name="date_begin" 
+            value="<?=$song['date_begin']?>"
             required
         >
     </p>
 
     <p>
-        <label for="cover_url">Cover-Bild URL</label><br>
+        <label for="public_entry">Public Entry</label><br>
         <input 
-            type="url" 
-            id="cover_url" 
-            name="cover_url" 
+            type="datetime" 
+            id="public_entry" 
+            name="public_entry" 
+            value="<?= htmlspecialchars($song['cover_url'] ?? '') ?>"
+        >
+    </p>
+
+    <p>
+        <label for="deadline">Deadline</label><br>
+        <input 
+            type="datetime" 
+            id="deadline" 
+            name="deadline" 
+            value="<?= htmlspecialchars($song['cover_url'] ?? '') ?>"
+        >
+    </p>
+
+    <p>
+        <label for="deadline">Deadline</label><br>
+        <input 
+            type="datetime" 
+            id="deadline" 
+            name="deadline" 
             value="<?= htmlspecialchars($song['cover_url'] ?? '') ?>"
         >
     </p>

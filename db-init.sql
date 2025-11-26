@@ -51,6 +51,16 @@ CREATE TABLE IF NOT EXISTS user_privileges (
         ON DELETE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS images (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    uri VARCHAR(255) NOT NULL,
+    title VARCHAR(255) NULL,
+    description TEXT NULL,
+    alt VARCHAR(255) NULL,
+    taken_at DATETIME NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE TABLE IF NOT EXISTS events (
     id INT AUTO_INCREMENT PRIMARY KEY,
     type ENUM('show', 'rehearsal', 'other') NOT NULL,
@@ -58,10 +68,30 @@ CREATE TABLE IF NOT EXISTS events (
     description VARCHAR(255) NULL,
     location VARCHAR(255) NULL,
     notes TEXT NULL,
-    date DATETIME NOT NULL,
+    date_begin DATETIME NOT NULL,
+    date_end DATETIME NULL,
+    public_entry DATETIME NULL,
     deadline DATETIME NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-    -- blogpost Ankündigung/Nachbearbeitung
+);
+
+CREATE TABLE IF NOT EXISTS blogposts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    cover_id INT NULL,
+    content TEXT NULL,
+    last_edit DATETIME DEFAULT CURRENT_TIMESTAMP,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (cover_id) REFERENCES images(id)
+);
+
+CREATE TABLE IF NOT EXISTS event_blogpost (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    event_id INT NOT NULL,
+    blogpost_id INT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (event_id) REFERENCES events(id),
+    FOREIGN KEY (blogpost_id) REFERENCES blogposts(id)
 );
 
 CREATE TABLE IF NOT EXISTS event_registration (
@@ -84,7 +114,6 @@ CREATE TABLE IF NOT EXISTS songs (
     cover_url VARCHAR(255) NULL,
     duration INT NULL,
     spotify_id VARCHAR(255) NULL,
-    /*original_key VARCHAR(255) NULL,*/
     /*('C', 'Db', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'Ab', 'A', 'Bb', 'B')*/
     original_key_maj INT DEFAULT -1,
     is_major BOOLEAN NULL,
