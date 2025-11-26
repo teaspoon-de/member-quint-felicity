@@ -32,9 +32,10 @@ class Song {
 
     public static function update(int $id, $data): bool {
         $pdo = Database::getConnection();
-        $stmt = $pdo->prepare("UPDATE songs SET original_key=?, transposed_by=?, status=?, notes=?  WHERE id=?");
+        $stmt = $pdo->prepare("UPDATE songs SET original_key_maj=?, is_major=?, transposed_by=?, status=?, notes=?  WHERE id=?");
         return $stmt->execute([
-            $data["original_key"] ?? null,
+            $data["original_key_maj"] ?? null,
+            $data["is_major"]==="null"? null: $data["is_major"],
             $data["transposed_by"] ?? null,
             $data["status"] ?? null,
             $data["notes"] ?? null,

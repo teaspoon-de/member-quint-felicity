@@ -5,7 +5,7 @@
     </div>
     <div class="search">
         <svg class="goggle" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-        <input type="text" placeholder="Suchen" onkeyup="suche()">
+        <input type="text" placeholder="<?= $placeHolder?>" onkeyup="suche()">
     </div>
 </section>
 <section id="filter" class="unselectable">
@@ -13,7 +13,7 @@
     <p id="filterInWork">Unsicher</p>
 </section>
 <script>
-    var forTracks = <!--forTracks-->;
+    var forTracks = <?= $forTracks ?>;
     if (!forTracks) {
         $("#filter").css("display", "none")
         $(".stats").css("display", "none");

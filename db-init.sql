@@ -37,7 +37,6 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS privileges (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
-    rank INT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -86,8 +85,9 @@ CREATE TABLE IF NOT EXISTS songs (
     duration INT NULL,
     spotify_id VARCHAR(255) NULL,
     /*original_key VARCHAR(255) NULL,*/
-    original_key_maj ENUM('C', 'Db', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'Ab', 'A', 'Bb', 'B') NULL,
-    is_major BOOLEAN NULL;
+    /*('C', 'Db', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'Ab', 'A', 'Bb', 'B')*/
+    original_key_maj INT DEFAULT -1,
+    is_major BOOLEAN NULL,
     transposed_by INT DEFAULT 0,
     status ENUM('red', 'orange', 'green') DEFAULT 'red',
     notes TEXT NULL,

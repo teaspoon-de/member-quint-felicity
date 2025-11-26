@@ -1,26 +1,7 @@
-<section id="saveBar" class="unselectable">
-    <p id="cancle">Abbrechen</p>
-    <p id="save">Speichern</p>
-</section>
-<script>
-    var backTo = "<!--backUri-->";
-    $("#cancle").click(()=>{
-        window.location.assign(backTo!="null"? backTo: getLastSite());
-    });
-    $("#save").click(()=>{
-        submit();
-    });
-
-    function getLastSite() {
-        var path = window.location.pathname;
-        if (path.substring(path.length-1) == "/")
-            path = path.substring(0, path.length-1);
-        var pathSplit = path.split("/");
-        return path.substring(0,path.length - pathSplit[pathSplit.length-1].length);
-    }
-</script>
-
-<p><a href="/songs/<?= $song['id'] ?>">Abbrechen</a></p>
+<?php
+$backURI = "/songs/".$song['id'];
+require __DIR__ . "/../layout/topBarEdit.php";
+?>
 
 <link rel="stylesheet" href="/css/trackEdit.css">
 <section id="track">
@@ -60,63 +41,103 @@
 </section>
 
 <form id="saveForm" action="/songs/<?= $song['id'] ?>/edit" method="POST">
-    <input type="hidden" id="original_key" name="original_key">
+    <input type="hidden" id="original_key_maj" name="original_key_maj">
+    <input type="hidden" id="is_major" name="is_major">
     <input type="hidden" id="transposed_by" name="transposed_by">
     <input type="hidden" id="status" name="status">
     <input type="hidden" id="notes" name="notes">
     <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
 </form>
 
-<script src="request.js"></script>
 <script>
 
-    var by = "<?= htmlspecialchars($song['transposed_by'] ?? '') ?>"
-    $(".by").val(by);
+    var by = <?= htmlspecialchars($song['transposed_by'] ?? '0') ?>;
+    var or_key = <?= htmlspecialchars($song['original_key_maj'] ?? '-1') ?>;
+    var key = "<?= htmlspecialchars($song['original_key_maj'] ?? '') ?>";
+    var dur = <?= $song['is_major']?? -1 ?>;
+    dur = dur==-1? null: dur!=0;
+    
+
+    function mod(a, b) {
+        x = a;
+        i = Math.abs(x) % (b);
+        if (x < 0) i = b-i;
+        return i;
+    }
+    function comp(qu, arr) {
+        for (var i = 0; i < arr.length; i++) {
+            var element = arr[i];
+            if (qu.toLowerCase() == element.toLowerCase()) {
+                return i;
+            } 
+        }
+        return null;
+    }
+
+    var possibleMaj = ["C", "Db", "D", "Eb", "E", "F",
+        "F#", "G", "Ab", "A", "Bb", "B"];
+    var possibleMin = ["A", "Bb", "B", "C", "C#", "D",
+    "D#", "E", "F", "F#", "G", "G#"];
+    var keyAlias = ["Gb", "A#", "Cb", "B#", "Fb", "E#"];
+    var keyAlias2 = ["F#", "Bb", "B", "C", "E", "F"];
+
+    updateKeySection();
+    function updateKeySection() {
+        $(".by").val(by > 0? "+" + by: by);
+        if (or_key < 0 || or_key > 11) {
+            keyUnset();
+            return;
+        }
+        var i = mod(or_key + by, possibleMaj.length)
+        $("#maj").val(possibleMaj[i]);
+        $("#min").val(possibleMin[i]);
+    }
+    function keyUnset() {
+        by = 0;
+        or_key = -1;
+        $(".by").val(0);
+        $("#maj").val("");
+        $("#min").val("");
+    }
+
+    $("#minus").click(()=>{
+        by = mod(by + 5, 12)-6;
+        updateKeySection();
+    });
+    $("#plus").click(()=>{
+        by = mod(by + 7, 12)-6;
+        updateKeySection();
+    });
+
+    function recreateOrKey() {
+        var val = $("#maj").val();
+        if (!contains(possibleMaj, val)) return;
+        or_key = mod(comp(val, possibleMaj)-by, possibleMaj.length);
+        console.log("recreateOrKey1: "+or_key);
+        console.log("recreateOrKey2: "+val);
+        
+    }
+
     function onBy() {
         q = ".by";
         if ($(q).val() == "") return;
-        if ($(q).val().substring(0,1)=="0" || $(q).val().substring(1)=="0") {
-            $(q).val("0");
-            by = "0";
-            return;
-        }
-        if ($(q).val().substring(0,1)!="-" && $(q).val().substring(0,1).toLowerCase()!="+") {
+        if (!($(q).val().substring(0,1)=="0" || $(q).val().substring(1)=="0") && $(q).val().substring(0,1)!="-" && $(q).val().substring(0,1).toLowerCase()!="+") {
             $(q).val("+" + $(q).val().substring(0,1));
         }
-        if ($(q).val().length == 2) by = $(q).val();
-    }
-
-    var key = "<?= htmlspecialchars($song['original_key'] ?? '') ?>";
-    function buildKey() {
-        var m = $("#maj").val();
-        var n = $("#min").val();
-        var mp = dur != null && dur? "*": "";
-        var np = dur != null && !dur? "*": "";
-        if (contains(possibleMaj, m) && contains(possibleMin, n)) {
-            key = mp + m + "/" + np + n + "m";
+        var x = parseInt($(q).val())
+        if (!isNaN(x) && x >= -6 && x <= 5) {
+            by = x;
+            recreateOrKey();
         }
     }
+
     function contains(array, element) {
         for (var i = 0; i < array.length; i++) {
             if (array[i] == element) return true;
         }
         return false;
     }
-    var possibleMaj = ["C", "Db", "D", "Eb", "E", "F",
-        "F#", "G", "Ab", "A", "Bb", "B"];
-    var possibleMin = ["A", "Bb", "B", "C", "C#", "D",
-    "D#", "E", "F", "F#", "G", "G#"];
-    var possibleBy = ["-6", "-5", "-4", "-3", "-2", "-1", "0", "+1", "+2", "+3", "+4", "+5", "+6"];
-    var keyAlias = ["Gb", "A#"];
-    var keyAlias2 = ["F#", "Bb"];
-    updateKeys();
-    function updateKeys() {
-        var keySplit = key.replace("*", "").replace("m", "").split("/");
-        var keyMaj = keySplit.length == 1? "": keySplit[0];
-        var keyMin = keySplit.length == 1? "": keySplit[1];
-        $("#maj").val(keyMaj);
-        $("#min").val(keyMin);
-    }
+
     function onMaj(maj) {
         a = maj? possibleMaj: possibleMin;
         b = !maj? possibleMaj: possibleMin;
@@ -133,7 +154,7 @@
         if (succ) {
             $(q).val(a[i]);
             $(q2).val(b[i]);
-            buildKey();
+            recreateOrKey();
             return;
         }
         i = comp($(q).val(), b);
@@ -151,50 +172,7 @@
             return;
         }
     }
-    function comp(qu, arr) {
-        for (var i = 0; i < arr.length; i++) {
-            var element = arr[i];
-            if (qu.toLowerCase() == element.toLowerCase()) {
-                return i;
-            } 
-        }
-        return null;
-    }
 
-    $("#minus").click(()=>{
-        transpose(false);
-    });
-    $("#plus").click(()=>{
-        transpose(true);
-    });
-    function transpose(up) {
-        var keySplit = key.replace("*", "").replace("m", "").split("/");
-        x = -1;
-        if (up) x *= x;
-        i = (comp(by, possibleBy) + x) % (possibleBy.length-1);
-        $(".by").val(possibleBy[i==-1?11:i]);
-        j = (comp(keySplit[0], possibleMaj) + x) % possibleMaj.length; 
-        $("#maj").val(possibleMaj[j==-1?possibleMaj.length-1:j]);
-        $("#min").val(possibleMin[j==-1?possibleMin.length-1:j]);
-        by = $(".by").val();
-        buildKey();
-    }
-
-    var inWork = "<!--inWork-->"=="true";
-    updateInWork();
-    function updateInWork() {
-        $("#warn input").prop("checked", inWork);
-        $("#warn").css("background-color", inWork? "var(--inWorkc)": "var(--cbgc)");
-    }
-    $("#warn").click(function() {
-        inWork = !inWork;
-        updateInWork();
-    });
-
-
-    var dur = key.split("/")[0].substring(0,1) == "*";
-    
-    if (!dur && (key.split("/").length == 1 || key.split("/")[1].substring(0,1) != "*")) dur = null;
     updateTonart();
     function updateTonart() {
         if (dur == null) {
@@ -213,16 +191,29 @@
     $("#dur").click(function() {
         dur = $(this).hasClass("selected")? null: true;
         updateTonart();
-        buildKey();
     });
     $("#moll").click(function() {
         dur = $(this).hasClass("selected")? null: false;
         updateTonart();
-        buildKey();
+    });
+
+    var inWork = "<!--inWork-->"=="true";
+    updateInWork();
+    function updateInWork() {
+        $("#warn input").prop("checked", inWork);
+        $("#warn").css("background-color", inWork? "var(--inWorkc)": "var(--cbgc)");
+    }
+    $("#warn").click(function() {
+        inWork = !inWork;
+        updateInWork();
     });
 
     async function submit() {
-        document.getElementById('original_key').value = key;
+        console.log("Key: " + or_key);
+        console.log("Dur: " + (dur == null ? "null": (dur? 1: 0)));
+        console.log("tb: " + by);
+        document.getElementById('original_key_maj').value = or_key;
+        document.getElementById('is_major').value = dur == null ? "null": (dur? 1: 0);
         document.getElementById('transposed_by').value = by;
         document.getElementById('status').value = "green";
         document.getElementById('notes').value = $("#global textarea").val();

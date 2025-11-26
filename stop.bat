@@ -1,1 +1,1 @@
-docker compose down
+cmd /k "docker compose down && echo "--- MYSQL BEING EXTRA ---" && docker stop mysql && echo "--- MYSQL STILL RUNNIG? ---" && docker ps && echo "--- MYSQL WILL SICH NICHT LOESCHEN ---" && docker ps -f "status=exited" && echo "--- MYSQL LOESCHEN ---" && docker container rm mysql && echo "--- JETZT HOFFENTLICH WEG ---" && docker ps -f "status=exited""

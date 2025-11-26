@@ -1,62 +1,25 @@
-<!--h1>Songs</h1>
+<?php
+$backToActive = false;
+$backToString = "";
+$backToURI = null;
+require __DIR__ . "/../layout/topBar.php"
+?>
 
-<a href="/songs/add">+ Song hinzufügen</a>
+<?php
+$title = "Quint Felicity";
+$page = "Repertoire";
+require __DIR__ . "/../layout/topMenu.php"
+?>
 
-<ul>
-    <?php foreach ($songs as $song): ?>
-        <li>
-            <a href="/songs/<?= $song['id'] ?>">
-                 – <?= htmlspecialchars($song['artists'] ?? '') ?>
-            </a>
-            |
-            <a href="/songs/<?= $song['id'] ?>/edit">Bearbeiten</a>
-            |
-            <form action="/songs/<?= $song['id'] ?>/delete" method="post" style="display:inline;">
-                <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
-                <button type="submit" onclick="return confirm('Sicher löschen?')">Löschen</button>
-            </form>
-        </li>
-    <?php endforeach; ?>
-</ul-->
-<section id="topbar" class="unselectable">
-    <svg id="back" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
-    <p><!--backTo--></p>
-    <svg id="edit" data-link="edit/" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg>
-</section>
-<script>
-    var backTo = "<!--backUri-->";
-    $("#back").click(()=> {
-        back();
-    });
-    $("#topbar p").click(()=> {
-        back();
-    });
-    $("#edit").click(function() {
-        window.location.assign($(this).data("link"));
-    })
+<?php
+$placeHolder = "Songs suchen";
+$forTracks = true;
+require __DIR__ . "/../layout/search.php"
+?>
 
-    function back() {
-        window.location.assign(backTo!="null"? backTo: getLastSite());
-    }
-
-    function getLastSite() {
-        var path = window.location.pathname;
-        if (path.substring(path.length-1) == "/")
-            path = path.substring(0, path.length-1);
-        var pathSplit = path.split("/");
-        return path.substring(0,path.length - pathSplit[pathSplit.length-1].length);
-    }
-</script>
-<section id="top" class="unselectable">
-    <h1 class="titleBig">Quint Felicity</h1>
-    <h2 class="page">Repertoire</h2>
-    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="play lucide lucide-play-icon lucide-play"><polygon points="6 3 20 12 6 21 6 3"/></svg>
-    <!--img data-href="" src="spotifyBlack.png" class="play" alt=""-->
-</section>
-<?php require __DIR__ . "/../layout/search.php" ?>
 <section id="trackList">
     <?php foreach ($songs as $song): ?>
-    <song data-link="/songs/<?= $song['id'] ?>" data-duration="<?= htmlspecialchars($song['duration'] ?? '') ?>">
+    <song class="unselectable" data-link="/songs/<?= $song['id'] ?>" data-duration="<?= htmlspecialchars($song['duration'] ?? '') ?>">
         <img src="<?= htmlspecialchars($song['cover_url'] ?? '') ?>">
         <div class="info">
             <h3><?= htmlspecialchars($song['title'] ?? '') ?></h3>
@@ -64,8 +27,25 @@
         </div>
         <div class="transpose">
             <p class="by"><?= htmlspecialchars($song['transposed_by'] ?? '') ?></p>
-            <p class="key"><?= htmlspecialchars($song['original_key'] ?? '?') ?></p>
+            <p class="key"><?php
+                $key = $song['original_key_maj'];
+                if ($key == -1) {
+                    echo "<b>?</b>";
+                } else {
+                    $possibleMaj = array("C", "Db", "D", "Eb", "E", "F", "F#", "G", "Ab", "A", "Bb", "B");
+                    $possibleMin = array("A", "Bb", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#");
+                    $maj = $song['is_major']===1? ' class="bold"': "";
+                    $min = $song['is_major']===0? ' class="bold"': "";
+                    echo '<major'.$maj.'>'.$possibleMaj[$key].'</major><minor'.$min.'>'.$possibleMin[$key].'</minor>';
+                }
+            ?></p>
         </div>
+        <form action="/songs/<?= $song['id'] ?>/delete" method="post" style="display:none;">
+            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+            <button type="submit" onclick="return confirm('Sicher löschen?')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+            </button>
+        </form>
     </song>
     <?php endforeach; ?>
 </section>
@@ -94,6 +74,23 @@
             if (($("#filterNotInWork").hasClass("selected") && $(this).hasClass("inWork")) || ($("#filterInWork").hasClass("selected") && !$(this).hasClass("inWork")) || (query != "" && !$(this).text().toLowerCase().replaceAll("♭", "b").includes(query))) {
                 $(this).css("display", "none");
             } else if ($(this).css("display") == "none") $(this).css("display", "flex");
+        });
+    }
+
+    function onEdit() {
+        var a, b = "none";
+        $(".editIcon").each(function(index) {
+            if (index == 0) {
+                a = $(this).css("display")=="none"? "block": "none";
+                if (a == "none") b = "block";
+                $(this).css("display", a);
+            } else $(this).css("display", b);
+        });
+        $(".transpose").each(function() {
+            $(this).css("display", a == "block"? "flex": a)
+        });
+        $("song form").each(function() {
+            $(this).css("display", b)
         });
     }
 </script>
