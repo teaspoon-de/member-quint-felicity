@@ -19,7 +19,7 @@ require __DIR__ . "/../layout/search.php"
 
 <section id="trackList">
     <?php foreach ($blogposts as $blogpost): ?>
-    <song class="unselectable" data-link="/blogposts/<?= $blogpost['id'] ?>/edit">
+    <song class="unselectable" data-link="/blog/<?= $blogpost['id'] ?>/edit">
         <img src="<?= htmlspecialchars($blogpost['cover_id'] ?? '') ?>">
         <div class="info">
             <h3><?= htmlspecialchars($blogpost['title'] ?? '') ?></h3>

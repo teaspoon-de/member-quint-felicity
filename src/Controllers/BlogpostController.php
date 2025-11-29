@@ -27,7 +27,7 @@ class BlogpostController {
 
     public function store() {
         Blogpost::create($_POST);
-        header("Location: /blogposts");
+        header("Location: /blog");
     }
 
     public function edit($id) {
@@ -37,11 +37,11 @@ class BlogpostController {
 
     public function update($id) {
         Blogpost::update($id, $_POST);
-        header("Location: /blogposts");
+        header("Location: /blog");
     }
 
     public function delete($id) {
         Blogpost::delete($id);
-        header("Location: /blogposts");
+        header("Location: /blog");
     }
 }

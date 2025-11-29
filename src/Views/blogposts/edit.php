@@ -1,9 +1,9 @@
 <?php
-$backURI = "/blogposts";
+$backURI = "/blog";
 require __DIR__ . "/../layout/topBarEdit.php";
 ?>
 
-<form style="margin-top: 100px;" id="createForm" action="/blogposts/<?= $blogpost['id'] ?>/edit" method="post">
+<form style="margin-top: 100px;" id="createForm" action="/blog/<?= $blogpost['id'] ?>/edit" method="post">
     <p>
         <label for="title">Titel</label><br>
         <input type="text" id="title" name="title" value="<?= htmlspecialchars($blogpost['title'] ?? '') ?>" required>
@@ -19,7 +19,7 @@ require __DIR__ . "/../layout/topBarEdit.php";
     <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
 </form>
 
-<p><a href="/songs">Abbrechen</a></p>
+<p><a href="/blog">Abbrechen</a></p>
 
 <script>
     async function submit() {

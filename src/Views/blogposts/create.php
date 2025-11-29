@@ -1,9 +1,9 @@
 <?php
-$backURI = "/blogposts";
+$backURI = "/blog";
 require __DIR__ . "/../layout/topBarEdit.php";
 ?>
 
-<form style="margin-top: 100px;" id="createForm" action="/blogposts/create" method="post">
+<form style="margin-top: 100px;" id="createForm" action="/blog/create" method="post">
     <p>
         <label for="title">Titel</label><br>
         <input type="text" id="title" name="title" required>
