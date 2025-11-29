@@ -39,7 +39,7 @@ class Event {
             $data["date_begin"] ?? null,
             $data["public_entry"] ?? null,
             $data["deadline"] ?? null,
-            $data["id"] ?? null
+            $id
         ]);
     }
 

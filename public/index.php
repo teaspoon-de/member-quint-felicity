@@ -27,6 +27,8 @@ require_once __DIR__ . '/../src/Controllers/UserController.php';
 require_once __DIR__ . '/../src/Models/User.php';
 require_once __DIR__ . '/../src/Controllers/EventController.php';
 require_once __DIR__ . '/../src/Models/Event.php';
+require_once __DIR__ . '/../src/Controllers/BlogpostController.php';
+require_once __DIR__ . '/../src/Models/Blogpost.php';
 
 $router = new Router();
 
@@ -60,5 +62,12 @@ $router->get('/events/{id}', [EventController::class, 'show']);
 $router->get('/events/{id}/edit', [EventController::class, 'edit']);
 $router->post('/events/{id}/edit', [EventController::class, 'update']);
 $router->post('/events/{id}/delete', [EventController::class, 'delete']);
+// Blogposts
+$router->get('/blogposts', [BlogpostController::class, 'index']);
+$router->get('/blogposts/create', [BlogpostController::class, 'create']);
+$router->post('/blogposts/create', [BlogpostController::class, 'store']);
+$router->get('/blogposts/{id}/edit', [BlogpostController::class, 'edit']);
+$router->post('/blogposts/{id}/edit', [BlogpostController::class, 'update']);
+$router->post('/blogposts/{id}/delete', [BlogpostController::class, 'delete']);
 
 $router->run();
