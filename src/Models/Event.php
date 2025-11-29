@@ -21,11 +21,24 @@ class Event {
     public static function create($data): bool {
         $pdo = Database::getConnection();
         $stmt = $pdo->prepare("INSERT INTO events (type, title, date_begin) VALUES (?, ?, ?)");
-        return $stmt->execute([
+        $result = $stmt->execute([
             /*$data["type"] ?? null*/ "show",
             $data["title"] ?? null,
             $data["date_begin"] ?? null,
         ]);
+        $event_id = $pdo->lastInsertId();
+        // Für jeden eine Eventregistration erstellen
+        $users = User::all();
+        foreach ($users as $user) {
+            $pdo = Database::getConnection();
+            $stmt = $pdo->prepare("INSERT INTO event_registration (event_id, user_id, status) VALUES (?, ?, ?)");
+            $result = $stmt->execute([
+                $event_id,
+                $user["id"],
+                "maybe"
+            ]);
+        }
+        return $result;
     }
 
     public static function update(int $id, $data): bool {
