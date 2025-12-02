@@ -65,11 +65,11 @@ CREATE TABLE IF NOT EXISTS events (
     id INT AUTO_INCREMENT PRIMARY KEY,
     type ENUM('show', 'rehearsal', 'other') NOT NULL,
     title VARCHAR(255) NOT NULL,
-    description VARCHAR(255) NULL,
     location VARCHAR(255) NULL,
+    duration VARCHAR(255) NULL,
+    salary VARCHAR(255) NULL,
     notes TEXT NULL,
     date_begin DATETIME NOT NULL,
-    date_end DATETIME NULL,
     public_entry DATETIME NULL,
     deadline DATETIME NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP

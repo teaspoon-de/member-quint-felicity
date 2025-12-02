@@ -27,16 +27,17 @@ require __DIR__ . "/../layout/search.php"
         </div>
         <div class="transpose">
             <p class="by"><?= htmlspecialchars($song['transposed_by'] ?? '') ?></p>
-            <p class="key"><?php
+            <p class="key">
+            <span style="background-color: var(--<?= $song['status']?>)"></span><?php
                 $key = $song['original_key_maj'];
                 if ($key == -1) {
                     echo "<b>?</b>";
                 } else {
-                    $possibleMaj = array("C", "Db", "D", "Eb", "E", "F", "F#", "G", "Ab", "A", "Bb", "B");
-                    $possibleMin = array("A", "Bb", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#");
+                    $possibleMaj = array("C", "D♭", "D", "E♭", "E", "F", "F#", "G", "A♭", "A", "B♭", "B");
+                    $possibleMin = array("A", "B♭", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#");
                     $maj = $song['is_major']===1? ' class="bold"': "";
                     $min = $song['is_major']===0? ' class="bold"': "";
-                    echo '<major'.$maj.'>'.$possibleMaj[$key].'</major><minor'.$min.'>'.$possibleMin[$key].'</minor>';
+                    echo '<major'.$maj.'>'.$possibleMaj[$key].'</major><minor'.$min.'>'.$possibleMin[$key].'m</minor>';
                 }
             ?></p>
         </div>

@@ -43,6 +43,21 @@ services:
     networks:
       - dbnet
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: root
+      PMA_ARBITRARY: 1
+    ports:
+      - 8081:80
+    depends_on:
+      - mysql
+    networks:
+      - dbnet
+
 networks:
   webnet:
     external: false
