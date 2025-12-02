@@ -72,6 +72,7 @@ CREATE TABLE IF NOT EXISTS events (
     date_begin DATETIME NOT NULL,
     public_entry DATETIME NULL,
     deadline DATETIME NULL,
+    /*Auftritt bestätigt?, Auftritt auf Website?*/
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 

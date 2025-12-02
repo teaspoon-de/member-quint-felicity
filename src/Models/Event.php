@@ -43,15 +43,17 @@ class Event {
 
     public static function update(int $id, $data): bool {
         $pdo = Database::getConnection();
-        $stmt = $pdo->prepare("UPDATE events SET type=?, title=?, location=?, notes=?, date_begin=?, public_entry=?, deadline=?  WHERE id=?");
+        $stmt = $pdo->prepare("UPDATE events SET type=?, title=?, location=?, duration=?, salary=?, notes=?, date_begin=?, public_entry=?, deadline=?  WHERE id=?");
         return $stmt->execute([
-            $data["type"] ?? null,
+            /*$data["type"] ?? null*/ "show",
             $data["title"] ?? null,
-            $data["location"] ?? null,
-            $data["notes"] ?? null,
+            $data["location"] !=""? $data["location"]: null,
+            $data["duration"] !=""? $data["duration"]: null,
+            $data["salary"] !=""? $data["salary"]: null,
+            $data["notes"] !=""? $data["notes"]: null,
             $data["date_begin"] ?? null,
-            $data["public_entry"] ?? null,
-            $data["deadline"] ?? null,
+            $data["public_entry"] !=""? $data["public_entry"]: null,
+            $data["deadline"] !=""? $data["deadline"]: null,
             $id
         ]);
     }

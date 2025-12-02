@@ -6,7 +6,7 @@ require __DIR__ . "/../layout/topBar.php"
 ?>
 
 <?php
-$title = $event["title"];
+$title = htmlspecialchars($event["title"]);
 $page = "Auftritt";
 require __DIR__ . "/../layout/topMenu.php"
 ?>
@@ -17,11 +17,16 @@ require __DIR__ . "/../layout/topMenu.php"
     <div class="container">
         <div class="kvRow">
             <div>
-                <value>20.03.26</value>
+                <value><?php 
+                    $date = new DateTime($event["date_begin"]);
+                    echo $date->format('d.m.Y');
+                ?></value>
                 <p>Datum</p>
             </div>
             <div>
-                <value>20:00</value>
+                <value><?php 
+                    echo $date->format('H:i');
+                ?></value>
                 <p>Uhrzeit</p>
             </div>
         </div>
@@ -73,26 +78,43 @@ require __DIR__ . "/../layout/topMenu.php"
     <div class="container">
         <div class="kvRow">
             <div>
-                <value>19:30</value>
+                <value><?php 
+                    if (!$event["public_entry"]) echo "--:--";
+                    else {
+                        $date = new DateTime($event["public_entry"]);
+                        echo $date->format('H:i');
+                    }
+                ?></value>
                 <p>Einlass</p>
             </div>
             <div>
-                <value>2,5h</value>
+                <value><?= htmlspecialchars($event["duration"] ?? '-- h')?></value>
                 <p>Setlänge</p>
             </div>
             <div>
-                <value>300€</value>
+                <value><?= htmlspecialchars($event["salary"] ?? '-- €')?></value>
                 <p>Gage</p>
             </div>
         </div>
-        <div class="kvLong">
-            <value>Jungs bei dem Auftritt wird richtig abgerissen schwöre. Müssen da richtig einen raushauen sonst knallts. Also muss eben bei uns knallen so. Checkt nicht jeder weißt.So ist so nicht jedermans dings. Ein Pferd.</value>
-        </div>
+        <?php
+            if ($event['notes']) echo '<div class="kvLong notes">
+                <value>'.htmlspecialchars($event['notes'] ?? '').'</value>
+            </div>'?>
     </div>
 </section>
 
-<section id="setlist" class="section">
+<?php
+if ($event['location']) echo '<section id="location" class="section">
+    <h3>Adresse</h3>
+    <div class="container">
+        <div class="kvLong notes">
+            <value>'.htmlspecialchars($event['location'] ?? '').'</value>
+        </div>
+    </div>
+</section>'?>
+
+<!--section id="setlist" class="section">
     <h3>Setlist</h3>
     <div class="container">
     </div>
-</section>
+</section-->

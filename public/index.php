@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../src/Database.php';
-//require_once __DIR__ . '/../src/Controllers/SpotifyController.php';
-//SpotifyController::getAccessToken();
+require_once __DIR__ . '/../src/Controllers/SpotifyController.php';
+SpotifyController::getAccessToken();
 
 if (session_status() === PHP_SESSION_NONE) {
     /*$pdo = Database::getConnection();

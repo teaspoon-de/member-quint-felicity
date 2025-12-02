@@ -42,11 +42,18 @@ require __DIR__ . "/../layout/topBarEdit.php";
             <h3>Einlass</h3>
             <input 
                 type="time" 
-                id="public_entry" 
-                name="public_entry" 
-                value="<?= htmlspecialchars($event['public_entry']) ?>"
+                id="public_entry_time" 
+                name="public_entry_time" 
+                value="<?php 
+                    if (!$event["public_entry"]) echo "";
+                    else {
+                        $date = new DateTime($event["public_entry"]);
+                        echo $date->format('H:i');
+                    }
+                ?>"
             >
         </div>
+        <input type="hidden" id="public_entry" name="public_entry">
 
         <div class="inLong">
             <h3>Setlänge</h3>
@@ -75,27 +82,17 @@ require __DIR__ . "/../layout/topBarEdit.php";
 
         <div class="inLong">
             <h3>Notizen</h3>
-            <input type="hidden" 
-                id="notes" 
-                name="notes" 
-                value="<?= htmlspecialchars($event['title'] ?? '') ?>"
-                required
-            >
-            <textarea placeholder="Lass richtig abgehen woop woop ..."><?= htmlspecialchars($event['notes'] ?? '') ?></textarea>
+            <textarea id="notesTa" placeholder="Lass richtig abgehen woop woop ..."><?= htmlspecialchars($event['notes'] ?? '') ?></textarea>
+            <input type="hidden" id="notes" name="notes">
         </div>
 
         <div class="inLong">
             <h3>Adresse</h3>
-            <input type="hidden" 
-                id="location" 
-                name="location" 
-                value="<?= htmlspecialchars($event['title'] ?? '') ?>"
-                required
-            >
-            <textarea placeholder=
+            <textarea id="locationTa" placeholder=
 "z.B. Wiedparkhalle
 Raiffeisenstraße 9
 53577 Neustadt (Wied)"><?= htmlspecialchars($event['location'] ?? '') ?></textarea>
+            <input type="hidden" id="location" name="location">
         </div>
 
         <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
@@ -104,7 +101,23 @@ Raiffeisenstraße 9
 
 <script>
     async function submit() {
+        console.log("hallo");
+        
+        const fullDate = document.getElementById("date_begin").value; // z.B. 2025-03-12T11:22
+        const time = document.getElementById("public_entry_time").value; // z.B. 14:30
+        const output = document.getElementById("public_entry");
+        // Falls keine Zeit angegeben -> NULL übergeben
+        if (!time) {
+            output.value = "";
+        } else {
+            // Datum extrahieren (YYYY-MM-DD)
+            const dateOnly = fullDate.split("T")[0];
+            // Neue datetime bauen
+            const datetime = `${dateOnly} ${time}:00`;
+            output.value = datetime;
+        }
+        document.getElementById("notes").value = document.getElementById("notesTa").value;
+        document.getElementById("location").value = document.getElementById("locationTa").value;
         document.getElementById('editForm').submit();
     }
 </script>
-
