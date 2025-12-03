@@ -7,6 +7,8 @@ class ImageController {
         ob_start();
         require __DIR__ . "/../Views/$view.php";
         $content = ob_get_clean();
+        $pageTitle = "Images";
+        $menuActive = "3";
 
         require __DIR__ . "/../Views/layout/main.php";
     }

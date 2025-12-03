@@ -7,6 +7,8 @@ class BlogpostController {
         ob_start();
         require __DIR__ . "/../Views/$view.php";
         $content = ob_get_clean();
+        $pageTitle = "Blog";
+        $menuActive = "3";
 
         require __DIR__ . "/../Views/layout/main.php";
     }

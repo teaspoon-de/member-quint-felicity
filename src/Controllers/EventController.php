@@ -7,6 +7,8 @@ class EventController {
         ob_start();
         require __DIR__ . "/../Views/$view.php";
         $content = ob_get_clean();
+        $pageTitle = "Events";
+        $menuActive = "2";
 
         require __DIR__ . "/../Views/layout/main.php";
     }

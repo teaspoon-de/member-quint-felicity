@@ -9,6 +9,8 @@ class UserController
         ob_start();
         require __DIR__ . "/../Views/$view.php";
         $content = ob_get_clean();
+        $pageTitle = "Members";
+        $menuActive = "-1";
 
         require __DIR__ . "/../Views/layout/main.php";
     }

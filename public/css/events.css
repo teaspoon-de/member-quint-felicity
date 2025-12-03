@@ -12,6 +12,83 @@ h3 {
 }
 
 
+
+/* INDEX EVENT */
+#eventList {
+    margin: 25px;
+    margin-top: 0;
+}
+event {
+    display: flex;
+    flex-direction: column;
+    border-radius: 30px;
+    overflow: hidden;
+    background-color: var(--cbglc);
+    margin-top: 15px;
+}
+event:first-child {
+    margin-top: 0px;
+}
+event .eventTop {
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    height: 100px;
+    background-color: var(--cbgc);
+}
+event .eventTop svg {
+    height: 50px;
+    width: 50px;
+    padding: 25px;
+    flex-basis: 50px;
+}
+event .eventTop .title {
+    flex-grow: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+event h3 {
+    margin-bottom: 0px;
+}
+event .eventTop p {
+    font-size: 20px;
+}
+event .kvRow value {
+    font-size: 30px;
+}
+event .reg {
+    display: flex;
+    height: 100px;
+}
+event .reg svg {
+    flex-basis: 50px;
+    height: 50px;
+    width: 50px;
+    padding: 25px;
+}
+event .reg svg:first-child {
+    border-top-right-radius: 15px;
+}
+event .reg div {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px
+}
+event .reg div p {
+    font-size: 30px;
+    font-weight: 400;
+}
+event .reg div svg {
+    padding: 0px;
+    height: 30px;
+    width: 30px;
+}
+
+
 /* REG AREA */
 #registrations .container {
     margin-top: 30px;

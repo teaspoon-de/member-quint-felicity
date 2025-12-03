@@ -1,14 +1,7 @@
 <?php
-$backToActive = false;
-$backToString = "";
-$backToURI = null;
-require __DIR__ . "/../layout/topBar.php"
-?>
-
-<?php
-$title = "Quint Felicity";
-$page = "Repertoire";
-require __DIR__ . "/../layout/topMenu.php"
+$title = "Songs";
+$add = "add";
+require __DIR__ . "/../layout/topIndex.php"
 ?>
 
 <?php

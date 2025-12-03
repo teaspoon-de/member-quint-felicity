@@ -262,6 +262,18 @@ html, body {
     flex-direction: column;
     justify-items: center;
 }
+#top .user {
+    align-self: flex-end;
+    height: 50px;
+    width: 50px;
+    margin-top: 40px;
+}
+#top .title {
+    z-index: 100;
+    font-size: 100px;
+    font-weight: 900;
+    line-height: 100px;
+}
 #top .titleSmall {
     flex-shrink: 1;
     z-index: 100;
@@ -300,7 +312,7 @@ html, body {
     color: var(--ctextc);
     background-color: var(--cbg);
 }
-#top .play {
+#add {
     z-index: 1000;
     align-self: flex-end;
     margin-top: -90px;
@@ -309,16 +321,14 @@ html, body {
     height: 50px;
     width: 50px;
     padding: 20px;
-    background-color: var(--spotify);
+    background-color: var(--green);
     border-radius: 100%;
     border-style: solid;
     border-width: 10px;
     border-color: var(--cbg);
-    color: var(--cbg);
+    color: var(--ctext);
     cursor: pointer;
 }
-
-
 
 
 

@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Band App</title>
+    <title><?= $pageTitle?></title>
     <meta name="viewport" content="width=device-width initial-scale=0.65">
     <script src="/js/jquery-3.6.1.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
@@ -44,6 +44,11 @@
 <script>
     $("menu").click(function() {
         window.location.assign(getLink($(this).data("link")));
+    });
+
+    $("menu").each(function(index) {
+        if (index == <?= $menuActive?>)
+            $(this).addClass("mSelected");
     });
 
     function getLink(link) {

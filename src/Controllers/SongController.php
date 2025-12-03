@@ -9,6 +9,8 @@ class SongController
         ob_start();
         require __DIR__ . "/../Views/$view.php";
         $content = ob_get_clean();
+        $pageTitle = "Repertoire";
+        $menuActive = "0";
 
         require __DIR__ . "/../Views/layout/main.php";
     }

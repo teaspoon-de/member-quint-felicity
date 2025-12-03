@@ -1,8 +1,7 @@
 <?php
-$backToActive = true;
 $backToString = "Repertoire";
 $backToURI = "/songs";
-require __DIR__ . "/../layout/topBar.php"
+require __DIR__ . "/../layout/topBarItem.php"
 ?>
 
 <link rel="stylesheet" href="/css/track.css">
