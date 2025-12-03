@@ -61,7 +61,7 @@ require __DIR__ . "/../layout/topBarEdit.php";
                 type="text" 
                 id="duration" 
                 name="duration" 
-                placeholder="z.B. 20 min, oder 1,5 h"
+                placeholder="z.B. 20 min oder 1,5h oder 17cm"
                 value="<?= htmlspecialchars($event['duration'] ?? '') ?>"
             >
         </div>
@@ -73,7 +73,7 @@ require __DIR__ . "/../layout/topBarEdit.php";
                     type="text" 
                     id="salary" 
                     name="salary" 
-                    placeholder="z.B. 10000"
+                    placeholder="z.B. 500"
                     value="<?= htmlspecialchars($event['salary'] ?? '') ?>"
                 >
             <p>€</p>

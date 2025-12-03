@@ -1,17 +1,18 @@
+/* GENERAL */
 main {
-    margin-bottom: 100px;
+    padding-bottom: 100px;
 }
-
 .section {
     padding: 25px;
     padding-top: 0px;
 }
-
 h3 {
     font-size: 35px;
     margin-bottom: 20px;
 }
 
+
+/* REG AREA */
 #registrations .container {
     margin-top: 30px;
     border-radius: 30px;
@@ -20,41 +21,16 @@ h3 {
     background-color: var(--cbglc);
     overflow: hidden;
 }
-
 #regArea {
     display: flex;
     justify-content: space-around;
     align-items: center;
     width: 100%;
 }
-#regArea .option {
-    background-color: var(--cbg);
-}
-#regNo {
-    border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px;
-}
-#regArea input {
-    position: absolute;
-    opacity: 0;
-    height: 0;
-    width: 0;
-}
-#regArea input + #regYes {
-    background-color: var(--green);
-}
-#regArea input:checked + #regMaybe {
-    background-color: var(--yellow);
-}
-#regArea input:checked + #regNo {
-    background-color: var(--red);
-}
-
 #regArea svg {
     height: 50px;
     width: 50px;
 }
-
 #regArea div {
     flex-grow: 1;
     flex-basis: 0;
@@ -63,14 +39,21 @@ h3 {
     padding-top: 20px;
     padding-bottom: 20px;
 }
+#regArea .option {
+    background-color: var(--cbg);
+}
+#regArea .last {
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
 
+/* REGISTRATIONS */
 #registrations li {
     display: flex;
     flex-direction: column;
     padding: 30px;
     gap: 20px;
 }
-
 #registrations li ul {
     display: flex;
     align-items: stretch;
@@ -95,6 +78,98 @@ h3 {
     gap: 5px;
 }
 
+
+/* REGISTER */
+#register {
+    position: absolute;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background-color: var(--shadow);
+}
+#register .container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 25px;
+    padding-top: 30px;
+    margin-left: 40px;
+    margin-right: 40px;
+    background-color: var(--cbglc);
+    border-radius: 30px;
+}
+#register .container div {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+#register svg {
+    align-self: center;
+    padding: 15px;
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    overflow: visible;
+}
+#register h2 {
+    text-align: center;
+    align-self: center;
+    margin-left: 10px;
+    font-size: 30px;
+    font-weight: 400;
+}
+#register textarea {
+    width: auto;
+    height: 100px;
+    resize: none;
+    outline: none;
+    background-color: var(--invis);
+    color: var(--ctext);
+    font-size: 24px;
+    font-family: var(--cfont);
+    padding: 30px;
+    border-radius: 20px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: var(--ctext);
+    margin-bottom: -10px;
+}
+#register p {
+    text-align: center;
+    align-self: center;
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--red);
+}
+#register button {
+    flex-grow: 1;
+    flex-basis: 0;
+    margin-top: 10px;
+    padding: 20px;
+    outline: none;
+    background: none;
+    border-radius: 64px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: var(--ctext);
+    color: var(--ctext);
+    font-family: var(--cfont);
+    font-weight: 400;
+    font-size: 24px;
+    box-shadow: none;
+    text-shadow: none;
+}
+#register .submit {
+    font-weight: 500;
+}
+
+
+/* KEY-VALUE */
 .kvRow {
     display: flex;
     justify-content: space-around;
@@ -143,6 +218,7 @@ h3 {
     color: var(--ctextc);
 }
 
+/* INFOS */
 #infos .container {
     border-radius: 30px;
     overflow: hidden;
@@ -154,7 +230,6 @@ h3 {
 #infos .notes {
     padding-bottom: 30px;
 }
-
 #location .container {
     border-radius: 30px;
     overflow: hidden;
@@ -164,6 +239,7 @@ h3 {
 }
 
 
+/* EDIT */
 .edit {
     display: flex;
     flex-direction: column;
@@ -196,7 +272,6 @@ input::-webkit-inner-spin-button,
 .kvInput input::-webkit-clear-button {
   filter: invert(1) brightness(0.9);
 }
-
 .inLong {
     margin-bottom: 40px;
     border-radius: 15px;

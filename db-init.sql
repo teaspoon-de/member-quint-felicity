@@ -95,11 +95,12 @@ CREATE TABLE IF NOT EXISTS event_blogpost (
     FOREIGN KEY (blogpost_id) REFERENCES blogposts(id)
 );
 
-CREATE TABLE IF NOT EXISTS event_registration (
+CREATE TABLE IF NOT EXISTS event_registrations (
     id INT AUTO_INCREMENT PRIMARY KEY,
     event_id INT NOT NULL,
     user_id INT NOT NULL,
-    status ENUM('yes', 'no', 'maybe') NOT NULL,
+    status ENUM('yes', 'maybe', 'no') NOT NULL,
+    message TEXT NULL,
     last_edit DATETIME DEFAULT CURRENT_TIMESTAMP,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (event_id) REFERENCES events(id)

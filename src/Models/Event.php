@@ -15,7 +15,22 @@ class Event {
         $stmt = $pdo->prepare("SELECT * FROM events WHERE id = ?");
         $stmt->execute([$id]);
         $event = $stmt->fetch();
+        $ur = $pdo->prepare("SELECT * FROM event_registrations WHERE event_id=? AND user_id=?");
+        $ur->execute([$id, $_SESSION["user_id"]]);
+        $ureg = $ur->fetch();
+        $event["user_reg"] = $ureg["status"];
         return $event ?: null;
+    }
+
+    public static function getRegistrations(int $id): ?array {
+        $pdo = Database::getConnection();
+        $stmt = $pdo->query("SELECT * FROM event_registrations WHERE event_id=$id ORDER BY status ASC");
+        $regs = $stmt->fetchAll();
+        for ($i = 0; $i < count($regs); $i++) {
+            $user = User::find($regs[$i]["user_id"]);
+            $regs[$i]["username"] = $user["username"];
+        }
+        return $regs ?: null;
     }
 
     public static function create($data): bool {
@@ -31,7 +46,7 @@ class Event {
         $users = User::all();
         foreach ($users as $user) {
             $pdo = Database::getConnection();
-            $stmt = $pdo->prepare("INSERT INTO event_registration (event_id, user_id, status) VALUES (?, ?, ?)");
+            $stmt = $pdo->prepare("INSERT INTO event_registrations (event_id, user_id, status) VALUES (?, ?, ?)");
             $result = $stmt->execute([
                 $event_id,
                 $user["id"],
@@ -56,6 +71,29 @@ class Event {
             $data["deadline"] !=""? $data["deadline"]: null,
             $id
         ]);
+    }
+
+    public static function register(int $id, $data): bool {
+        $pdo = Database::getConnection();
+        $stmt = $pdo->prepare("SELECT id FROM event_registrations WHERE event_id = ? AND user_id = ? LIMIT 1");
+        $stmt->execute([$id, $_SESSION["user_id"]]);
+        $existing = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($existing) {
+            $update = $pdo->prepare("UPDATE event_registrations SET status=?, message=?, last_edit=NOW() WHERE id=?");
+            return $update->execute([
+                $data["status"],
+                $data["message"] !=""? $data["message"]: null,
+                $existing['id']
+            ]);
+        } else {
+            $insert = $pdo->prepare("INSERT INTO event_registrations (event_id, user_id status, message, last_edit, created_at) VALUES (?,?,?,?, NOW(), NOW())");
+            return $insert->execute([
+                $id,
+                $_SESSION["user_id"],
+                $data["status"],
+                $data["message"] !=""? $data["message"]: null
+            ]);
+        }
     }
 
     public static function delete(int $id): bool {
