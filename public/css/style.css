@@ -76,38 +76,30 @@ html, body {
     padding: 0;
 }
 
-.null {
-    display: none;
-}
 
+/* GENERAL CLASSES */
+.null {display: none;}
 .flexStartCenter {
     display: flex;
     justify-content: flex-start;
     align-items: center;
 }
-
 .flexEndCenter {
     display: flex;
     justify-content: flex-start;
     align-items: center;
 }
-
 .flexCenterCenter {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
 .flexStartStretch {
     display: flex;
     justify-content: flex-start;
     align-items: stretch;
 }
-
-.flexColumn {
-    flex-direction: column;
-}
-
+.flexColumn {flex-direction: column;}
 .unselectable {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -116,77 +108,16 @@ html, body {
     -ms-user-select: none;
     user-select: none;
 }
-
-
-
-
-
-
-
-
-
-
-#topbar {
-    height: 40px;
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    padding: 40px;
-    padding-left: 20px;
+main {
+    padding-bottom: 100px;
 }
-#topbar svg {
-    z-index: 100;
-    height: 40px;
-    width: 40px;
-    flex-basis: 40px;
-}
-#topbar svg:hover {
-    cursor: pointer;
-}
-#topbar p:hover {
-    cursor: pointer;
-}
-#topbar p {
-    z-index: 100;
-    font-size: 25px;
-    font-weight: 400;
-    align-self: center;
-    flex-grow: 1;
-    width: fit-content;
-    height: 40px;
-    align-content: center;
-}
-.editIcon {
-    z-index: 150;
-}
-
-#saveBar {
-    z-index: 1000;
-    position: fixed;
-    top: 0;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    background-image: var(--fadeUp);
-}
-#saveBar p {
-    cursor: pointer;
-    padding: 40px;
-    font-size: 24px;
-    font-weight: 300;
-}
-#saveBar #save {
-    color: var(--blue);
-    font-weight: 500;
+.section {
+    padding: 25px;
+    padding-top: 0px;
 }
 
 
-
-
-
-
-
-
+/* MENU */
 #menu {
     z-index: 1000;
     position: fixed;
@@ -223,209 +154,10 @@ html, body {
     text-align: center;
     margin-top: 10px;
 }
-#menu .mSelected {
-    color: var(--ctext);
-}
+#menu .mSelected {color: var(--ctext);}
 
 
-
-
-
-
-
-
-
-#top {
-    display: flex;
-    flex-direction: column;
-    padding: 40px;
-    padding-top: 0px;
-    padding-bottom: 0px;
-}
-#top div {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    border-bottom-style: solid;
-    border-bottom-width: 2px;
-    border-bottom-color: var(--ctextc);
-    padding-bottom: 40px;
-}
-#top img {
-    width: 30%;
-    height: fit-content;
-    flex-basis: 30%;
-    border-radius: 15px;
-}
-#top div span {
-    display: flex;
-    flex-direction: column;
-    justify-items: center;
-}
-#top .user {
-    align-self: flex-end;
-    height: 50px;
-    width: 50px;
-    margin-top: 40px;
-}
-#top .title {
-    z-index: 100;
-    font-size: 100px;
-    font-weight: 900;
-    line-height: 100px;
-}
-#top .titleSmall {
-    flex-shrink: 1;
-    z-index: 100;
-    font-size: 50px;
-    font-weight: 900;
-    line-height: 50px;
-}
-#top .titleBig {
-    z-index: 100;
-    font-size: 100px;
-    font-weight: 900;
-    border-bottom-style: solid;
-    border-bottom-width: 2px;
-    border-bottom-color: var(--ctextc);
-    padding-bottom: 40px;
-    line-height: 100px;
-}
-#top p {
-    flex-basis: content;
-    margin-top: 10px;
-    font-size: 20px;
-    font-weight: 300;
-}
-#top p b {
-    font-weight: 500;
-}
-#top .page {
-    z-index: 150;
-    width: max-content;
-    margin-top: -17px;
-    margin-left: 40px;
-    padding-left: 10px;
-    padding-right: 10px;
-    font-size: 25px;
-    font-weight: 500;
-    color: var(--ctextc);
-    background-color: var(--cbg);
-}
-#add {
-    z-index: 1000;
-    align-self: flex-end;
-    margin-top: -90px;
-    margin-bottom: -10px;
-    margin-right: -30px;
-    height: 50px;
-    width: 50px;
-    padding: 20px;
-    background-color: var(--green);
-    border-radius: 100%;
-    border-style: solid;
-    border-width: 10px;
-    border-color: var(--cbg);
-    color: var(--ctext);
-    cursor: pointer;
-}
-
-
-
-
-
-
-
-
-
-
-#search .stats {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    margin: 20px;
-    margin-bottom: 10px;
-    margin-top: 0px;
-}
-#search .stats p {
-    font-size: 20px;
-}
-
-#search {
-    position: sticky;
-    top: 0px;
-    height: 80px;
-    padding: 20px;
-    padding-top: 20px;
-    padding-bottom: 50px;
-    z-index: 1000;
-    background-image: var(--fadeUp);
-}
-.search {
-    display: flex;
-    justify-content: space-between;
-    overflow: hidden;
-    background-color: var(--cbgc);
-    height: 60px;
-    padding: 10px;
-    border-radius: 60px;
-}
-.search .goggle {
-    height: 30px;
-    width: 30px;
-    flex-basis: 30px;
-    margin: 15px;
-}
-.search input {
-    height: 60px;
-    flex-grow: 1;
-    border-style: none;
-    cursor: text;
-    outline: none;
-    background-color: var(--invis);
-    font-size: 23px;
-    color: var(--ctext);
-}
-.search input:focus {
-    outline: none;
-}
-
-#filter {
-    max-width: 1000px;
-    height: 53px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 20px;
-    display: flex;
-    gap: 10px;
-}
-#filter p {
-    cursor: pointer;
-    font-size: 23px;
-    font-weight: 400;
-    padding: 18px;
-    padding-top: 12px;
-    padding-bottom: 14px;
-    color: var(--ctextc);
-    background-color: var(--cbgc);
-    border-radius: 40px;
-    border-width: 2px;
-    border-style: solid;
-    border-color: var(--invis);
-    -webkit-transition: .4s;
-    transition: .4s;
-}
-#filter .selected {
-    color: var(--ctext);
-    border-color: var(--ctext);
-    background-color: (--cbglc);
-}
-
-
-
-
-
-
+/* DELETE CONTEXT */
 .deleteContext {
     top: 0px;
     left: 0px;
@@ -486,264 +218,10 @@ html, body {
     justify-content: center;
     align-items: center;
 }
-.deleteContext .buttons .yesDelete {
-    background-color: var(--red);
-}
+.deleteContext .buttons .yesDelete {background-color: var(--red);}
 
 
-
-
-
-
-
-
-#showConnections {
-    display: flex;
-    margin: 20px;
-    margin-top: -10px;
-}
-#showConnections div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    height: 34px;
-    padding: 10px;
-    padding-left: 20px;
-    background-color: var(--cbgc);
-    border-radius: 43px;
-    border-style: solid;
-    border-width: 2px;
-    border-color: var(--invis);
-    color: var(--ctextc);
-    -webkit-transition: .4s;
-    transition: .4s;
-}
-#showConnections div h3 {
-    font-size: 23px;
-    font-weight: 400;
-}
-#showConnections div input {
-    z-index: 100;
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-#showConnections div .slider {
-    border-color: var(--ctextc);
-    background-color: var(--cbglc);
-}
-#showConnections div .slider::before {
-    background-color: var(--ctextc);
-}
-#showConnections div input:checked + .slider {
-    background-color: var(--cbglc);
-}
-#showConnections div input:checked + .slider::before {
-    background-color: var(--ctext);
-}
-
-
-
-
-
-
-
-
-
-#trackList {
-    position: relative;
-    padding: 25px;
-    padding-top: 0px;
-    margin-bottom: 100px;
-    justify-items: center;
-}
-
-song {
-    max-width: 990px;
-    width: 100%;
-    margin-bottom: 10px;
-    padding-left: 10px;
-    height: 120px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: var(--cbglc);
-    overflow: hidden;
-    border-bottom-left-radius: 15px;
-    border-top-left-radius: 15px;
-    border-radius: 15px;
-    gap: 20px;
-}
-song:hover {
-    cursor: pointer;
-    background-color: var(--cbgc);
-}
-.inWork {
-    background-color: var(--inWork);
-}
-.inWork:hover {
-    background-color: var(--inWorkc);
-}
-
-song img {
-    flex-basis: 100px;
-    height: 100px;
-    width: 100px;
-    border-radius: 10px;
-}
-song .trackIndex {
-    min-width: 30px;
-    width: 30px;
-    height: 27px;
-    text-align: center;
-    font-size: 20px;
-    font-weight: 500;
-    margin-right: -10px;
-    background-color: var(--cbgc);
-    border-radius: 100%;
-    border-style: solid;
-    border-color: var(--ctextc);
-    border-width: 2px;
-    padding-top: 3px;
-}
-
-song .info {
-    flex-grow: 1;
-    overflow: hidden;
-}
-song .info h3 {
-    font-weight: 500;
-    font-size: 30px;
-    text-overflow: cut;
-    overflow: hidden;
-    white-space: nowrap;
-}
-song .info p {
-    font-size: 20px;
-    font-weight: 400;
-    text-overflow: cut;
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-song .transpose {
-    height: 120px;
-    flex-basis: content;
-    min-width: max-content;
-    display: flex;
-    overflow: hidden;
-}
-
-song .transpose .key span {
-    position: absolute;
-    margin-top: -60px;
-    margin-left: -160px;
-    height: 30px;
-    width: 30px;
-    border-radius: 100%;
-    border-style: none;
-    border-width: 2px;
-    border-color: var(--cbg);
-}
-
-song .transpose .changed {
-    background-color: var(--green);
-}
-
-song .transpose p {
-    height: 120px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--cbgc);
-}
-song .transpose .by {
-    margin-right: -1px;
-    padding-right: 1px;
-    z-index: 150;
-    align-self: flex-end;
-    width: 60px;
-    height: 60px;
-    border-top-left-radius: 15px;
-    font-weight: 600;
-    font-size: 20px;
-    border-width: 0px;
-    border-right-width: 2px;
-    border-style: solid;
-    border-color: var(--ctextc);
-}
-song .transpose .key {
-    display: flex;
-    flex-direction: column;
-    z-index: 100;
-    width: 100px;
-    text-align: center;
-    font-size: 25px;
-    font-weight: 200;
-}
-song .transpose .key .bold {
-    font-weight: 800;
-}
-song .transpose .key minor {
-    border-top-style: solid;
-    border-top-width: 2px;
-    border-top-color: var(--ctextc);
-}
-song form button {
-    background-color: var(--red);
-    outline: none;
-    border-style: none;
-    height: 120px;
-}
-song form button svg {
-    height: 50px;
-    width: 50px;
-    color: var(--ctext);
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
-#trackList .connection {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    border-top-style: solid;
-    border-width: 2px;
-    background-color: var(--cbglc);
-    border-color: var(--ctextc);
-    align-items: center;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-    color: var(--ctextc);
-}
-#trackList .connection h2 {
-    height: 10px;
-    margin-bottom: 0px;
-    font-size: 20px;
-    font-weight: 500;
-    margin-top: -12px;
-    background-color: var(--cbg);
-    padding: 10px;
-    padding-top: 0px;
-    padding-bottom: 3px;
-    width: max-content;
-    color: var(--ctextc);
-}
-#trackList .connection p {
-    font-size: 20px;
-    padding: 20px;
-    padding-top: 10px;
-    padding-bottom: 20px;
-}
-
-
-
-
+/* SLIDER */
 .slider {
     z-index: 50;
     position: relative;

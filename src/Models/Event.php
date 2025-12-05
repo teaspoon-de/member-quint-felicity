@@ -4,10 +4,11 @@ require_once __DIR__ . '/../Database.php';
 
 class Event {
 
-    public static function all(): array {
+    public static function all(): ?array {
         $pdo = Database::getConnection();
         $stmt = $pdo->query("SELECT * FROM events WHERE date_begin > NOW() ORDER BY date_begin ASC"); // Zeitspanne Einschränken
         $events = $stmt->fetchAll();
+        if (count($events) === 0) return $events;
         for ($i = 0; $i < count($events); $i++) {
             $ur = $pdo->prepare("SELECT * FROM event_registrations WHERE event_id=? AND user_id=?");
             $ur->execute([$events[$i]["id"], $_SESSION["user_id"]]);

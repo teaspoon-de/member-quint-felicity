@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="/css/top.css">
 <section id="saveBar" class="unselectable">
     <p id="cancle">Abbrechen</p>
     <p id="save">Speichern</p>

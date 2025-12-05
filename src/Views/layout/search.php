@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="/css/search.css">
 <section id="search">
     <div class="stats">
         <p id="count"></p>

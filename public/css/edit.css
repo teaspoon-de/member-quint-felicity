@@ -1,0 +1,113 @@
+/* EDIT */
+.edit {
+    display: flex;
+    flex-direction: column;
+    margin-top: 80px;
+    padding: 40px;
+    margin-bottom: 60px;
+}
+input {
+    font-size: 28px;
+    font-weight: 600;
+    background: none;
+    outline: none;
+    border-style: none;
+    color: var(--ctext);
+    font-family: var(--cfont);
+}
+/*
+ * Native date/time icons entfernen,
+ * aber Picker weiterhin funktionieren lassen
+ */
+input::-webkit-calendar-picker-indicator {
+  filter: invert(1) brightness(0.9);
+}
+/* Für Firefox */
+input::-moz-focus-inner {
+    border: 0;
+}
+/* Arrow Buttons bei time entfernen */
+input::-webkit-inner-spin-button,
+.kvInput input::-webkit-clear-button {
+  filter: invert(1) brightness(0.9);
+}
+.inLong {
+    margin-top: 40px;
+    border-radius: 15px;
+    background-color: var(--cbg);
+    border-style: solid;
+    border-width: 2px;
+    border-color: var(--ctextc);
+    padding: 25px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.inLong:first-child {
+    margin-top: 0px;
+}
+.inLong h3 {
+    color: var(--cfontc);
+    font-weight: 400;
+    margin-top: -40px;
+    margin-bottom: 20px;
+    margin-left: -10px;
+    font-size: 24px;
+    height: 24px;
+    background-color: var(--cbg);
+    width: fit-content;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.inLong input {
+    width: 100%;
+}
+.inLong:has(> input:focus), .inLong:has(> textarea:focus) {
+    border-color: var(--ctext);
+    border-width: 3px;
+}
+.inLong:has(> input:focus) > h3, .inLong:has(> textarea:focus) > h3 {
+    color: var(--ctext);
+    font-weight: 600;
+    margin-top: -41px;
+    margin-left: -11px;
+}
+.inLong:has(> .error) {
+    border-color: var(--red);
+    border-width: 3px;
+}
+.inLong:has(> .error) > h3 {
+    color: var(--red);
+    font-weight: 600;
+    margin-top: -41px;
+    margin-left: -11px;
+}
+.inLong:has(> .error) + .errorMessage {
+    color: var(--red);
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+textarea {
+    width: 100%;
+    height: 100px;
+    resize: none;
+    outline: none;
+    background-color: var(--invis);
+    border-style: none;
+    color: var(--ctext);
+    font-size: 24px;
+    font-family: var(--cfont);
+}
+.inFlex {
+    padding-left: 0px;
+    padding-right: 0px;
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+}
+.inFlex p {
+    display: inline;
+    width: 28px;
+    font-size: 28px;
+    font-weight: 600;
+}

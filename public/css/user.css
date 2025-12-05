@@ -1,0 +1,46 @@
+#userList {
+    padding: 25px;
+}
+user {
+    margin-top: 15px;
+    padding: 25px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--cbglc);
+}
+user:first-child {
+    margin-top: 0px;
+}
+.self {
+    background-color: var(--cbgc);
+}
+user .infos {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;   
+}
+user .title {
+    display: flex;
+    align-items: flex-end;
+    gap: 15px;
+}
+user .title h3 {
+    font-size: 30px;
+    font-weight: 500;
+}
+user .title p {
+    color: var(--ctextc);
+    font-size: 24px;
+    font-weight: 400;
+}
+user p {
+    font-size: 20px;
+    font-weight: 400;
+}
+user svg {
+    color: var(--ctext);
+    height: 30px;
+    width: 30px;
+}

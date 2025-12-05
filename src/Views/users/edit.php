@@ -1,61 +1,56 @@
-<h1>Konto bearbeiten</h1>
+<?php
+$backURI = "/members";
+require __DIR__ . "/../layout/topBarEdit.php";
+?>
 
-<form action="/account/edit" method="post">
-    <input type="hidden" name="_method" value="PUT">
+<link rel="stylesheet" href="/css/user.css">
+<link rel="stylesheet" href="/css/edit.css">
 
-    <p>
-        <label for="username">Nutzername</label><br>
-        <input 
-            type="text" 
-            id="username" 
-            name="username" 
-            value="<?= htmlspecialchars($user['username'] ?? '') ?>"
-            required
-        >
-    </p>
+<section class="section edit">
+    <form action="/account/edit" method="post">
+        <input type="hidden" name="_method" value="PUT">
+        <div class="inLong">
+            <h3>Nutzername (zum Anmelden)</h3>
+            <input 
+                type="text" 
+                id="username" 
+                name="username" 
+                value="<?= htmlspecialchars($user['username'] ?? '') ?>"
+                required
+            >
+        </div>
 
-    <p>
-        <label for="name">Anzeigename</label><br>
-        <input 
-            type="text" 
-            id="name" 
-            name="name" 
-            value="<?= htmlspecialchars($user['name'] ?? '') ?>"
-            required
-        >
-    </p>
+        <div class="inLong">
+            <h3>Anzeigename</h3>
+            <input 
+                type="text" 
+                id="name" 
+                name="name" 
+                value="<?= htmlspecialchars($user['name'] ?? '') ?>"
+                required
+            >
+        </div>
 
-    <p>
-        <label for="email">E-Mail</label><br>
-        <input 
-            type="text" 
-            id="email" 
-            name="email" 
-            value="<?= htmlspecialchars($user['email'] ?? '') ?>"
-        >
-    </p>
+        <div class="inLong">
+            <h3>E-Mail</h3>
+            <input 
+                type="text" 
+                id="email" 
+                name="email" 
+                value="<?= htmlspecialchars($user['email'] ?? '') ?>"
+            >
+        </div>
 
-    <p>
-        <label for="password">Passwort</label><br>
-        <input 
-            type="password" 
-            id="password" 
-            name="password"
-        >
-    </p>
+        <div class="inLong">
+            <h3>Instrument</h3>
+            <input 
+                type="text" 
+                id="instrument" 
+                name="instrument" 
+                value="<?= htmlspecialchars($user['instrument'] ?? '') ?>"
+            >
+        </div>
 
-    <p>
-        <label for="instrument">Instrument</label><br>
-        <input 
-            type="text" 
-            id="instrument" 
-            name="instrument" 
-            value="<?= htmlspecialchars($user['instrument'] ?? '') ?>"
-        >
-    </p>
-
-    <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
-    <button type="submit">Änderungen speichern</button>
-</form>
-
-<p><a href="/account">Abbrechen</a></p>
+        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+    </form>
+</section>

@@ -4,6 +4,7 @@ require __DIR__ . "/../layout/topBarEdit.php";
 ?>
 
 <link rel="stylesheet" href="/css/events.css">
+<link rel="stylesheet" href="/css/edit.css">
 
 <section class="section edit">
     <form id="editForm" action="/events/<?= $event['id'] ?>/edit" method="post">
@@ -52,8 +53,8 @@ require __DIR__ . "/../layout/topBarEdit.php";
                     }
                 ?>"
             >
+            <input type="hidden" id="public_entry" name="public_entry">
         </div>
-        <input type="hidden" id="public_entry" name="public_entry">
 
         <div class="inLong">
             <h3>Setlänge</h3>
@@ -101,8 +102,13 @@ Raiffeisenstraße 9
 
 <script>
     async function submit() {
-        console.log("hallo");
-        
+        $("input").each(function() {
+            $(this).removeClass("error");
+        });
+        $(".errorMessage").each(function() {
+            $(this).remove();
+        });
+
         const fullDate = document.getElementById("date_begin").value; // z.B. 2025-03-12T11:22
         const time = document.getElementById("public_entry_time").value; // z.B. 14:30
         const output = document.getElementById("public_entry");
@@ -116,8 +122,39 @@ Raiffeisenstraße 9
             const datetime = `${dateOnly} ${time}:00`;
             output.value = datetime;
         }
+
+        // Sinn überprüfen
+        if ($("#title").val().trim() == "") {
+            inputError("#title", "Feld darf nicht leer sein.");
+            return;
+        }
+        if (!fullDate) {
+            inputError("#date_begin", "Feld darf nicht leer sein.");
+            return;
+        }
+        var begin = new Date($("#date_begin").val());
+        if ($("#deadline").val() != "") {
+            var deadline = new Date($("#deadline").val());
+            if (deadline > begin) {
+                inputError("#deadline", "Deadline kann nicht nach Konzertbeginn sein.");
+                return;
+            }
+        }
+        if ($("#public_entry").val() != "") {
+            var publicEntry = new Date($("#public_entry").val());
+            if (publicEntry > begin) {
+                inputError("#public_entry", "Einlass kann nicht nach Konzertbeginn sein.");
+                return;
+            }
+        }
+
         document.getElementById("notes").value = document.getElementById("notesTa").value;
         document.getElementById("location").value = document.getElementById("locationTa").value;
         document.getElementById('editForm').submit();
+    }
+
+    function inputError(query, message) {
+        $(query).addClass("error");
+        $('<p class="errorMessage">' + message + '</p>').insertAfter($(query).parent());
     }
 </script>

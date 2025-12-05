@@ -34,6 +34,28 @@ require __DIR__ . "/../layout/topBarEdit.php";
 
 <script>
     async function submit() {
+        $("input").each(function() {
+            $(this).removeClass("error");
+        });
+        $(".errorMessage").each(function() {
+            $(this).remove();
+        });
+
+        // Sinn überprüfen
+        if ($("#title").val().trim() == "") {
+            inputError("#title", "Feld darf nicht leer sein.");
+            return;
+        }
+        if (!$("#date_begin").val()) {
+            inputError("#date_begin", "Feld darf nicht leer sein.");
+            return;
+        }
+
         document.getElementById('createForm').submit();
+    }
+
+    function inputError(query, message) {
+        $(query).addClass("error");
+        $('<p class="errorMessage">' + message + '</p>').insertAfter($(query).parent());
     }
 </script>

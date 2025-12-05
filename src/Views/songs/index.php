@@ -10,6 +10,8 @@ $forTracks = true;
 require __DIR__ . "/../layout/search.php"
 ?>
 
+<link rel="stylesheet" href="/css/songs.css">
+
 <section id="trackList">
     <?php foreach ($songs as $song): ?>
     <song class="unselectable" data-link="/songs/<?= $song['id'] ?>" data-duration="<?= htmlspecialchars($song['duration'] ?? '') ?>">
