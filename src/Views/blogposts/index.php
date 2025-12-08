@@ -7,6 +7,7 @@ require __DIR__ . "/../layout/topIndex.php"
 <?php
 $placeHolder = "Beitrag suchen";
 $forTracks = true;
+$searchMethod = null;
 require __DIR__ . "/../layout/search.php"
 ?>
 

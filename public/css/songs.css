@@ -228,3 +228,10 @@ song form button svg {
     padding-top: 10px;
     padding-bottom: 20px;
 }
+
+
+/* SELECT FOR ADD */
+#trackList .selected {
+    background-color: var(--ctext);
+    color: var(--cbg);
+}

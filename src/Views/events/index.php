@@ -9,6 +9,7 @@ require __DIR__ . "/../layout/topIndex.php"
 <?php
 $placeHolder = "Event suchen";
 $forTracks = true;
+$searchMethod = null;
 require __DIR__ . "/../layout/search.php"
 ?>
 
