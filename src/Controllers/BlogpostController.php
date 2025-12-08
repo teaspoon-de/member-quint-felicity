@@ -7,7 +7,20 @@ class BlogpostController {
         ob_start();
         require __DIR__ . "/../Views/$view.php";
         $content = ob_get_clean();
-        $pageTitle = "Blog";
+
+        switch($view) {
+            case "blogposts/create":
+                $pageTitle = "Blogpost erstellen";
+                break;
+            case "blogposts/show":
+                $pageTitle = "Blog - ". $blogpost['title'];
+                break;
+            case "blogposts/edit":
+                $pageTitle = "Blogpost bearbeiten";
+                break;
+            default:
+                $pageTitle = "Blog";
+        }
         $menuActive = "3";
 
         require __DIR__ . "/../Views/layout/main.php";

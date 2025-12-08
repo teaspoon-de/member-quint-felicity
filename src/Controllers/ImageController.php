@@ -7,7 +7,20 @@ class ImageController {
         ob_start();
         require __DIR__ . "/../Views/$view.php";
         $content = ob_get_clean();
-        $pageTitle = "Images";
+
+        switch($view) {
+            case "images/create":
+                $pageTitle = "Bild hochladen";
+                break;
+            case "images/show":
+                $pageTitle = "Bilder - ". $image['title'];
+                break;
+            case "images/edit":
+                $pageTitle = "Bild bearbeiten";
+                break;
+            default:
+                $pageTitle = "Bilder";
+        }
         $menuActive = "3";
 
         require __DIR__ . "/../Views/layout/main.php";

@@ -1,3 +1,4 @@
+/* GENERAL */
 #track {
     z-index: 1;
     position: relative;
@@ -8,8 +9,14 @@
     margin: 60px;
     margin-bottom: 184px;
 }
+#track h2 {
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: -20px;
+}
 
-#warn {
+/* AMPEL */
+#statusAmpel {
     cursor: pointer;
     z-index: 10;
     display: flex;
@@ -21,31 +28,25 @@
     -webkit-transition: .4s;
     transition: .4s;
 }
-#warn svg {
-    height: 40px;
-    width: 40px;
-    min-width: 40px;
-    flex-basis: 40px;
-}
-#warn p {
+#statusAmpel p {
     flex-grow: 1;
     font-size: 23px;
     font-weight: 400;
 }
-#warn input { 
-    z-index: 100;
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
-} 
-
-#track h2 {
-    font-size: 30px;
-    font-weight: 500;
-    margin-bottom: -20px;
+#track .ampel {
+    height: 35px;
+    width: fit-content;
+    display: flex;
+    gap: 10px;
+}
+#track .ampel span {
+    background-color: var(--cbgc);
+    height: 35px;
+    width: 35px;
+    border-radius: 100%;
 }
 
+/* INFO */
 #track .info {
     position: relative;
 }
@@ -56,23 +57,16 @@
     padding-bottom: 10px;
     font-weight: 700;
 }
-#track .info h3 {
+#track .info p {
     text-align: center;
-    font-size: 23px;
-    font-weight: 300;
+    font-size: 24px;
+    font-weight: 400;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
 }
-#track .info p {
-    margin-top: -4px;
-    text-align: center;
-    padding: 20px;
-    font-size: 23px;
-    font-weight: 300;
-    color: var(--blue);
-}
 
+/* TRANSPOSE */
 #track .transpose {
     display: flex;
     justify-content: space-between;
@@ -141,63 +135,12 @@
     padding-right: 20px;
 }
 
-
-
-#track .transpose .transposeb {
-    display: flex;
-    align-items: center;
-    padding: 20px;
-    padding-top: 0px;
-    padding-bottom: 0px;
-    border-radius: 15px;
-    background-color: var(--cbgc);
-    width: fit-content;
-}
-#track .transpose .setlist {
-    background-color: var(--green);
-}
-#track .transpose .transposeb p {
-    font-size: 23px;
-    font-weight: 300;
-}
-#track .transpose .transposeb .by {
-    width: 40px;
-    height: max-content;
-    padding: 10px;
-}
-#track .transpose .transposeb .key {
-    width: 40px;
-    padding-left: 30px;
-    padding-right: 10px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-left-style: solid;
-    border-left-width: 2px;
-    border-left-color: var(--ctextc);
-}
-#track .transpose .transposeb .key .bold {
-    font-weight: 800;
-}
-#track .transpose .transposeb .key minor {
-    border-top-style: solid;
-    border-top-width: 2px;
-    border-top-color: var(--ctextc);
-}
-
-
-
-
-
-
+/* TONART */
 #track #tonart {
     cursor: pointer;
     display: flex;
     width: fit-content;
     border-radius: 15px;
-
 }
 #track #tonart p {
     font-size: 24px;
@@ -206,9 +149,7 @@
     border-bottom-right-radius: 0px;
     padding: 18px;
     background-color: var(--cbglc);
-    border-style: solid;
-    border-width: 2px;
-    border-color: var(--cbglc);
+    border: 2px solid var(--cbglc);
 }
 #track #tonart #moll {
     border-radius: 0px;
@@ -220,8 +161,7 @@
     border-color: var(--ctextc);
 }
 
-
-
+/* NOTES */
 #track .notes {
     display: flex;
     background-color: var(--cbglc);

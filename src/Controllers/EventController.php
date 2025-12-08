@@ -7,7 +7,20 @@ class EventController {
         ob_start();
         require __DIR__ . "/../Views/$view.php";
         $content = ob_get_clean();
-        $pageTitle = "Events";
+
+        switch($view) {
+            case "events/create":
+                $pageTitle = "Event erstellen";
+                break;
+            case "events/show":
+                $pageTitle = "Events - ". $event['title'];
+                break;
+            case "events/edit":
+                $pageTitle = "Event bearbeiten";
+                break;
+            default:
+                $pageTitle = "Events";
+        }
         $menuActive = "2";
 
         require __DIR__ . "/../Views/layout/main.php";

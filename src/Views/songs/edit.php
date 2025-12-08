@@ -7,13 +7,7 @@ require __DIR__ . "/../layout/topBarEdit.php";
 <section id="track">
     <div class="info unselectable">
         <h1><?= htmlspecialchars($song['title'] ?? '') ?></h1>
-        <h3><?= htmlspecialchars($song['artists'] ?? '') ?></h3>
-    </div>
-    <div id="warn" class="unselectable">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-traffic-cone-icon lucide-traffic-cone"><path d="M16.05 10.966a5 2.5 0 0 1-8.1 0"/><path d="m16.923 14.049 4.48 2.04a1 1 0 0 1 .001 1.831l-8.574 3.9a2 2 0 0 1-1.66 0l-8.574-3.91a1 1 0 0 1 0-1.83l4.484-2.04"/><path d="M16.949 14.14a5 2.5 0 1 1-9.9 0L10.063 3.5a2 2 0 0 1 3.874 0z"/><path d="M9.194 6.57a5 2.5 0 0 0 5.61 0"/></svg>
-        <p>Übungsbedarf</p>
-        <input type="checkbox">
-        <span class="slider"></span>
+        <p><?= htmlspecialchars($song['artists'] ?? '') ?></p>
     </div>
     <h2 class="unselectable">Transponieren</h2>
     <div class="transpose">
@@ -33,6 +27,14 @@ require __DIR__ . "/../layout/topBarEdit.php";
     <div id="tonart" class="unselectable">
         <p id="dur">Dur</p>
         <p id="moll">Moll</p>
+    </div>
+    <div id="statusAmpel" class="unselectable">
+        <p>Wie gut läuft der Song?</p>
+        <div class="ampel">
+            <span <?= $song['status']==="red"? 'style="background-color: var(--red);"': '' ?>></span>
+            <span <?= $song['status']==="orange"? 'style="background-color: var(--orange);"': '' ?>></span>
+            <span <?= $song['status']==="green"? 'style="background-color: var(--green);"': '' ?>></span>
+        </div>
     </div>
     <h2 class="unselectable">Notizen (für alle sichtbar)</h2>
     <div class="notes" id="global">
@@ -197,15 +199,25 @@ require __DIR__ . "/../layout/topBarEdit.php";
         updateTonart();
     });
 
-    var inWork = "<!--inWork-->"=="true";
-    updateInWork();
-    function updateInWork() {
-        $("#warn input").prop("checked", inWork);
-        $("#warn").css("background-color", inWork? "var(--inWorkc)": "var(--cbgc)");
+    var statusArray = ["red", "orange", "green"];
+    var status = '<?= $song['status']?>';
+    var statusIndex = getStatusIndex();
+    console.log(status);
+    function getStatusIndex() {
+        for (var i = 0; i < 3; i++) if (statusArray[i] == status) return i;
     }
-    $("#warn").click(function() {
-        inWork = !inWork;
-        updateInWork();
+    function updateAmpel() {
+        statusIndex = (statusIndex +1) %3;
+        status = statusArray[statusIndex];
+        $("#statusAmpel span").each(function(index) {
+            if (index == statusIndex) $(this).css("background-color", "var(--" + status + ")");
+            else $(this).css("background-color", "var(--cbgc)");
+        });
+        console.log(status);
+        
+    }
+    $("#statusAmpel").click(function() {
+        updateAmpel();
     });
 
     async function submit() {
@@ -215,7 +227,7 @@ require __DIR__ . "/../layout/topBarEdit.php";
         document.getElementById('original_key_maj').value = or_key;
         document.getElementById('is_major').value = dur == null ? "null": (dur? 1: 0);
         document.getElementById('transposed_by').value = by;
-        document.getElementById('status').value = "green";
+        document.getElementById('status').value = status;
         document.getElementById('notes').value = $("#global textarea").val();
         document.getElementById('saveForm').submit();
     }

@@ -9,7 +9,21 @@ class SongController
         ob_start();
         require __DIR__ . "/../Views/$view.php";
         $content = ob_get_clean();
-        $pageTitle = "Repertoire";
+
+        switch($view) {
+            case "songs/add":
+                $pageTitle = "Song hinzufügen";
+                break;
+            case "songs/show":
+                $pageTitle = "Songs - ". $song['title'];
+                break;
+            case "songs/edit":
+                $pageTitle = "Song bearbeiten";
+                break;
+            default:
+                $pageTitle = "Repertoire";
+        }
+
         $menuActive = "0";
 
         require __DIR__ . "/../Views/layout/main.php";

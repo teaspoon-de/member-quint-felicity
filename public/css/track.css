@@ -1,55 +1,16 @@
+/* GENERAL */
 #track {
     position: flex;
     flex-direction: column;
-    margin: 60px;
+    margin: 25px;
     margin-top:  0px;
     margin-bottom: 120px;
 }
-
-#track #warn {
-    display: flex;
-    align-items: center;
-    background-color: var(--inWork);
-    gap: 20px;
-    padding: 20px;
-    border-radius: 15px;
+#track .container {
+    background-color: var(--cbglc);
+    border-radius: 50px;
+    padding: 25px;
 }
-#track #warn svg {
-    height: 40px;
-    width: 40px;
-    min-width: 40px;
-    flex-basis: 40px;
-}
-#track #warn p {
-    flex-grow: 1;
-    font-size: 23px;
-    font-weight: 400;
-}
-
-#track img {
-    width: 100%;
-    position: relative;
-    border-radius: 30px;
-    margin-top: 40px;
-}
-#track img p {
-    position: absolute;
-    bottom: 0px;
-}
-#play {
-    position: absolute;
-    margin-top: -120px;
-    right: 0px;
-    margin-right: -40px;
-    height: 50px;
-    width: 50px;
-    padding: 35px;
-    background-color: var(--spotify);
-    border-radius: 100%;
-    color: var(--cbg);
-    cursor: pointer;
-}
-
 #track h2 {
     font-size: 30px;
     font-weight: 500;
@@ -57,9 +18,32 @@
     margin-bottom: 20px;
 }
 
+/* COVER */
+#track .imgContainer {
+    margin: 25px;
+}
+#track img {
+    width: 100%;
+    border-radius: 30px;
+}
+#play {
+    position: absolute;
+    margin-top: -130px;
+    right: 0px;
+    height: 50px;
+    width: 50px;
+    padding: 25px;
+    background-color: var(--spotify);
+    border-radius: 100%;
+    color: var(--cbg);
+    cursor: pointer;
+}
+
+/* INFO */
 #track .info {
     position: relative;
     margin-top: 40px;
+    margin-bottom: 25px;
 }
 #track .info h1 {
     text-align: center;
@@ -68,98 +52,34 @@
     padding-bottom: 10px;
     font-weight: 700;
 }
-#track .info h3 {
+#track .info p {
     text-align: center;
-    font-size: 23px;
-    font-weight: 300;
+    font-size: 24px;
+    font-weight: 400;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
 }
 
-#track .transposeContainer {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-#track .transpose {
-    display: flex;
-    align-items: center;
-    margin-top: 30px;
-    padding: 20px;
-    padding-top: 0px;
-    padding-bottom: 0px;
-    border-radius: 15px;
-    background-color: var(--cbgc);
+/* AMPEL */
+#track .ampel {    
+    height: 35px;
     width: fit-content;
-}
-#track .transposeContainer .setlist {
-    background-color: var(--green);
-}
-#track .transpose p {
-    font-size: 23px;
-    font-weight: 300;
-}
-#track .transpose .by {
-    width: 40px;
-    height: max-content;
-    padding: 10px;
-}
-#track .transpose .key {
-    width: 40px;
-    padding-left: 30px;
-    padding-right: 10px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    justify-self: center;
+    padding: 15px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-left-style: solid;
-    border-left-width: 2px;
-    border-left-color: var(--ctextc);
+    gap: 10px;
+    background-color: var(--cbg);
+    border-radius: 85px;
 }
-#track .transpose .key .bold {
-    font-weight: 800;
-}
-#track .transpose .key minor {
-    border-top-style: solid;
-    border-top-width: 2px;
-    border-top-color: var(--ctextc);
-}
-
-#track .notes .top {
-    z-index: 50;
-    display: flex;
-    background-color: var(--cbglc);
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    overflow: hidden;
-    cursor: pointer;
-}
-#track .notes .top h3 {
-    z-index: 150;
-    padding: 20px;
-    width: 34%;
-    font-size: 23px;
-    font-weight: 500;
+#track .ampel span {
     background-color: var(--cbgc);
-    border-radius: 15px;
-    text-align: center;
-}
-#track .notes .top .b {
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px;
-    background-color: var(--cbglc);
-}
-#track .notes .top .r {
-    border-bottom-right-radius: 0px;
-    background-color: var(--cbglc);
-}
-#track .notes .top .l {
-    border-bottom-left-radius: 0px;
-    background-color: var(--cbglc);
+    height: 35px;
+    width: 35px;
+    border-radius: 100%;
 }
 
+/* NOTES */
 #track .notes p {
     z-index: 100;
     font-size: 20px;
@@ -167,13 +87,5 @@
     padding: 20px;
     background-color: var(--cbgc);
     border-radius: 15px;
-}
-
-
-@media only screen and (min-width: 700px) {
-    
-    #track {
-        display: grid;
-    }
-    
+    margin-bottom: 25px;
 }
