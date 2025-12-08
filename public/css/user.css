@@ -44,6 +44,8 @@ user svg {
     height: 30px;
     width: 30px;
 }
+
+/* PASSWORT ÄNDERN LINK */
 .edit a {
     display: flex;
     text-decoration: none;
@@ -57,8 +59,6 @@ user svg {
     align-items: center;
     margin-bottom: 40px;
 }
-
-/* PASSWORT ÄNDERN LINK */
 .edit a:hover {
     background-color: var(--cbgc);
 }

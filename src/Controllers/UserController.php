@@ -15,15 +15,17 @@ class UserController
     }
 
     public function login() {
-            $error = false;
-            $data = false;
-            $this->render('users/login', compact('error', 'data'));
+            $error = null;
+            $data = null;
+            $pageTitle = "Login";
+            require __DIR__ . "/../Views/users/login.php";
     }
 
     public function loginSubmit() {
         $user = User::get($_POST["username"]);
         if (!$user) {
-            $error = "User nicht gefunden.";
+            $error['message'] = "User nicht gefunden.";
+            $error['field'] = 0;
             $data["username"] = $_POST["username"];
             $this->render('users/login', compact('error', 'data'));
         } else if (password_verify($_POST["password"], $user["password"])) {
@@ -32,7 +34,8 @@ class UserController
             header("Location: /songs");
             exit;
         } else {
-            $error = "Falscher Benutzername oder Passwort!";
+            $error['message'] = "Falscher Benutzername oder Passwort!";
+            $error['field'] = 1;
             $data["username"] = $_POST["username"];
             $this->render('users/login', compact('error', 'data'));
         }

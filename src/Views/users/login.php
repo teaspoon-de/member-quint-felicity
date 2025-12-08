@@ -1,21 +1,48 @@
-<h1>Login</h1>
+<!DOCTYPE html>
+<html lang="de">
+    <?php require __DIR__ . "/../layout/headers.php";?>
+<body>
 
-<form action="/login" method="post">
-    <p>
-        <label for="username">Nutzername</label><br>
-        <input type="text"
-        id="username"
-        name="username"
-        <?php if(isset($data["username"])) echo 'value="'.$data["username"].'"'?>
-        required>
-    </p>
+<?php
+$title = "Mitglieder Bereich";
+$add = null;
+require __DIR__ . "/../layout/topIndex.php"
+?>
 
-    <p>
-        <label for="password">Anzeigename</label><br>
-        <input type="password" id="password" name="password" required>
-        <?php if(isset($error)) echo '<p>'.$error.'</p>'?>
-    </p>
-    <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+<link rel="stylesheet" href="/css/edit.css">
 
-    <button type="submit">Anmelden</button>
-</form>
+<section class="section edit" style="margin-top: 0px">
+    <form action="/login" method="post">
+        <div class="inLong">
+            <h3>Nutzername</h3>
+            <input <?php if($error) echo 'class="error"'?>
+                type="text"
+                id="username"
+                name="username"
+                <?php if(isset($data["username"])) echo 'value="'.$data["username"].'"'?>
+                required
+                <?php if(!$error || $error['field'] === 0) echo 'autofocus'?>
+            >
+        </div>
+        <?php if($error && $error['field'] === 0) echo '<p class="errorMessage">'. $error['message'] .'</p>'?>
+        <div class="inLong">
+            <h3>Passwort</h3>
+            <input <?php if($error && $error['field'] === 1) echo 'class="error"'?>
+                type="password"
+                id="password"
+                name="password"
+                required
+                <?php if($error && $error['field'] === 1) echo 'autofocus'?>
+            >
+        </div>
+        <?php if($error && $error['field'] === 1) echo '<p class="errorMessage">'. $error['message'] .'</p>'?>
+        <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token']; ?>">
+
+        <button type="submit">
+            <p>Anmelden</p>
+        </button>
+    </form>
+</section>
+
+</body>
+</html>

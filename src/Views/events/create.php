@@ -4,10 +4,10 @@ require __DIR__ . "/../layout/topBarEdit.php";
 ?>
 
 <link rel="stylesheet" href="/css/events.css">
+<link rel="stylesheet" href="/css/edit.css">
 
 <section class="section edit">
     <form id="createForm" action="/events/create" method="post">
-        <input type="hidden" name="_method" value="PUT">
         <div class="inLong">
             <h3>Titel</h3>
             <input type="text" 
@@ -28,7 +28,7 @@ require __DIR__ . "/../layout/topBarEdit.php";
             >
         </div>
 
-        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+        <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token']; ?>">
     </form>
 </section>
 
