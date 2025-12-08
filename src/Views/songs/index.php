@@ -15,7 +15,7 @@ require __DIR__ . "/../layout/search.php"
 
 <section id="trackList">
     <?php foreach ($songs as $song): ?>
-    <song class="unselectable" data-link="/songs/<?= $song['id'] ?>" data-duration="<?= htmlspecialchars($song['duration'] ?? '') ?>">
+    <song class="unselectable" data-link="/songs/<?= $song['id'] ?>" data-duration="<?= htmlspecialchars($song['duration'] ?? '') ?>" data-status="<?= $song['status'] ?>">
         <img src="<?= htmlspecialchars($song['cover_url'] ?? '') ?>">
         <div class="info">
             <h3><?= htmlspecialchars($song['title'] ?? '') ?></h3>
@@ -24,7 +24,8 @@ require __DIR__ . "/../layout/search.php"
         <div class="transpose">
             <p class="by"><?= htmlspecialchars($song['transposed_by'] ?? '') ?></p>
             <p class="key">
-            <span style="background-color: var(--<?= $song['status']?>)"></span><?php
+            <!--span style="background-color: var(--<?= $song['status']?>)"></span-->
+            <?php
                 $key = $song['original_key_maj'];
                 if ($key == -1) {
                     echo "<b>?</b>";
@@ -70,8 +71,12 @@ require __DIR__ . "/../layout/search.php"
     });
 
     function onSearchUpdate(query) {
+        var filterActive = false;
+        $("#filter div").each(function() {
+            if ($(this).hasClass("selected")) filterActive = true;
+        });
         $("#trackList song").each(function(index) {
-            if (($("#filterNotInWork").hasClass("selected") && $(this).hasClass("inWork")) || ($("#filterInWork").hasClass("selected") && !$(this).hasClass("inWork")) || (query != "" && !$(this).text().toLowerCase().replaceAll("♭", "b").includes(query))) {
+            if ((filterActive && !$("#filter ." + $(this).data("status")).hasClass("selected")) || (query != "" && !$(this).text().toLowerCase().replaceAll("♭", "b").includes(query))) {
                 $(this).css("display", "none");
             } else if ($(this).css("display") == "none") $(this).css("display", "flex");
         });

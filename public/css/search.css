@@ -45,22 +45,26 @@
 }
 .search input:focus {outline: none;}
 #filter {
-    max-width: 1000px;
-    height: 53px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 20px;
     display: flex;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    padding-right: 17px;
+    box-sizing: content-box;
     gap: 10px;
+    margin-left: 25px;
+    margin-bottom: 15px;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox, Safari 18.2+, Chromium 121+ */
 }
-#filter p {
+#filter::-webkit-scrollbar { 
+    display: none; /* Older Safari and Chromium */
+}
+#filter div {
+    display: flex;
+    width: fit-content;
     cursor: pointer;
-    font-size: 23px;
-    font-weight: 400;
-    padding: 18px;
-    padding-top: 12px;
-    padding-bottom: 14px;
-    color: var(--ctextc);
+    padding-left: 18px;
+    padding-right: 18px;
     background-color: var(--cbgc);
     border-radius: 40px;
     border-width: 2px;
@@ -68,6 +72,32 @@
     border-color: var(--invis);
     -webkit-transition: .4s;
     transition: .4s;
+    gap: 10px;
+}
+#filter .ampel::before {
+    content: "";
+    display: block;
+    height: 23px;
+    width: 23px;
+    margin-top: 13px;
+    border-radius: 100%;
+}
+#filter .green::before {
+    background-color: var(--green);
+}
+#filter .orange::before {
+    background-color: var(--orange);
+}
+#filter .red::before {
+    background-color: var(--red);
+}
+#filter div p {
+    padding-top: 12px;
+    padding-bottom: 14px;
+    width: max-content;
+    font-size: 23px;
+    font-weight: 400;
+    color: var(--ctextc);
 }
 #filter .selected {
     color: var(--ctext);

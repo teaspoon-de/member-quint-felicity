@@ -97,6 +97,7 @@ Raiffeisenstraße 9
         </div>
 
         <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+        <button type="submit" class="null"></button>
     </form>
 </section>
 

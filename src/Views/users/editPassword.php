@@ -39,6 +39,7 @@ require __DIR__ . "/../layout/topBarEdit.php";
         </div>
 
         <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
+        <button type="submit" class="null"></button>
     </form>
 
     <script>

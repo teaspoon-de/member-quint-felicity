@@ -6,7 +6,7 @@ require __DIR__ . "/../layout/topIndex.php"
 
 <?php
 $placeHolder = "Beitrag suchen";
-$forTracks = true;
+$forTracks = false;
 $searchMethod = null;
 require __DIR__ . "/../layout/search.php"
 ?>
@@ -31,8 +31,8 @@ require __DIR__ . "/../layout/search.php"
     });
 
     function onSearchUpdate(query) {
-        $("#trackList song").each(function(index) {
-            if (($("#filterNotInWork").hasClass("selected") && $(this).hasClass("inWork")) || ($("#filterInWork").hasClass("selected") && !$(this).hasClass("inWork")) || (query != "" && !$(this).text().toLowerCase().replaceAll("♭", "b").includes(query))) {
+        $("#eventList event").each(function(index) {
+            if (query != "" && !$(this).text().toLowerCase().includes(query)) {
                 $(this).css("display", "none");
             } else if ($(this).css("display") == "none") $(this).css("display", "flex");
         });

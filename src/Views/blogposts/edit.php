@@ -17,6 +17,7 @@ require __DIR__ . "/../layout/topBarEdit.php";
         <input type="text" id="content" name="content" value="<?= htmlspecialchars($blogpost['content'] ?? '') ?>">
     </p>
     <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+    <button type="submit" class="null"></button>
 </form>
 
 <p><a href="/blog">Abbrechen</a></p>

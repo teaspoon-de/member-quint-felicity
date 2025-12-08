@@ -8,7 +8,7 @@ require __DIR__ . "/../layout/topIndex.php"
 
 <?php
 $placeHolder = "Event suchen";
-$forTracks = true;
+$forTracks = false;
 $searchMethod = null;
 require __DIR__ . "/../layout/search.php"
 ?>
@@ -65,4 +65,12 @@ require __DIR__ . "/../layout/search.php"
             window.location.assign($(this).data("link"));
         });
     });
+
+    function onSearchUpdate(query) {
+        $("#eventList event").each(function(index) {
+            if (query != "" && !$(this).text().toLowerCase().includes(query)) {
+                $(this).css("display", "none");
+            } else if ($(this).css("display") == "none") $(this).css("display", "flex");
+        });
+    }
 </script>

@@ -10,11 +10,18 @@
     </div>
 </section>
 <section id="filter" class="unselectable">
-    <p id="filterNotInWork">Sicher</p>
-    <p id="filterInWork">Unsicher</p>
+    <div class="ampel green">
+        <p>Top</p>
+    </div>
+    <div class="ampel orange">
+        <p>Läuft so semi</p>
+    </div>
+    <div class="ampel red">
+        <p>Katastrophe</p>
+    </div>
 </section>
 <script>
-    var forTracks = <?= $forTracks ?>;
+    var forTracks = <?= $forTracks? "true": "false" ?>;
     if (!forTracks) {
         $("#filter").css("display", "none")
         $(".stats").css("display", "none");
@@ -47,22 +54,11 @@
         }
     }
 
-    $("#filterNotInWork").click(function() {
-        if ($(this).hasClass("selected")) {
-            $(this).removeClass("selected");
-        } else {
+    $("#filter div").off().click(function() {
+        if ($(this).hasClass("selected")) $(this).removeClass("selected");
+        else {
+            $("#filter div").removeClass("selected");
             $(this).addClass("selected");
-            if ($("#filterInWork").hasClass("selected")) $("#filterInWork").removeClass("selected");
-        }
-        updateElements();
-    });
-
-    $("#filterInWork").click(function() {
-        if ($(this).hasClass("selected")) {
-            $(this).removeClass("selected");
-        } else {
-            $(this).addClass("selected");
-            if ($("#filterNotInWork").hasClass("selected")) $("#filterNotInWork").removeClass("selected");
         }
         updateElements();
     });
