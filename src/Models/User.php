@@ -40,13 +40,34 @@ class User {
 
     public static function update(int $id, $data): bool {
         $pdo = Database::getConnection();
-        $stmt = $pdo->prepare("UPDATE users SET username=?, name=?, email=?, password=?, instrument=?  WHERE id=?");
+        try {
+            $stmt = $pdo->prepare("UPDATE users SET username=?, name=?, email=?, instrument=?  WHERE id=?");
+
+            return $stmt->execute([
+                $data['username'],
+                $data['name'],
+                $data['email'],
+                $data['instrument'],
+                $id
+            ]);
+
+        } catch (PDOException $e) {
+
+            // Error-Code 23000 = Integrity constraint violation (u.a. UNIQUE-Fehler)
+            if ($e->getCode() === "23000") {
+                return false;
+            }
+
+            // andere DB-Fehler normal weiterreichen
+            throw $e;
+        }
+    }
+
+    public static function updatePassword(int $id, string $password): bool {
+        $pdo = Database::getConnection();
+        $stmt = $pdo->prepare("UPDATE users SET password=? WHERE id=?");
         return $stmt->execute([
-            $data['username'],
-            $data['name'],
-            $data['email'],
-            password_hash($data["password"], PASSWORD_DEFAULT),
-            $data['instrument'],
+            password_hash($password, PASSWORD_DEFAULT),
             $id
         ]);
     }

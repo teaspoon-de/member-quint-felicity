@@ -4,12 +4,6 @@ CREATE DATABASE IF NOT EXISTS quint_felicity
     CHARACTER SET utf8mb4
     COLLATE utf8mb4_unicode_ci;
 
-CREATE USER IF NOT EXISTS 'www_quint_felicity'@'%'
-    IDENTIFIED BY 'YqDW4k6EMKp1lBS8IatiP0lh2Mruvohe';
-
-GRANT ALL PRIVILEGES ON quint_felicity.* TO 'www_quint_felicity'@'%';
-FLUSH PRIVILEGES;
-
 USE quint_felicity;
 
 -- global metadata table
@@ -26,7 +20,7 @@ CREATE TABLE IF NOT EXISTS site_meta (
 
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(255) NOT NULL,
+    username VARCHAR(255) NOT NULL UNIQUE,
     name VARCHAR(255) NULL,
     email VARCHAR(255) NULL,
     password VARCHAR(255) NOT NULL,

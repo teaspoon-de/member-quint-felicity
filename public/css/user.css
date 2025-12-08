@@ -44,3 +44,34 @@ user svg {
     height: 30px;
     width: 30px;
 }
+.edit a {
+    display: flex;
+    text-decoration: none;
+    color: var(--ctext);
+    gap: 20px;
+    padding: 25px;
+    border-radius: 15px;
+    background-color: var(--cbglc);
+    cursor: pointer;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+/* PASSWORT ÄNDERN LINK */
+.edit a:hover {
+    background-color: var(--cbgc);
+}
+.edit a p {
+    font-size: 24px;
+    font-weight: 400;
+    flex-grow: 1;
+}
+.edit a svg {
+    height: 50px;
+    width: 50px;
+}
+.edit a svg:first-child {
+    height: 30px;
+    width: 30px;
+}

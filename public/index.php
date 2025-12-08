@@ -44,10 +44,12 @@ $router->post('/login', [UserController::class, 'loginSubmit']);
 $router->get('/members', [UserController::class, 'index']);
 $router->get('/members/create', [UserController::class, 'create']);
 $router->post('/members/create', [UserController::class, 'store']);
-$router->get('/account', [UserController::class, 'show']);
+//$router->get('/account', [UserController::class, 'show']);
 $router->get('/account/edit', [UserController::class, 'edit']);
 $router->post('/account/edit', [UserController::class, 'update']);
-$router->post('/members/{id}/delete', [UserController::class, 'delete']);
+$router->get('/account/edit/password', [UserController::class, 'editPassword']);
+$router->post('/account/edit/password', [UserController::class, 'updatePassword']);
+//$router->post('/members/{id}/delete', [UserController::class, 'delete']);
 // Songs
 $router->get('/songs', [SongController::class, 'index']);
 $router->get('/songs/add', [SongController::class, 'add']);
