@@ -50,7 +50,7 @@ services:
     environment:
       PMA_HOST: mysql
       PMA_USER: root
-      PMA_PASSWORD: root
+      PMA_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       PMA_ARBITRARY: 1
     ports:
       - 8081:80

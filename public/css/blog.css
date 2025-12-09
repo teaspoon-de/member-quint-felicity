@@ -1,0 +1,108 @@
+/* INDEX BLOGPOSTS */
+#blogList {
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-bottom: 125px;
+    display: flex;
+    flex-direction: column;
+}
+#blogList entry {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 10px;
+    padding: 25px;
+    border-radius: 15px;
+    background-color: var(--bbglc);
+}
+#blogList entry:first-child {
+    margin-top: 0px;
+}
+#blogList entry .title {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+#blogList entry .title img {
+    float: left;
+    width: 75px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 6px;
+}
+#blogList entry .title div {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+#blogList entry .title div h3 {
+    font-size: 30px;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+#blogList entry .title div p {
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--ctextc);
+}
+#blogList entry p {
+    font-size: 20px;
+    font-weight: 400;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 5; /* number of lines to show */
+    line-clamp: 5; 
+    -webkit-box-orient: vertical;
+}
+
+
+/* INDEX IMAGES */
+#imageList {
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-bottom: 125px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 gleich breite Spalten */
+    gap: 10px; /* Abstand zwischen Bildern */
+}
+#imageList img {
+    cursor: pointer;
+    width: 100%;
+    aspect-ratio: 1 / 1;  /* macht die Bilder quadratisch */
+    object-fit: cover;    /* schneidet das Bild passend zu */
+    border-radius: 6px;   /* optional: abgerundete Ecken */
+}
+
+
+/* EDIT BLOGPOST */
+#changeCover {
+    display: flex;
+    height: 74px;
+    padding: 15px;
+    border-radius: 15px;
+    gap: 15px;
+    align-items: center;
+    background-color: var(--cbglc);
+}
+#changeCover img {
+    width: 75px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 6px;
+}
+#changeCover p {
+    font-size: 24px;
+    font-weight: 500;
+    flex-grow: 1;
+}
+#changeCover svg {
+    margin-left: 18px;
+    height: 30px;
+    width: 30px;
+}
+#contentTa {
+    height: calc(100vh - 700px);
+}

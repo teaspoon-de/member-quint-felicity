@@ -11,27 +11,34 @@ $searchMethod = null;
 require __DIR__ . "/../layout/search.php"
 ?>
 
-<section id="trackList">
+<link rel="stylesheet" href="/css/blog.css">
+<section id="blogList">
     <?php foreach ($blogposts as $blogpost): ?>
-    <song class="unselectable" data-link="/blog/<?= $blogpost['id'] ?>/edit">
-        <img src="<?= htmlspecialchars($blogpost['cover_id'] ?? '') ?>">
-        <div class="info">
-            <h3><?= htmlspecialchars($blogpost['title'] ?? '') ?></h3>
-            <p><?= htmlspecialchars($blogpost['content'] ?? '') ?></p>
+    <entry class="unselectable" data-link="/blog/<?= $blogpost['id'] ?>/edit">
+        <div class="title">
+            <img src="<?= "/resources/uploads/".htmlspecialchars($blogpost['cover_uri'] ?? '') ?>">
+            <div>
+                <h3><?= htmlspecialchars($blogpost['title'] ?? '') ?></h3>
+                <p><?php 
+                        $date = new DateTime($blogpost["created_at"]);
+                        echo 'am '.$date->format('d.m.Y');
+                    ?></p>
+            </div>
         </div>
-    </song>
+        <p><?= substr(htmlspecialchars($blogpost['content'] ?? ''), 0, 512) ?></p>
+    </entry>
     <?php endforeach; ?>
 </section>
 <script>
 
-    $("#trackList song").each(function(index) {
+    $("#blogList entry").each(function(index) {
         $(this).click(function() {
             window.location.assign($(this).data("link"));
         });
     });
 
     function onSearchUpdate(query) {
-        $("#eventList event").each(function(index) {
+        $("#blogList entry").each(function(index) {
             if (query != "" && !$(this).text().toLowerCase().includes(query)) {
                 $(this).css("display", "none");
             } else if ($(this).css("display") == "none") $(this).css("display", "flex");

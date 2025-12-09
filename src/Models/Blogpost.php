@@ -7,7 +7,12 @@ class Blogpost {
     public static function all(): array {
         $pdo = Database::getConnection();
         $stmt = $pdo->query("SELECT * FROM blogposts ORDER BY created_at DESC");
-        return $stmt->fetchAll();
+        $posts = $stmt->fetchAll();
+        for ($i = 0; $i < count($posts); $i++) {
+            $cover = Image::find($posts[$i]["cover_id"]);
+            $posts[$i]["cover_uri"] = $cover["uri"];
+        }
+        return $posts;
     }
 
     public static function find(int $id): ?array {
@@ -15,6 +20,8 @@ class Blogpost {
         $stmt = $pdo->prepare("SELECT * FROM blogposts WHERE id = ?");
         $stmt->execute([$id]);
         $blogpost = $stmt->fetch();
+        $cover = Image::find($blogpost["cover_id"]);
+        $blogpost["cover_uri"] = $cover["uri"];
         return $blogpost ?: null;
     }
 
