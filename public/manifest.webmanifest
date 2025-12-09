@@ -1,0 +1,40 @@
+{
+  "name": "Quint Felicity",
+  "short_name": "QF",
+  "start_url": "/songs",
+  "display": "standalone",
+  "background_color": "#100f0f",
+  "theme_color": "#336428",
+  "icons": [
+    {
+      "src": "/resources/icon-152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "/resources/icon-167.png",
+      "sizes": "167x167",
+      "type": "image/png"
+    },
+    {
+      "src": "/resources/icon-180.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/resources/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/resources/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/resources/LogoRotICO.png",
+      "sizes": "588x588",
+      "type": "image/png"
+    }
+  ]
+}

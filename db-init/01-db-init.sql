@@ -66,7 +66,8 @@ CREATE TABLE IF NOT EXISTS events (
     date_begin DATETIME NOT NULL,
     public_entry DATETIME NULL,
     deadline DATETIME NULL,
-    /*Auftritt bestätigt?, Auftritt auf Website?*/
+    booked BOOLEAN DEFAULT 0,
+    publish BOOLEAN DEFAULT 0,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -110,6 +111,7 @@ CREATE TABLE IF NOT EXISTS songs (
     title VARCHAR(255) NULL,
     artists VARCHAR(255) NULL,
     cover_url VARCHAR(255) NULL,
+    cover_big_url VARCHAR(255) NULL,
     duration INT NULL,
     spotify_id VARCHAR(255) NULL,
     /*('C', 'Db', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'Ab', 'A', 'Bb', 'B')*/

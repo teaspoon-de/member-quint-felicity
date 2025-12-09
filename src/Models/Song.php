@@ -25,11 +25,12 @@ class Song {
         $stmt->execute([$data["spotify_id"]]);
         if (($stmt->fetch()?: null) !== null) return false;
 
-        $stmt = $pdo->prepare("INSERT INTO songs (title, artists, cover_url, duration, spotify_id) VALUES (?, ?, ?, ?, ?)");
+        $stmt = $pdo->prepare("INSERT INTO songs (title, artists, cover_url, cover_big_url, duration, spotify_id) VALUES (?, ?, ?, ?, ?, ?)");
         return $stmt->execute([
             $data["title"] ?? null,
             $data["artists"] ?? null,
             $data["cover_url"] ?? null,
+            $data["cover_big_url"] ?? null,
             $data["duration_ms"] ?? null,
             $data["spotify_id"] ?? null
         ]);

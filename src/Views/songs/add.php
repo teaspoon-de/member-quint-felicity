@@ -22,6 +22,7 @@ require __DIR__ . "/../layout/search.php"
     <input type="hidden" id="title" name="title">
     <input type="hidden" id="artists" name="artists">
     <input type="hidden" id="cover_url" name="cover_url">
+    <input type="hidden" id="cover_big_url" name="cover_url">
     <input type="hidden" id="duration_ms" name="duration_ms">
     <input type="hidden" id="spotify_id" name="spotify_id">
     <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
@@ -36,11 +37,12 @@ require __DIR__ . "/../layout/search.php"
 
         data.tracks.items.forEach(track => {
             // TODO Render Artists, Rate Limit
-            $(`<song><img src="${track.album.images[0].url}">
+            $(`<song><img src="${track.album.images[1].url}">
                 <div class="info"><h3>${track.name}</h3><p>${formatArtists(track.artists)}</p></div></song>`)
                 .data('title', track.name)
                 .data('artists', formatArtists(track.artists))
-                .data('cover_url', track.album.images[0].url)
+                .data('cover_url', track.album.images[1].url)
+                .data('cover_big_url', track.album.images[0].url)
                 .data('duration_ms', track.duration_ms)
                 .data('spotify_id', track.id)
                 .off().click(function() {
@@ -70,6 +72,7 @@ require __DIR__ . "/../layout/search.php"
         document.getElementById('title').value = $song.data('title');
         document.getElementById('artists').value = $song.data('artists');
         document.getElementById('cover_url').value = $song.data('cover_url');
+        document.getElementById('cover_big_url').value = $song.data('cover_big_url');
         document.getElementById('duration_ms').value = $song.data('duration_ms');
         document.getElementById('spotify_id').value = $song.data('spotify_id');
         document.getElementById('saveForm').submit();
