@@ -39,7 +39,7 @@ class Event {
         $regs = $stmt->fetchAll();
         for ($i = 0; $i < count($regs); $i++) {
             $user = User::find($regs[$i]["user_id"]);
-            $regs[$i]["username"] = $user["username"];
+            $regs[$i]["name"] = $user["name"];
         }
         return $regs ?: null;
     }

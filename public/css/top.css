@@ -12,9 +12,8 @@
     height: 40px;
     width: 40px;
     flex-basis: 40px;
+    cursor: pointer;
 }
-#topbar svg:hover {cursor: pointer;}
-#topbar p:hover {cursor: pointer;}
 #topbar p {
     z-index: 100;
     font-size: 25px;
@@ -23,6 +22,7 @@
     flex-grow: 1;
     width: fit-content;
     height: 40px;
+    cursor: pointer;
     align-content: center;
 }
 .editIcon {z-index: 150;}
@@ -77,6 +77,7 @@
     justify-items: center;
 }
 #top .user {
+    cursor: pointer;
     align-self: flex-end;
     height: 50px;
     width: 50px;
@@ -140,4 +141,14 @@
     border-color: var(--cbg);
     color: var(--ctext);
     cursor: pointer;
+}
+@media only screen and (min-width: 1050px) {
+    #top, #topbar {
+        justify-self: center;
+        width: 970px;
+    }
+    #saveBar {
+        justify-self: center;
+        width: 1050px;
+    }
 }

@@ -63,7 +63,7 @@ require __DIR__ . "/../layout/topItem.php"
                     echo $svg[$statusIndex];
                 ?>
                 <div>
-                    <h4><?= $reg["username"]?></h4>
+                    <h4><?= $reg["name"]?></h4>
                     <?php if ($reg["message"]) echo "<p>".$reg["message"]."</p>"?>
                 </div>
             </ul>
@@ -135,6 +135,7 @@ if ($event['location']) echo '<section id="location" class="section">
     <div class="container">
     </div>
 </section-->
+<span style="display: block; height: 125px;"></span>
 
 <script>
     var status = "";

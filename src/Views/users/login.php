@@ -19,6 +19,7 @@ require __DIR__ . "/../layout/topIndex.php"
                 type="text"
                 id="username"
                 name="username"
+                autocomplete="username"
                 <?php if(isset($data["username"])) echo 'value="'.$data["username"].'"'?>
                 required
                 <?php if(!$error || $error['field'] === 0) echo 'autofocus'?>
@@ -31,6 +32,7 @@ require __DIR__ . "/../layout/topIndex.php"
                 type="password"
                 id="password"
                 name="password"
+                autocomplete="current-password"
                 required
                 <?php if($error && $error['field'] === 1) echo 'autofocus'?>
             >

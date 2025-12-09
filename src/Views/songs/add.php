@@ -37,11 +37,11 @@ require __DIR__ . "/../layout/search.php"
 
         data.tracks.items.forEach(track => {
             // TODO Render Artists, Rate Limit
-            $(`<song><img src="${track.album.images[1].url}">
+            $(`<song><img src="${track.album.images[2].url}">
                 <div class="info"><h3>${track.name}</h3><p>${formatArtists(track.artists)}</p></div></song>`)
                 .data('title', track.name)
                 .data('artists', formatArtists(track.artists))
-                .data('cover_url', track.album.images[1].url)
+                .data('cover_url', track.album.images[2].url)
                 .data('cover_big_url', track.album.images[0].url)
                 .data('duration_ms', track.duration_ms)
                 .data('spotify_id', track.id)

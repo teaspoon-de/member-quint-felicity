@@ -9,6 +9,7 @@ user {
     justify-content: space-between;
     align-items: center;
     background-color: var(--cbglc);
+    cursor: pointer;
 }
 user:first-child {
     margin-top: 0px;
@@ -74,4 +75,11 @@ user svg {
 .edit a svg:first-child {
     height: 30px;
     width: 30px;
+}
+
+@media only screen and (min-width: 1050px) {
+    #userList {
+        justify-self: center;
+        width: 1000px;
+    }
 }

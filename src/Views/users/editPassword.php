@@ -14,6 +14,7 @@ require __DIR__ . "/../layout/topBarEdit.php";
                 type="password" 
                 id="old" 
                 name="old"
+                autocomplete="current-password"
                 required
             >
         </div>
@@ -25,6 +26,7 @@ require __DIR__ . "/../layout/topBarEdit.php";
                 type="password" 
                 id="password" 
                 name="password"
+                autocomplete="new-password"
                 required
             >
         </div>
@@ -34,6 +36,7 @@ require __DIR__ . "/../layout/topBarEdit.php";
             <input 
                 type="password"
                 id="again"
+                autocomplete="new-password"
                 required
             >
         </div>

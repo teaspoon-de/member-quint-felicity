@@ -8,7 +8,7 @@
 
 <script>
     if (window.location.pathname == "/members" || window.location.pathname == "/login") {
-        $(".user").css("opacity", "0");
+        $(".user").css("opacity", "0").css("cursor", "default");
     } else {
         $(".user").each(function() {
             $(this).off().click(function() {
