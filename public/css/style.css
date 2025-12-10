@@ -115,8 +115,6 @@ main {
     padding: 25px;
     padding-top: 0px;
 }
-section {
-}
 
 /* MENU */
 #menu {
@@ -242,7 +240,7 @@ section {
     background-color: var(--cbgc);
     border-width: 2px;
     border-style: solid;
-    border-color: var(--ctext);
+    border-color: var(--ctextc);
 }
 .slider:before {
     position: absolute;
@@ -252,12 +250,15 @@ section {
     left: 4px;
     bottom: 4px;
     border-radius: 50%;
-    background-color: var(--ctext);
+    background-color: var(--ctextc);
     -webkit-transition: .4s;
     transition: .4s;
 }
 input:checked + .slider {
-    background-color: var(--inWork);
+    border-color: var(--ctext);
+}
+input:checked + .slider:before {
+    background-color: var(--ctext);
 }
 /*input:focus + .slider {
     box-shadow: 0 0 1px var(--inWork);

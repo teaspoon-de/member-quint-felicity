@@ -20,7 +20,7 @@ require __DIR__ . "/../layout/search.php"
             <div>
                 <h3><?= htmlspecialchars($blogpost['title'] ?? '') ?></h3>
                 <p><?php 
-                        $date = new DateTime($blogpost["created_at"]);
+                        $date = new DateTime($blogpost['date']);
                         echo 'am '.$date->format('d.m.Y');
                     ?></p>
             </div>

@@ -8,7 +8,7 @@
     <link rel="apple-touch-icon" href="/resources/icon-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/resources/icon-180.png">
 
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <!-- IMPORTS -->
     <script src="/js/jquery-3.6.1.min.js"></script>

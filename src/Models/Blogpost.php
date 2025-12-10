@@ -27,21 +27,25 @@ class Blogpost {
 
     public static function create($data): bool {
         $pdo = Database::getConnection();
-        $stmt = $pdo->prepare("INSERT INTO blogposts (title, /*cover_id,*/ content) VALUES (?, ?)");
+        $stmt = $pdo->prepare("INSERT INTO blogposts (title, cover_id, content, publish, date) VALUES (?, ?, ?, ? , ?)");
         return $stmt->execute([
             $data["title"] ?? null,
-            /*$data["cover_id"] ?? null,*/
+            $data["cover_id"] ?? null,
             $data["content"] ?? null,
+            isset($data["publish"]) && $data["publish"] === 'on'? 1:0,
+            $data["date"] ?? null,
         ]);
     }
 
     public static function update(int $id, $data): bool {
         $pdo = Database::getConnection();
-        $stmt = $pdo->prepare("UPDATE blogposts SET title=?, /*cover_id=?,*/ content=?, last_edit=NOW()  WHERE id=?");
+        $stmt = $pdo->prepare("UPDATE blogposts SET title=?, cover_id=?, content=?, publish=?, date=?, last_edit=NOW()  WHERE id=?");
         return $stmt->execute([
             $data["title"] ?? null,
-            /*$data["cover_id"] ?? null,*/
+            $data["cover_id"] ?? null,
             $data["content"] ?? null,
+            isset($data["publish"]) && $data["publish"] === 'on'? 1:0,
+            $data["date"] ?? null,
             $id
         ]);
     }

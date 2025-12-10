@@ -31,6 +31,10 @@ class ImageController {
         $this->render('images/index', compact('images'));
     }
 
+    public function select() {
+        echo json_encode(Image::all());
+    }
+
     public function show($id) {
         $image = Image::find($id);
         $this->render('images/show', compact('image'));

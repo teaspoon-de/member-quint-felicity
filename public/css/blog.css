@@ -87,6 +87,10 @@
     gap: 15px;
     align-items: center;
     background-color: var(--cbglc);
+    border: 2px solid var(--cbglc);
+}
+#changeCover:has(.error) {
+    border-color: var(--red);
 }
 #changeCover img {
     width: 75px;
@@ -104,12 +108,39 @@
     height: 30px;
     width: 30px;
 }
+#changeCover + .errorMessage {
+    color: var(--red);
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 10px;
+}
 #contentTa {
     height: calc(100vh - 700px);
 }
 
+/* SELECT IMAGES */
+#imageSelect {
+    z-index: 100;
+    top: 0;
+    overflow-y: scroll;
+    padding-top: 125px;
+    display: none;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: var(--cbg);
+}
+#imageSelect p {
+    font-size: 30px;
+    font-weight: 500;
+    justify-self: center;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+
 @media only screen and (min-width: 1050px) {
-    #blogList {
+    #blogList, #imageList {
         justify-self: center;
         width: 1000px;
     }

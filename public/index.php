@@ -76,6 +76,7 @@ $router->post('/blog/{id}/edit', [BlogpostController::class, 'update']);
 $router->post('/blog/{id}/delete', [BlogpostController::class, 'delete']);
 // Blog Images
 $router->get('/blog/images', [ImageController::class, 'index']);
+$router->get('/blog/images/select', [ImageController::class, 'select']);
 $router->get('/blog/images/create', [ImageController::class, 'create']);
 $router->post('/blog/images/create', [ImageController::class, 'store']);
 $router->get('/blog/image/{id}/edit', [ImageController::class, 'edit']);
