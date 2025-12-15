@@ -148,6 +148,7 @@ button {
     padding: 32px;
     margin-top: 40px;
     background-color: var(--green);
+    cursor: pointer;
 }
 
 /* CHECKBOX */
@@ -162,6 +163,7 @@ button {
     gap: 15px;
     margin-top: 40px;
     border: 2px solid var(--cbglc);
+    cursor: pointer;
 }
 .checkBox:has(input:checked) {
     color: var(--ctext);

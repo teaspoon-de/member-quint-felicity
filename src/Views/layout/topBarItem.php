@@ -31,6 +31,6 @@
         if (path.substring(path.length-1) == "/")
             path = path.substring(0, path.length-1);
         var pathSplit = path.split("/");
-        return path.substring(0,path.length - pathSplit[pathSplit.length-1].length);
+        return path.substring(0,path.length - pathSplit[pathSplit.length-1].length -1);
     }
 </script>
