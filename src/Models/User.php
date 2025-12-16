@@ -65,7 +65,8 @@ class User {
 
     public static function updatePassword(int $id, string $password): bool {
         $pdo = Database::getConnection();
-        $stmt = $pdo->prepare("UPDATE users SET password=? WHERE id=?");
+        $_SESSION["pw_ini"] = 1;
+        $stmt = $pdo->prepare("UPDATE users SET password=?, pw_ini=1 WHERE id=?");
         return $stmt->execute([
             password_hash($password, PASSWORD_DEFAULT),
             $id
@@ -76,6 +77,18 @@ class User {
         $pdo = Database::getConnection();
         $stmt = $pdo->prepare("DELETE FROM users WHERE id=?");
         return $stmt->execute([$id]);
+    }
+
+    public static function storeSessionToken(int $userId, string $tokenHash):bool {
+        $pdo = Database::getConnection();
+        $stmt = $pdo->prepare("INSERT INTO auth_tokens (user_id, token_hash, expires_at) VALUES (?, ?, DATE_ADD(NOW(), INTERVAL 30 DAY));");
+        return $stmt->execute([$userId, $tokenHash]);
+    }
+
+    public static function deleteSessionTokens(int $userId):bool {
+        $pdo = Database::getConnection();
+        $stmt = $pdo->prepare("DELETE FROM auth_tokens WHERE user_id = ?;");
+        return $stmt->execute([$userId]);
     }
 
 }

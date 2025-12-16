@@ -38,6 +38,23 @@ require __DIR__ . "/../layout/topIndex.php"
             >
         </div>
         <?php if($error && $error['field'] === 1) echo '<p class="errorMessage">'. $error['message'] .'</p>'?>
+
+        <div class="checkBox">
+            <p>Angemeldet Bleiben</p>
+            <input
+                type="checkbox"
+                id="rememberMe"
+                name="rememberMe"
+            >
+            <span class="slider"></span>
+        </div>
+        <script>
+            $('.checkBox').each(function() {$(this).off().click(function() {
+                var cb = $(this).find('input[type=checkbox]');
+                cb.prop('checked', !cb.prop('checked'));
+            });});
+        </script>
+
         <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token']; ?>">
 
         <button type="submit">

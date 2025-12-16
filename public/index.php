@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../src/ini.php';
 require_once __DIR__ . '/../src/Database.php';
 require_once __DIR__ . '/../src/Controllers/SpotifyController.php';
 SpotifyController::getAccessToken();
@@ -35,6 +36,15 @@ require_once __DIR__ . '/../src/Models/Image.php';
 $router = new Router();
 
 // Login, User
+if (!isset($_SESSION['user_id']) && isset($_COOKIE['remember_me'])) {
+    $tokenHash = hash('sha256', $_COOKIE['remember_me']);
+    $pdo = Database::getConnection();
+    $stmt = $pdo->prepare("SELECT user_id FROM auth_tokens WHERE token_hash=? AND expires_at > NOW()");
+    $stmt->execute([$tokenHash]);
+    if ($row = $stmt->fetch()) {
+        $_SESSION['user_id'] = $row['user_id'];
+    }
+}
 if (!isset($_SESSION["user_id"]) && $_SERVER['REQUEST_URI'] !== "/login") {
     header("Location: /login");
     exit;

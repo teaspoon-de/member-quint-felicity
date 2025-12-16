@@ -31,6 +31,19 @@ class UserController
         } else if (password_verify($_POST["password"], $user["password"])) {
             session_regenerate_id(true);
             $_SESSION["user_id"] = $user["id"];
+            $_SESSION["pw_ini"] = $user["pw_ini"];
+
+            if (isset($_POST["rememberMe"]) && $_POST["rememberMe"] === 'on') {
+                $token = bin2hex(random_bytes(32));
+                $tokenHash = hash('sha256', $token);
+                User::deleteSessionTokens($user["id"]);
+                User::storeSessionToken($user["id"], $tokenHash);
+                setcookie('remember_me', $token, time() + 60*60*24*30, '/', '',
+                    true,   // Secure
+                    true    // HttpOnly
+                    );
+            }
+
             header("Location: /songs");
             exit;
         } else {
@@ -39,6 +52,12 @@ class UserController
             $data["username"] = $_POST["username"];
             $this->render('users/login', compact('error', 'data'));
         }
+    }
+
+    public function logOut() {
+        User::deleteSessionTokens($_SESSION["user_id"]);
+        setcookie('remember_me', '', time() - 3600);
+        session_destroy();
     }
 
     public function index() {

@@ -14,8 +14,6 @@ CREATE TABLE IF NOT EXISTS site_meta (
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
-
-
 -- TABLES
 
 CREATE TABLE IF NOT EXISTS users (
@@ -24,8 +22,21 @@ CREATE TABLE IF NOT EXISTS users (
     name VARCHAR(255) NULL,
     email VARCHAR(255) NULL,
     password VARCHAR(255) NOT NULL,
+    pw_ini BOOLEAN DEFAULT 0,
     instrument VARCHAR(255) NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS auth_tokens (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    token_hash CHAR(64) NOT NULL,
+    expires_at DATETIME NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    user_agent VARCHAR(255),
+    ip_address VARCHAR(45),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+        ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS privileges (
