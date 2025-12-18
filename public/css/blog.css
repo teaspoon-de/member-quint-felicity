@@ -12,7 +12,6 @@
     padding: 25px;
     border-radius: 15px;
     background-color: var(--cbgc);
-    justify-self: center;
 }
 #imageLink svg {
     height: 30px;
@@ -229,7 +228,7 @@
 
 
 @media only screen and (min-width: 1050px) {
-    #blogList, #imageList, #fileUploadForm {
+    #blogList, #imageList, #imageLink, #fileUploadForm {
         justify-self: center;
         width: 1000px;
     }

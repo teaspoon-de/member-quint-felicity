@@ -66,6 +66,21 @@ require __DIR__ . "/../layout/topBarEdit.php";
     </form>
 </section>
 
+<section id="contentEdit">
+    <div class="paragraph">
+        <textarea placeholder="Text ..."></textarea>
+    </div>
+    <div class="paragraph">
+        <input type="text" placeholder="Überschrift ...">
+        <textarea placeholder="Text ..."></textarea>
+    </div>
+    <div class="paragraph">
+        <input type="text" placeholder="Überschrift ...">
+        <textarea placeholder="Text ..."></textarea>
+    </div>
+    <div>Abschnitt hinzufügen</div>
+</section>
+
 <section id="imageSelect">
     <p>Such Dir ein Cover aus:</p>
     <div id="imageList"></div>    
