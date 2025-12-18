@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS images (
     title VARCHAR(255) NULL,
     description TEXT NULL,
     alt VARCHAR(255) NULL,
-    taken_at DATETIME NULL,
+    taken_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 

@@ -46,7 +46,7 @@ class Image {
         if (move_uploaded_file($file['tmp_name'], $uploadPath)) {
             
             $pdo = Database::getConnection();
-            $stmt = $pdo->prepare("INSERT INTO images (uri) VALUES (?)");
+            $stmt = $pdo->prepare("INSERT INTO images (uri, taken_at) VALUES (?, NOW())");
             return $stmt->execute([$newName]);
 
         } else {
