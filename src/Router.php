@@ -19,6 +19,14 @@ class Router
         $method = $_SERVER['REQUEST_METHOD'];
         $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
+        // 🔹 Slash-Normalisierung (außer Root)
+        if ($path !== '/' && str_ends_with($path, '/')) {
+            $normalized = rtrim($path, '/');
+            http_response_code(301);
+            header("Location: $normalized");
+            exit;
+        }
+
         if (in_array($method, ['POST', 'PUT', 'DELETE'])) {
             if (!$this->validCsrfToken()) {
                 http_response_code(403);

@@ -29,13 +29,11 @@ class Blogpost {
         $pdo = Database::getConnection();
         try {
             $slug = self::generateUniqueSlug($data["title"]);
-            $stmt = $pdo->prepare("INSERT INTO blogposts (title, slug, cover_id, content, publish, date) VALUES (?, ?, ?, ?, ? , ?)");
+            $stmt = $pdo->prepare("INSERT INTO blogposts (title, slug, cover_id, date) VALUES (?, ?, ?, ?)");
             return $stmt->execute([
                 $data["title"] ?? null,
                 $slug,
                 $data["cover_id"] ?? null,
-                $data["content"] ?? null,
-                isset($data["publish"]) && $data["publish"] === 'on'? 1:0,
                 $data["date"] ?? null,
             ]);
         } catch (PDOException $e) {

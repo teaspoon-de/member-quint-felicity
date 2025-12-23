@@ -81,7 +81,7 @@ require __DIR__ . "/../layout/topBarEdit.php";
 
 <section id="contentEdit" style="display: none;">
     <div class="paragraph">
-        <article class="textarea" role="textbox" contenteditable></article>
+        <article class="textarea" role="textbox" contenteditable><div>Hier Text bearbeiten ...</div></article>
     </div>
     <div id="contentNewPar" class="paragraph" style="display: none;">
         <h3 role="textbox" onkeyup="checkEmpty()" contenteditable>Überschrift</h3>
@@ -95,15 +95,24 @@ require __DIR__ . "/../layout/topBarEdit.php";
 </section>
 
 <script>
-    var iniCont = $('<div>' + $('#content').val() + '</div>');
-    
+    iniContent();
+    function iniContent() {
+        if ($('#content').val() == '') return;
+        var iniCont = $('<div>' + $('#content').val() + '</div>');
+        var pArray = getArray(iniCont, 'article');
+        var hArray = getArray(iniCont, 'h2');
+        $('#contentEdit .paragraph:first-child article').html(changeTags(pArray[0], 'p', 'div'));
+        for (var i = 0; i < hArray.length; i++) {
+            var e = getNewParagraph();
+            e.find('h3').html(hArray[i].html());
+            e.find('article').html(changeTags(pArray[i+1], 'p', 'div'));
+        }
+    }
     function getArray(v, q) {
         var a = new Array();
         v.find(q).each(function() {a.push($(this))});
         return a;
     }
-    var pArray = getArray(iniCont, 'article');
-    var hArray = getArray(iniCont, 'h2');
     function changeTags(article, old, ne) {
         var divs = getArray(article, old);
         if (divs.length == 0) return article.html();
@@ -115,13 +124,10 @@ require __DIR__ . "/../layout/topBarEdit.php";
         }
         return art.html();
     }
-    $('#contentEdit .paragraph:first-child article').html(changeTags(pArray[0], 'p', 'div'));
-    for (var i = 0; i < hArray.length; i++) {
-        var e = getNewParagraph();
-        e.find('h3').html(hArray[i].html());
-        e.find('article').html(changeTags(pArray[i+1], 'p', 'div'));
-    }
+
     $('#changeContent').off().click(function() {
+        $('#contentEdit .errorMessage').each(function() {$(this).remove()});
+        $('#contentEdit .paragraph').each(function() {$(this).removeClass('error')});
         $('#contentEdit').css('display', 'block');
         $('#cancel').off().click(function() {
             $('#contentEdit').css('display', 'none');
@@ -129,6 +135,10 @@ require __DIR__ . "/../layout/topBarEdit.php";
         });
         $("#save").off().click(()=>{
             var content = '';
+            if ($('#contentEdit .paragraph').first().text().trim() == '') {
+                $('#contentEdit .paragraph').first().addClass('error').append('<p class="errorMessage">Die Einleitung darf nicht leer sein</p>');
+                return;
+            }
             $('#contentEdit .paragraph').each(function(index) {
                 if ($(this).attr('id') == 'contentNewPar') return;
                 if (index != 0) content += '<h2>' + $(this).find('h3').html() + '</h2>';
@@ -193,6 +203,11 @@ require __DIR__ . "/../layout/topBarEdit.php";
 
     async function submit() {
         clearErrors();
+        if ($('#content').val().trim() == "") {
+            $('#content').addClass("error");
+            $('<p class="errorMessage">Bitte füge einen Inhalt hinzu</p>').insertAfter($('#changeContent'));
+            return;
+        }
         if (inputIsEmpty("#title")) return;
         if (inputIsEmpty("#date")) return;
 
