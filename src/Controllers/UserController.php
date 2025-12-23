@@ -60,6 +60,10 @@ class UserController
         session_destroy();
     }
 
+    public function root() {
+        header('Location: /songs');
+    }
+
     public function index() {
         $users = User::all();
         $this->render('users/index', compact('users'));

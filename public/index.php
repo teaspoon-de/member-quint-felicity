@@ -51,6 +51,7 @@ if (!isset($_SESSION["user_id"]) && $_SERVER['REQUEST_URI'] !== "/login") {
 }
 $router->get('/login', [UserController::class, 'login']);
 $router->post('/login', [UserController::class, 'loginSubmit']);
+$router->get('/', [UserController::class, 'root']);
 $router->get('/members', [UserController::class, 'index']);
 $router->get('/members/create', [UserController::class, 'create']);
 $router->post('/members/create', [UserController::class, 'store']);
@@ -89,7 +90,7 @@ $router->get('/blog/images', [ImageController::class, 'index']);
 $router->get('/blog/images/select', [ImageController::class, 'select']);
 $router->get('/blog/images/create', [ImageController::class, 'create']);
 $router->post('/blog/images/create', [ImageController::class, 'store']);
-$router->get('/blog/image/{id}/edit', [ImageController::class, 'edit']);
+$router->get('/blog/images/{id}/edit', [ImageController::class, 'edit']);
 $router->post('/blog/images/{id}/edit', [ImageController::class, 'update']);
 $router->post('/blog/images/{id}/delete', [ImageController::class, 'delete']);
 

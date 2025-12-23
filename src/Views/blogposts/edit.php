@@ -170,7 +170,7 @@ require __DIR__ . "/../layout/topBarEdit.php";
 
 <section id="imageSelect">
     <p>Such Dir ein Cover aus:</p>
-    <div id="imageList"></div>    
+    <div id="imageList"></div>
 </section>
 
 <script>
@@ -185,8 +185,11 @@ require __DIR__ . "/../layout/topBarEdit.php";
     $('#changeCover').off().click(async function() {
         if (!imagesInitialized) {
             const res = await fetch('/blog/images/select');
-            const data = await res.json();
-            data.forEach(image => {
+            const data = await res.json();            
+            data.forEach(imgs => {
+                $('<h2>'+imgs.month+'</h2>').appendTo('#imageList');
+                var list = $('<div class="imageList"></div>');
+                imgs.imgs.forEach(image => {
                 $('<img src="/resources/uploads/' + image.uri + '">')
                     .data('id', image.id)
                     .off().click(function() {
@@ -194,7 +197,9 @@ require __DIR__ . "/../layout/topBarEdit.php";
                         $('#changeCover img').attr('src', $(this).attr('src'));
                         $('#changeCover input').val($(this).data('id'));
                     })
-                    .appendTo('#imageList');
+                    .appendTo(list);
+                });
+                list.appendTo('#imageList');
             });
             imagesInitialized = true;
         }

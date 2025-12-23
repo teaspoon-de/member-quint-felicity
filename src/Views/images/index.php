@@ -67,7 +67,7 @@ require __DIR__ . "/../layout/search.php"
             echo $months[(int)$date->format('n')] . ' ' . $date->format('Y');
         ?></h2>
         <div class="imageList"><?php foreach($imgsi as $image): ?>
-            <img src="<?= '/resources/uploads/'.htmlspecialchars($image['uri'] ?? '')?>" alt="<?= htmlspecialchars($image['alt'] ?? '')?>" data-title="<?= htmlspecialchars($image['title'] ?? '')?>" data-link="<?= $image['id']?>">
+            <img src="<?= '/resources/uploads/'.htmlspecialchars($image['uri'] ?? '')?>" alt="<?= htmlspecialchars($image['alt'] ?? '')?>" data-title="<?= htmlspecialchars($image['title'] ?? '')?>" data-link="<?= $image['id']?>/edit">
         <?php endforeach; ?></div>
     <?php endforeach; ?>
 </section>

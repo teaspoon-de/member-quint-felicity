@@ -57,13 +57,12 @@ class Image {
 
     public static function update(int $id, $data): bool {
         $pdo = Database::getConnection();
-        $stmt = $pdo->prepare("UPDATE images SET uri=?, title=?, description=?, alt=?/*, taken_at=?*/ WHERE id=?");
+        $stmt = $pdo->prepare("UPDATE images SET title=?, description=?, alt=?, taken_at=? WHERE id=?");
         return $stmt->execute([
-            $data["uri"] ?? null,
             $data["title"] ?? null,
             $data["description"] ?? null,
             $data["alt"] ?? null,
-            /*$data["taken_at"] ?? null,*/
+            $data["taken_at"] ?? null,
             $id
         ]);
     }
