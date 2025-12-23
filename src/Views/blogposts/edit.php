@@ -7,7 +7,7 @@ require __DIR__ . "/../layout/topBarEdit.php";
 <link rel="stylesheet" href="/css/edit.css">
 <section class="section edit">
     <form id="createForm" action="/blog/<?= $blogpost['id'] ?>/edit" method="post">
-        <div id=changeCover>
+        <div id="changeCover" class="editContextButton">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil-icon lucide-pencil"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg>
             <p>Cover ändern</p>
             <img src="/resources/uploads/<?=$blogpost['cover_uri']?>">
@@ -56,30 +56,107 @@ require __DIR__ . "/../layout/topBarEdit.php";
             <span class="slider"></span>
         </div>
 
-        <div class="inLong">
+        <div id="changeContent" class="editContextButton">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil-icon lucide-pencil"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg>
+            <p>Inhalt bearbeiten</p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-text-initial-icon lucide-text-initial"><path d="M15 5h6"/><path d="M15 12h6"/><path d="M3 19h18"/><path d="m3 12 3.553-7.724a.5.5 0 0 1 .894 0L11 12"/><path d="M3.92 10h6.16"/></svg>
+            <input
+                type="hidden"
+                id="content"
+                name="content"
+                value="<?= htmlspecialchars($blogpost['content'] ?? '') ?>"
+                required
+            >
+        </div>
+
+        <!--div class="inLong">
             <h3>Inhalt</h3>
             <textarea id="contentTa" placeholder="Lass richtig abgehen woop woop ..."><?= htmlspecialchars($blogpost['content'] ?? '') ?></textarea>
             <input type="hidden" id="content" name="content">
-        </div>
+        </div-->
         <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token']; ?>">
         <button type="submit" class="null"></button>
     </form>
 </section>
 
-<section id="contentEdit">
+<section id="contentEdit" style="display: none;">
     <div class="paragraph">
-        <textarea placeholder="Text ..."></textarea>
+        <article class="textarea" role="textbox" contenteditable></article>
     </div>
-    <div class="paragraph">
-        <input type="text" placeholder="Überschrift ...">
-        <textarea placeholder="Text ..."></textarea>
+    <div id="contentNewPar" class="paragraph" style="display: none;">
+        <h3 role="textbox" onkeyup="checkEmpty()" contenteditable>Überschrift</h3>
+        <article role="textbox" onkeyup="checkEmpty()" contenteditable>Text</article>
     </div>
-    <div class="paragraph">
-        <input type="text" placeholder="Überschrift ...">
-        <textarea placeholder="Text ..."></textarea>
+    <div id="contentAddPar" class="editContextButton">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+        <p>Abschnitt hinzufügen</p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heading2-icon lucide-heading-2"><path d="M4 12h8"/><path d="M4 18V6"/><path d="M12 18V6"/><path d="M21 18h-4c0-4 4-3 4-6 0-1.5-2-2.5-4-1"/></svg>
     </div>
-    <div>Abschnitt hinzufügen</div>
 </section>
+
+<script>
+    var iniCont = $('<div>' + $('#content').val() + '</div>');
+    
+    function getArray(v, q) {
+        var a = new Array();
+        v.find(q).each(function() {a.push($(this))});
+        return a;
+    }
+    var pArray = getArray(iniCont, 'article');
+    var hArray = getArray(iniCont, 'h2');
+    function changeTags(article, old, ne) {
+        var divs = getArray(article, old);
+        if (divs.length == 0) return article.html();
+        var art = $('<div></div>');
+        for (var i = 0; i < divs.length; i++)
+            art.append('<'+ne+'>'+ divs[i].html() +'</'+ne+'>');
+        if (article.html().substring(0, old.length+2) != '<'+old+'>') {
+            return '<'+ne+'>'+ article.html().split('<'+old+'>')[0] +'</'+ne+'>' + art.html();
+        }
+        return art.html();
+    }
+    $('#contentEdit .paragraph:first-child article').html(changeTags(pArray[0], 'p', 'div'));
+    for (var i = 0; i < hArray.length; i++) {
+        var e = getNewParagraph();
+        e.find('h3').html(hArray[i].html());
+        e.find('article').html(changeTags(pArray[i+1], 'p', 'div'));
+    }
+    $('#changeContent').off().click(function() {
+        $('#contentEdit').css('display', 'block');
+        $('#cancel').off().click(function() {
+            $('#contentEdit').css('display', 'none');
+            defaultTopBar();
+        });
+        $("#save").off().click(()=>{
+            var content = '';
+            $('#contentEdit .paragraph').each(function(index) {
+                if ($(this).attr('id') == 'contentNewPar') return;
+                if (index != 0) content += '<h2>' + $(this).find('h3').html() + '</h2>';
+                content += '<article>' + changeTags($(this).find('article'), 'div', 'p') + '</article>';
+            });
+            $('#content').val(content);
+            $('#contentEdit').css('display', 'none');
+            defaultTopBar();            
+        });
+        function defaultTopBar() {
+            $("#cancel").off().click(()=>{window.location.assign('/blog');});
+            $("#save").off().click(()=>{submit();});
+        }
+    });
+
+    $('#contentAddPar').off().click(function() {
+        getNewParagraph();
+    });
+    function getNewParagraph() {
+        return $('#contentNewPar').clone().attr('id', '').attr('style', '').insertBefore('#contentAddPar');
+    }
+
+    function checkEmpty() {
+        $('#contentEdit .paragraph').each(function(index) {
+            if ($(this).attr('id') != 'contentNewPar' && $(this).find('article').html() == '<br>' && $(this).find('h3').html() == '<br>') $(this).remove();
+        });
+    }
+</script>
 
 <section id="imageSelect">
     <p>Such Dir ein Cover aus:</p>
@@ -119,7 +196,6 @@ require __DIR__ . "/../layout/topBarEdit.php";
         if (inputIsEmpty("#title")) return;
         if (inputIsEmpty("#date")) return;
 
-        document.getElementById("content").value = document.getElementById("contentTa").value;
         document.getElementById('createForm').submit();
     }
 

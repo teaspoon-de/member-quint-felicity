@@ -39,7 +39,7 @@ require __DIR__ . "/../layout/search.php"
                     ?></p>
             </div>
         </div>
-        <p><?= substr(htmlspecialchars($blogpost['content'] ?? ''), 0, 512) ?></p>
+        <p><?= substr(htmlspecialchars(substr(explode('</p>', $blogpost['content'])[0], strlen('<article><p>')) ?? ''), 0, 512) ?></p>
     </entry>
     <?php endforeach; ?>
 </section>

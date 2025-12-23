@@ -1,11 +1,11 @@
 <link rel="stylesheet" href="/css/top.css">
 <section id="saveBar" class="unselectable">
-    <p id="cancle">Abbrechen</p>
+    <p id="cancel">Abbrechen</p>
     <p id="save">Speichern</p>
 </section>
 <script>
     var backTo = "<?= $backURI ?>";
-    $("#cancle").click(()=>{
+    $("#cancel").click(()=>{
         window.location.assign(backTo!="null"? backTo: getLastSite());
     });
     $("#save").click(()=>{

@@ -10,6 +10,7 @@
     font-size: 24px;
     font-weight: 400;
     padding: 25px;
+    height: 30px;
     border-radius: 15px;
     background-color: var(--cbgc);
 }
@@ -93,7 +94,7 @@
 /* INDEX IMAGES */
 #fileUploadForm {
     margin: 25px;
-    margin-top: 0;
+    margin-bottom: 0;
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -167,40 +168,14 @@
 
 /* EDIT BLOGPOST */
 #changeCover {
-    display: flex;
-    height: 74px;
-    padding: 15px;
-    border-radius: 15px;
-    gap: 15px;
-    align-items: center;
-    background-color: var(--cbglc);
-    border: 2px solid var(--cbglc);
-    cursor: pointer;
-}
-#changeCover:has(.error) {
-    border-color: var(--red);
+    margin-top: 0;
+    padding-right: 15px;
 }
 #changeCover img {
     width: 75px;
     aspect-ratio: 1 / 1;
     object-fit: cover;
     border-radius: 6px;
-}
-#changeCover p {
-    font-size: 24px;
-    font-weight: 500;
-    flex-grow: 1;
-}
-#changeCover svg {
-    margin-left: 18px;
-    height: 30px;
-    width: 30px;
-}
-#changeCover + .errorMessage {
-    color: var(--red);
-    font-size: 20px;
-    font-weight: 600;
-    margin-top: 10px;
 }
 #contentTa {
     height: calc(100vh - 700px);
@@ -224,6 +199,54 @@
     justify-self: center;
     text-align: center;
     margin-bottom: 25px;
+}
+
+/* EDIT CONTENT */
+#contentEdit {
+    z-index: 100;
+    top: 0;
+    overflow-y: scroll;
+    display: block;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    padding: 110px 0 200px;
+    background-color: var(--cbg);
+}
+#contentEdit .paragraph {
+    padding: 15px 25px;
+    transition: .4s;
+}
+#contentEdit .paragraph h3, #contentEdit .paragraph article {
+    outline: none;
+    padding: 10px 25px;
+    border: 3px solid var(--invis);
+}
+#contentEdit .paragraph:has(> h3:focus), #contentEdit .paragraph:has(> article:focus) {
+    background-color: var(--cbglc);
+}
+/*#contentEdit .paragraph:has(> h3:focus) > h3, #contentEdit .paragraph:has(> h3:focus) > p, #contentEdit .paragraph:has(> p:focus) > h3, #contentEdit .paragraph:has(> p:focus) > p {
+    border-color: var(--ctextc);
+}
+#contentEdit .paragraph.error > h3, #contentEdit .paragraph.error > p {
+    border-color: var(--red);
+}*/
+#contentEdit .paragraph h3 {
+    font-size: 32px;
+    border-bottom-width: 0;
+    border-radius: 15px 15px 0 0;
+}
+#contentEdit .paragraph article {
+    border-radius: 0 0 15px 15px;
+    border-top-width: 0;
+    font-size: 24px;
+}
+#contentEdit .paragraph:first-child article {
+    border-radius: 15px;
+}
+#contentAddPar {
+    margin: 25px 50px 0;
+    height: 50px;
 }
 
 
