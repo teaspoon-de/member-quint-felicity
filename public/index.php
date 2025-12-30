@@ -26,6 +26,8 @@ require_once __DIR__ . '/../src/Controllers/SongController.php';
 require_once __DIR__ . '/../src/Models/Song.php';
 require_once __DIR__ . '/../src/Controllers/UserController.php';
 require_once __DIR__ . '/../src/Models/User.php';
+require_once __DIR__ . '/../src/Controllers/SetlistController.php';
+require_once __DIR__ . '/../src/Models/Setlist.php';
 require_once __DIR__ . '/../src/Controllers/EventController.php';
 require_once __DIR__ . '/../src/Models/Event.php';
 require_once __DIR__ . '/../src/Controllers/BlogpostController.php';
@@ -63,12 +65,21 @@ $router->post('/account/edit/password', [UserController::class, 'updatePassword'
 //$router->post('/members/{id}/delete', [UserController::class, 'delete']);
 // Songs
 $router->get('/songs', [SongController::class, 'index']);
+$router->get('/songs/select', [SongController::class, 'select']);
 $router->get('/songs/add', [SongController::class, 'add']);
 $router->post('/songs/add', [SongController::class, 'store']);
 $router->get('/songs/{id}', [SongController::class, 'show']);
 $router->get('/songs/{id}/edit', [SongController::class, 'edit']);
 $router->post('/songs/{id}/edit', [SongController::class, 'update']);
 $router->post('/songs/{id}/delete', [SongController::class, 'delete']);
+// Setlists
+$router->get('/setlists', [SetlistController::class, 'index']);
+$router->get('/setlists/create', [SetlistController::class, 'create']);
+$router->post('/setlists/create', [SetlistController::class, 'store']);
+$router->get('/setlists/{id}', [SetlistController::class, 'show']);
+$router->get('/setlists/{id}/edit', [SetlistController::class, 'edit']);
+$router->post('/setlists/{id}/edit', [SetlistController::class, 'update']);
+$router->post('/setlists/{id}/delete', [SetlistController::class, 'delete']);
 // Events
 /*$router->get('/events', [EventController::class, 'index']);
 $router->get('/events/create', [EventController::class, 'create']);

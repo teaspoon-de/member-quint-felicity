@@ -35,6 +35,11 @@ class SongController
         $this->render('songs/index', compact('songs'));
     }
 
+    public function select() {
+        $songs = Song::all();
+        echo json_encode($songs);
+    }
+
     public function show($id)
     {
         $song = Song::find($id);
