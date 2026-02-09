@@ -37,6 +37,11 @@ require_once __DIR__ . '/../src/Models/Image.php';
 
 $router = new Router();
 
+// ICS-Calendar
+require_once __DIR__ . '/../src/Controllers/ICSController.php';
+$router->get('/calendar/qf.ics', [ICSController::class, 'bandCalendar']);
+
+
 // Login, User
 if (!isset($_SESSION['user_id']) && isset($_COOKIE['remember_me'])) {
     $tokenHash = hash('sha256', $_COOKIE['remember_me']);
