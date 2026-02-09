@@ -39,7 +39,9 @@ $router = new Router();
 
 // ICS-Calendar
 require_once __DIR__ . '/../src/Controllers/ICSController.php';
-$router->get('/calendar/qf.ics', [ICSController::class, 'bandCalendar']);
+if ($_SERVER['REQUEST_METHOD']==='GET' && $_SERVER['REQUEST_URI']==='/calendar/qf.ics?token='.getenv('ICS_TOKEN')) {
+    ICSController::bandCalendar();
+}
 
 
 // Login, User

@@ -2,13 +2,13 @@
 
 class ICSController {
 
-    public function bandCalendar() {
+    public static function bandCalendar() {
         // --- Zugriffsschutz (Token) ---
-        $token = getenv('ICS_TOKEN');
+        /*$token = getenv('ICS_TOKEN');
         if (!isset($_GET['token']) || $_GET['token'] !== $token) {
             http_response_code(403);
             exit('Forbidden');
-        }
+        }*/
 
         // --- Header ---
         header('Content-Type: text/calendar; charset=utf-8');
@@ -33,7 +33,7 @@ class ICSController {
         echo "END:VCALENDAR\r\n";
     }
 
-    public function renderEvent($gig) {
+    public static function renderEvent($gig) {
         $startDate = new DateTime($gig['date_begin']);
         $eventDate = $startDate->format('Ymd'); // 20260315
         $eventEnd  = $startDate->modify('+1 day')->format('Ymd');
