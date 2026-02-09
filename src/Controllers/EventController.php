@@ -65,4 +65,9 @@ class EventController {
         Event::delete($id);
         header("Location: /events");
     }
+
+    public function calendar() {
+        $scheissphp = null;
+        $this->render('events/calendar', compact('scheissphp'));
+    }
 }

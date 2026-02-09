@@ -96,6 +96,7 @@ $router->get('/events/{id}/edit', [EventController::class, 'edit']);
 $router->post('/events/{id}/edit', [EventController::class, 'update']);
 //$router->post('/events/{id}/register', [EventController::class, 'register']);
 $router->post('/events/{id}/delete', [EventController::class, 'delete']);
+$router->get('/calendar', [EventController::class, 'calendar']);
 // Blogposts
 $router->get('/blog', [BlogpostController::class, 'index']);
 $router->get('/blog/create', [BlogpostController::class, 'create']);

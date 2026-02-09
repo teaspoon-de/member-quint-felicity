@@ -75,7 +75,7 @@ require __DIR__ . "/../layout/topItem.php"
     </div>
 </section>
 
-<section id="register">
+<!--section id="register">
     <div class="container">
         <h2></h2>
         <textarea name="registerText" id="registerText"></textarea>
@@ -91,7 +91,7 @@ require __DIR__ . "/../layout/topItem.php"
         </form>
     </div>
     
-</section>
+</section-->
 
 <section id="infos" class="section">
     <h3>Infos</h3>
@@ -118,7 +118,7 @@ require __DIR__ . "/../layout/topItem.php"
         </div>
         <?php
             if ($event['notes']) echo '<div class="kvLong notes">
-                <value>'.htmlspecialchars($event['notes'] ?? '').'</value>
+                <value>'.str_replace("\n", "<br>", htmlspecialchars($event['notes'] ?? '')).'</value>
             </div>'?>
     </div>
 </section>
@@ -128,7 +128,7 @@ if ($event['location']) echo '<section id="location" class="section">
     <h3>Adresse</h3>
     <div class="container">
         <div class="kvLong notes">
-            <value>'.htmlspecialchars($event['location'] ?? '').'</value>
+            <value>'.str_replace("\n", "<br>", htmlspecialchars($event['location'] ?? '')).'</value>
         </div>
     </div>
 </section>'?>
@@ -141,7 +141,7 @@ if ($event['location']) echo '<section id="location" class="section">
 <span style="display: block; height: 125px;"></span>
 
 <script>
-    var status = "";
+    /*var status = "";
     $(".option").each(function(index){$(this).off().click(function() {
         var data = ["yes", "maybe", "no"];
         var title = ["Killer, gefällt mir!", "never let em know your next move", "Man was da los?"];
@@ -181,5 +181,5 @@ if ($event['location']) echo '<section id="location" class="section">
 
     function cancle() {
         $("#register").css("display", "none");
-    }
+    }*/
 </script>
