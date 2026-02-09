@@ -1,8 +1,13 @@
+.section.edit {
+    margin-bottom: 0;
+}
+
 #orderEdit {
-    padding: 0 40px;
+    padding: 0 40px 100px;
 }
 #orderEdit h2 {
     font-size: 30px;
+    margin-bottom: 15px;
 }
 #orderEdit .song {
     display: flex;
