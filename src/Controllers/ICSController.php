@@ -65,11 +65,11 @@ class ICSController {
             $desc[] = "🎶 Setlänge: {$gig['duration']}";
         }
 
-        if ($gig['location']) {
+        /*if ($gig['location']) {
             $desc[] = "";
             $desc[] = "📍 Adresse:";
             $desc[] = $gig['location'];
-        }
+        }*/
         if ($gig['notes']) {
             $desc[] = "";
             $desc[] = "📝 Notizen:";
