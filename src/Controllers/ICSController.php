@@ -86,9 +86,9 @@ class ICSController {
         echo "DTSTAMP:" . gmdate('Ymd\THis\Z') . "\r\n";
         echo "DTSTART;VALUE=DATE:$eventDate\r\n";
         echo "DTEND;VALUE=DATE:$eventEnd\r\n";
-        echo "SUMMARY:" . addcslashes($summary, ",;\\") . "\r\n";
+        echo "SUMMARY:" . addcslashes($summary, ",;") . "\r\n";
         if ($gig['location']) echo "LOCATION:" . addcslashes($location, ",;\\") . "\r\n";
-        echo "DESCRIPTION:" . addcslashes($description, ",;\\") . "\r\n";
+        echo "DESCRIPTION:" . addcslashes($description, ",;") . "\r\n";
         echo "END:VEVENT\r\n";
     }
 }
