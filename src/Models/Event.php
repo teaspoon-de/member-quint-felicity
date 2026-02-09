@@ -8,7 +8,7 @@ class Event {
         $pdo = Database::getConnection();
         $stmt = $pdo->query("SELECT * FROM events WHERE date_begin > NOW() ORDER BY date_begin ASC"); // Zeitspanne Einschränken
         $events = $stmt->fetchAll();
-        if (count($events) === 0) return $events;
+        /*if (count($events) === 0) return $events;
         for ($i = 0; $i < count($events); $i++) {
             $ur = $pdo->prepare("SELECT * FROM event_registrations WHERE event_id=? AND user_id=?");
             $ur->execute([$events[$i]["id"], $_SESSION["user_id"]]);
@@ -17,7 +17,7 @@ class Event {
             $ur = $pdo->prepare("SELECT COUNT(*) FROM event_registrations WHERE event_id=? AND status='yes'");
             $ur->execute([$events[$i]["id"]]);
             $events[$i]["yes_count"] = $ur->fetchColumn();
-        }
+        }*/
         return $events ?: null;
     }
 
@@ -26,14 +26,14 @@ class Event {
         $stmt = $pdo->prepare("SELECT * FROM events WHERE id = ?");
         $stmt->execute([$id]);
         $event = $stmt->fetch();
-        $ur = $pdo->prepare("SELECT * FROM event_registrations WHERE event_id=? AND user_id=?");
+        /*$ur = $pdo->prepare("SELECT * FROM event_registrations WHERE event_id=? AND user_id=?");
         $ur->execute([$id, $_SESSION["user_id"]]);
         $ureg = $ur->fetch();
-        $event["user_reg"] = $ureg["status"];
+        $event["user_reg"] = $ureg["status"];*/
         return $event ?: null;
     }
 
-    public static function getRegistrations(int $id): ?array {
+    /*public static function getRegistrations(int $id): ?array {
         $pdo = Database::getConnection();
         $stmt = $pdo->query("SELECT * FROM event_registrations WHERE event_id=$id ORDER BY status ASC");
         $regs = $stmt->fetchAll();
@@ -42,7 +42,7 @@ class Event {
             $regs[$i]["name"] = $user["name"];
         }
         return $regs ?: null;
-    }
+    }*/
 
     public static function create($data): bool {
         $pdo = Database::getConnection();
@@ -52,8 +52,8 @@ class Event {
             $data["title"] ?? null,
             $data["date_begin"] ?? null,
         ]);
-        $event_id = $pdo->lastInsertId();
         // Für jeden eine Eventregistration erstellen
+        /*$event_id = $pdo->lastInsertId();
         $users = User::all();
         foreach ($users as $user) {
             $pdo = Database::getConnection();
@@ -63,13 +63,13 @@ class Event {
                 $user["id"],
                 "maybe"
             ]);
-        }
+        }*/
         return $result;
     }
 
     public static function update(int $id, $data): bool {
         $pdo = Database::getConnection();
-        $stmt = $pdo->prepare("UPDATE events SET type=?, title=?, location=?, duration=?, salary=?, notes=?, date_begin=?, public_entry=?, deadline=?  WHERE id=?");
+        $stmt = $pdo->prepare("UPDATE events SET type=?, title=?, location=?, duration=?, salary=?, notes=?, date_begin=?, public_entry=?, deadline=?, booked=?, publish=?  WHERE id=?");
         return $stmt->execute([
             /*$data["type"] ?? null*/ "show",
             $data["title"] ?? null,
@@ -80,11 +80,13 @@ class Event {
             $data["date_begin"] ?? null,
             $data["public_entry"] !=""? $data["public_entry"]: null,
             $data["deadline"] !=""? $data["deadline"]: null,
+            isset($data["booked"]) && $data["booked"] === 'on'? 1:0,
+            isset($data["publish"]) && $data["publish"] === 'on'? 1:0,
             $id
         ]);
     }
 
-    public static function register(int $id, $data): bool {
+    /*public static function register(int $id, $data): bool {
         $pdo = Database::getConnection();
         $stmt = $pdo->prepare("SELECT id FROM event_registrations WHERE event_id = ? AND user_id = ? LIMIT 1");
         $stmt->execute([$id, $_SESSION["user_id"]]);
@@ -105,7 +107,7 @@ class Event {
                 $data["message"] !=""? $data["message"]: null
             ]);
         }
-    }
+    }*/
 
     public static function delete(int $id): bool {
         $pdo = Database::getConnection();

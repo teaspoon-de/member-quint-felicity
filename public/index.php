@@ -73,13 +73,13 @@ $router->get('/songs/{id}/edit', [SongController::class, 'edit']);
 $router->post('/songs/{id}/edit', [SongController::class, 'update']);
 $router->post('/songs/{id}/delete', [SongController::class, 'delete']);
 // Setlists
-//$router->get('/setlists', [SetlistController::class, 'index']);
-//$router->get('/setlists/create', [SetlistController::class, 'create']);
-//$router->post('/setlists/create', [SetlistController::class, 'store']);
-//$router->get('/setlists/{id}', [SetlistController::class, 'show']);
-//$router->get('/setlists/{id}/edit', [SetlistController::class, 'edit']);
-//$router->post('/setlists/{id}/edit', [SetlistController::class, 'update']);
-//$router->post('/setlists/{id}/delete', [SetlistController::class, 'delete']);
+/*$router->get('/setlists', [SetlistController::class, 'index']);
+$router->get('/setlists/create', [SetlistController::class, 'create']);
+$router->post('/setlists/create', [SetlistController::class, 'store']);
+$router->get('/setlists/{id}', [SetlistController::class, 'show']);
+$router->get('/setlists/{id}/edit', [SetlistController::class, 'edit']);
+$router->post('/setlists/{id}/edit', [SetlistController::class, 'update']);
+$router->post('/setlists/{id}/delete', [SetlistController::class, 'delete']);*/
 // Events
 $router->get('/events', [EventController::class, 'index']);
 $router->get('/events/create', [EventController::class, 'create']);
@@ -87,7 +87,7 @@ $router->post('/events/create', [EventController::class, 'store']);
 $router->get('/events/{id}', [EventController::class, 'show']);
 $router->get('/events/{id}/edit', [EventController::class, 'edit']);
 $router->post('/events/{id}/edit', [EventController::class, 'update']);
-$router->post('/events/{id}/register', [EventController::class, 'register']);
+//$router->post('/events/{id}/register', [EventController::class, 'register']);
 $router->post('/events/{id}/delete', [EventController::class, 'delete']);
 // Blogposts
 $router->get('/blog', [BlogpostController::class, 'index']);
