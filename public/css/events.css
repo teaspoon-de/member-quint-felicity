@@ -38,6 +38,7 @@ event .eventTop svg {
 event .eventTop .title {
     flex-grow: 1;
     height: 100%;
+    padding-left: 25px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -90,6 +91,21 @@ event .reg div svg {
     flex-direction: column;
     background-color: var(--cbglc);
     overflow: hidden;
+}
+#registrations .container .booked {
+    display: flex;
+    gap: 15px;
+    margin: 0 0 20px 20px;
+    align-items: center;
+}
+#registrations .container .booked svg {
+    height: 40px;
+    width: 40px;
+    padding: 10px;
+    border-radius: 15px;
+}
+#registrations .container .booked p {
+    font-size: 28px;
 }
 #regArea {
     display: flex;

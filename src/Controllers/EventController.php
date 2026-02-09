@@ -21,7 +21,7 @@ class EventController {
             default:
                 $pageTitle = "Events";
         }
-        $menuActive = "2";
+        $menuActive = "1";
 
         require __DIR__ . "/../Views/layout/main.php";
     }
@@ -33,8 +33,8 @@ class EventController {
 
     public function show($id) {
         $event = Event::find($id);
-        $regs = Event::getRegistrations($id);
-        $this->render('events/show', compact('event', 'regs'));
+        //$regs = Event::getRegistrations($id);
+        $this->render('events/show', compact('event'/*, 'regs'*/));
     }
 
     public function create() {
@@ -56,10 +56,10 @@ class EventController {
         header("Location: /events/$id");
     }
 
-    public function register($id) {
+    /*public function register($id) {
         Event::register($id, $_POST);
         header("Location: /events/$id");
-    }
+    }*/
 
     public function delete($id) {
         Event::delete($id);

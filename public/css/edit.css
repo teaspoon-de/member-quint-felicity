@@ -4,7 +4,7 @@
     flex-direction: column;
     margin-top: 80px;
     padding: 40px;
-    margin-bottom: 60px;
+    margin-bottom: 100px;
 }
 
 @media only screen and (min-width: 1050px) {
@@ -161,7 +161,7 @@ button {
     border-radius: 15px;
     background-color: var(--cbglc);
     gap: 15px;
-    margin-top: 40px;
+    margin-top: 30px;
     border: 2px solid var(--cbglc);
     cursor: pointer;
 }
@@ -191,7 +191,7 @@ button {
 
 /* EDIT CONTEXT BUTTON */
 .editContextButton {
-    margin-top: 40px;
+    margin-top: 30px;
     display: flex;
     height: 74px;
     padding: 15px 25px;
