@@ -31,6 +31,7 @@ class ICSController {
         }
 
         echo "END:VCALENDAR\r\n";
+        exit;
     }
 
     public static function renderEvent($gig) {
