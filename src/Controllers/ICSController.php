@@ -77,7 +77,9 @@ class ICSController {
             $desc[] = $gig['notes'];
         }
 
-        $description = implode("\\n", $desc);
+        $description = implode("\n", $desc);
+        $description = str_replace(["\r", "\n"], '\n', $description);
+        $location = str_replace(["\r", "\n"], '\n', $gig['location']);
 
         echo "BEGIN:VEVENT\r\n";
         echo "UID:event-{$gig['id']}@member.quint-felicity.de\r\n";
@@ -85,7 +87,7 @@ class ICSController {
         echo "DTSTART;VALUE=DATE:$eventDate\r\n";
         echo "DTEND;VALUE=DATE:$eventEnd\r\n";
         echo "SUMMARY:" . addcslashes($summary, ",;\\") . "\r\n";
-        if ($gig['location']) echo "LOCATION:" . addcslashes($gig['location'], ",;\\") . "\r\n";
+        if ($gig['location']) echo "LOCATION:" . addcslashes($location, ",;\\") . "\r\n";
         echo "DESCRIPTION:" . addcslashes($description, ",;\\") . "\r\n";
         echo "END:VEVENT\r\n";
     }
