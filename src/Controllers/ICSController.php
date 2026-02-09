@@ -46,12 +46,11 @@ class ICSController {
         $statusEmoji = $gig['booked']? '[GEBUCHT]' : '[PENDING]';
         $art = $gig['publish'] ? 'Öffentlich' : 'Privat';
 
-        $summary = "$statusEmoji {$gig['title']}";
+        $summary = $gig['title'];
 
         $desc = [];
         $desc[] = "Status: " . ($gig['booked'] ? 'Gebucht' : 'Noch nicht nicht fix');
         $desc[] = "Art: $art";
-        $desc[] = "";
         
         $desc[] = "⏰ Start: ". (!$startTime? "Noch unbekannt" : $startTime);
 
@@ -78,8 +77,18 @@ class ICSController {
         }
 
         $description = implode("\n", $desc);
-        $description = str_replace(["\r", "\n"], '\n', $description);
-        $location = str_replace(["\r", "\n"], '\n', $gig['location']);
+        // Windows / Unix normalisieren
+        $description = str_replace("\r\n", "\n", $description);
+        $description = str_replace("\r", "\n", $description);
+        // Mehr als 2 \n auf genau 2 reduzieren
+        $description = preg_replace("/\n{3,}/", "\n\n", $description);
+        // Jetzt erst ICS-konform machen
+        $description = str_replace("\n", '\n', $description);
+
+        if ($gig['location']) {
+            $location = str_replace("\r\n", "\n", $gig['location']);
+            $location = str_replace(["\r", "\n"], '\n', $location);
+        }
 
         echo "BEGIN:VEVENT\r\n";
         echo "UID:event-{$gig['id']}@member.quint-felicity.de\r\n";
