@@ -22,7 +22,7 @@ require __DIR__ . "/../layout/search.php"
             <p><?= htmlspecialchars($song['artists'] ?? '') ?></p>
         </div>
         <div class="transpose">
-            <p class="by"><?= htmlspecialchars($song['transposed_by'] ?? '') ?></p>
+            <p class="by"><?= ($song['transposed_by']>0?'+':'').$song['transposed_by'] ?></p>
             <p class="key">
             <!--span style="background-color: var(--<?= $song['status']?>)"></span-->
             <?php

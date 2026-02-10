@@ -15,7 +15,7 @@ require __DIR__ . "/../layout/topBarItem.php"
         </div>
         <div class="kvRow">
             <div>
-                <value><?= $song['transposed_by'] ?></value>
+                <value><?= ($song['transposed_by']>0?'+':'').$song['transposed_by'] ?></value>
                 <p>Transponiert</p>
             </div>
             <div>
