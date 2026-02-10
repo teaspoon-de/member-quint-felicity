@@ -77,6 +77,8 @@ require __DIR__ . "/../layout/topBarEdit.php";
         <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token']; ?>">
         <button type="submit" class="null"></button>
     </form>
+    
+    <button onClick="deleteContext()" id="deleteButton">Löschen</button>
 </section>
 
 <section id="contentEdit" style="display: none;">
@@ -239,3 +241,22 @@ require __DIR__ . "/../layout/topBarEdit.php";
         $('<p class="errorMessage">' + message + '</p>').insertAfter($(query).parent());
     }
 </script>
+
+<section id="deleteContext">
+    <div class="container">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle-alert-icon lucide-triangle-alert"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+        <h2>Möchtest du <b><?= $blogpost['title']?></b> wirklich löschen?</h2>
+        <div>
+            <button onClick="cancelDelete()">Abbrechen</button>
+            <button class="submit" onClick="submitDelete()">Löschen</button>
+        </div>
+        <form id="deleteForm" action="/blog/<?= $blogpost['id'] ?>/delete" method="POST" style="display: none;">
+            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+        </form>
+    </div>
+    <script>
+        function deleteContext() {$("#deleteContext").css("display", "flex");}
+        function submitDelete() {document.getElementById('deleteForm').submit();}
+        function cancelDelete() {$("#deleteContext").css("display", "none");}
+    </script>
+</section>
