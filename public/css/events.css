@@ -3,11 +3,42 @@ h3 {
     margin-bottom: 20px;
 }
 
+#imageLink {
+    cursor: pointer;
+    margin: 25px;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    font-size: 24px;
+    font-weight: 400;
+    padding: 25px;
+    height: 30px;
+    border-radius: 15px;
+    background-color: var(--cbgc);
+}
+#imageLink svg {
+    height: 30px;
+    width: 30px;
+    flex-basis: 30px;
+}
+#imageLink div {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+#imageLink .linkIcon {
+    justify-self: end;
+    height: 50px;
+    width: 50px;
+    flex-basis: 50px;
+}
+
 
 /* INDEX EVENT */
 #eventList {
-    margin: 25px;
-    margin-top: 0;
+    margin: 0 25px 140px;
 }
 event {
     display: flex;
@@ -26,23 +57,31 @@ event .eventTop {
     display: flex;
     justify-content:space-between;
     align-items: center;
-    height: 100px;
+    height: 80px;
     background-color: var(--cbgc);
+    max-width: 100%;
+    overflow-x: hidden;
 }
 event .eventTop svg {
-    height: 50px;
-    width: 50px;
-    padding: 25px;
-    flex-basis: 50px;
+    height: 40px;
+    width: 40px;
+    padding: 20px;
+    flex-basis: 40px;
 }
 event .eventTop .title {
     flex-grow: 1;
     height: 100%;
+    padding-left: 25px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    overflow: hidden;
 }
 event h3 {
+    font-size: 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
     margin-bottom: 0px;
 }
 event .eventTop p {
@@ -90,6 +129,21 @@ event .reg div svg {
     flex-direction: column;
     background-color: var(--cbglc);
     overflow: hidden;
+}
+#registrations .container .booked {
+    display: flex;
+    gap: 15px;
+    margin: 0 0 20px 20px;
+    align-items: center;
+}
+#registrations .container .booked svg {
+    height: 40px;
+    width: 40px;
+    padding: 10px;
+    border-radius: 15px;
+}
+#registrations .container .booked p {
+    font-size: 28px;
 }
 #regArea {
     display: flex;
@@ -153,7 +207,7 @@ event .reg div svg {
 /* REGISTER */
 #register {
     position: absolute;
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
     top: 0px;
@@ -257,6 +311,53 @@ event .reg div svg {
     background-color: var(--cbglc);
     padding-top: 30px;
     padding-bottom: 30px;
+}
+
+#calendar {
+    margin: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+#calendar h2 {
+    font-size: 35px;
+}
+#calendar p {
+    font-size: 23px;
+    text-align: justify;
+}
+#calendar .copy-field {
+    display: flex;
+    width: 100%;
+    border-radius: 15px;
+    height: 80px;
+    background-color: var(--cbgc);
+    overflow: hidden;
+}
+#calendar .copy-field input {
+    flex-grow: 1;
+    font-size: 23px;
+    padding: 0 20px;
+    border: none;
+    outline: none;
+    color: var(--ctext);
+    background-color: var(--alpha);
+}
+#calendar .copy-field button {
+    flex-basis: 40px;
+    padding: 20px;
+    background-color: var(--cbglc);
+    outline: none;
+    box-shadow: none;
+    border: none;
+    color: var(--ctext);
+}
+#copyHint {
+    font-size: 23px;
+    color: var(--green);
+    width: 100%;
+    align-self: center;
+    text-align: center;
 }
 
 @media only screen and (min-width: 1050px) {

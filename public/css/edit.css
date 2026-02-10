@@ -4,7 +4,7 @@
     flex-direction: column;
     margin-top: 80px;
     padding: 40px;
-    margin-bottom: 60px;
+    margin-bottom: 100px;
 }
 
 @media only screen and (min-width: 1050px) {
@@ -161,7 +161,7 @@ button {
     border-radius: 15px;
     background-color: var(--cbglc);
     gap: 15px;
-    margin-top: 40px;
+    margin-top: 30px;
     border: 2px solid var(--cbglc);
     cursor: pointer;
 }
@@ -191,7 +191,7 @@ button {
 
 /* EDIT CONTEXT BUTTON */
 .editContextButton {
-    margin-top: 40px;
+    margin-top: 30px;
     display: flex;
     height: 74px;
     padding: 15px 25px;
@@ -229,4 +229,163 @@ button {
     font-size: 20px;
     font-weight: 600;
     margin-top: 10px;
+}
+
+/* REG AREA */
+#registrations .container {
+    margin-top: 30px;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--cbglc);
+    overflow: hidden;
+}
+#registrations .container .booked {
+    display: flex;
+    gap: 15px;
+    margin: 0 0 20px 20px;
+    align-items: center;
+}
+#registrations .container .booked svg {
+    height: 40px;
+    width: 40px;
+    padding: 10px;
+    border-radius: 15px;
+}
+#registrations .container .booked p {
+    font-size: 28px;
+}
+#regArea {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+#regArea svg {
+    height: 50px;
+    width: 50px;
+}
+#regArea div {
+    flex-grow: 1;
+    flex-basis: 0;
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+#regArea .option {
+    cursor: pointer;
+    background-color: var(--cbg);
+}
+#regArea .last {
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+/* REGISTRATIONS */
+#registrations li {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    gap: 20px;
+}
+#registrations li ul {
+    display: flex;
+    align-items: stretch;
+    gap: 20px;
+}
+#registrations li ul svg {
+    margin-top: 3px;
+    height: 40px;
+    width: 40px;
+    flex-shrink: 0;
+}
+#registrations li ul h4 {
+    font-size: 25px;
+}
+#registrations li ul p {
+    font-size: 20px;
+}
+#registrations li ul div {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+/* DELETE CONTEXT */
+#deleteButton {
+    background-color: var(--red);
+    font-size: 30px;
+    font-weight: 600;
+    padding: 25px 0;
+}
+#deleteContext {
+    position: absolute;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background-color: var(--shadow);
+    z-index: 100000;
+}
+#deleteContext .container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 25px;
+    padding-top: 30px;
+    margin-left: 40px;
+    margin-right: 40px;
+    background-color: var(--cbglc);
+    border-radius: 30px;
+}
+#deleteContext .container div {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+#deleteContext svg {
+    align-self: center;
+    padding: 15px 18px 21px;
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    overflow: visible;
+    background-color: var(--red);
+}
+#deleteContext h2 {
+    text-align: center;
+    align-self: center;
+    margin-left: 10px;
+    font-size: 30px;
+    font-weight: 400;
+}
+#deleteContext button {
+    flex-grow: 1;
+    flex-basis: 0;
+    margin-top: 10px;
+    padding: 20px;
+    outline: none;
+    background: none;
+    border-radius: 64px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: var(--ctext);
+    color: var(--ctext);
+    font-family: var(--cfont);
+    font-weight: 400;
+    font-size: 24px;
+    box-shadow: none;
+    text-shadow: none;
+}
+#deleteContext .submit {
+    font-weight: 500;
+    background-color: var(--red);
+    border-color: var(--red);
 }

@@ -37,6 +37,13 @@ require_once __DIR__ . '/../src/Models/Image.php';
 
 $router = new Router();
 
+// ICS-Calendar
+require_once __DIR__ . '/../src/Controllers/ICSController.php';
+if ($_SERVER['REQUEST_METHOD']==='GET' && $_SERVER['REQUEST_URI']==='/calendar/qf.ics?token='.getenv('ICS_TOKEN')) {
+    ICSController::bandCalendar();
+}
+
+
 // Login, User
 if (!isset($_SESSION['user_id']) && isset($_COOKIE['remember_me'])) {
     $tokenHash = hash('sha256', $_COOKIE['remember_me']);
@@ -81,14 +88,15 @@ $router->get('/setlists/{id}/edit', [SetlistController::class, 'edit']);
 $router->post('/setlists/{id}/edit', [SetlistController::class, 'update']);
 $router->post('/setlists/{id}/delete', [SetlistController::class, 'delete']);
 // Events
-/*$router->get('/events', [EventController::class, 'index']);
+$router->get('/events', [EventController::class, 'index']);
 $router->get('/events/create', [EventController::class, 'create']);
 $router->post('/events/create', [EventController::class, 'store']);
 $router->get('/events/{id}', [EventController::class, 'show']);
 $router->get('/events/{id}/edit', [EventController::class, 'edit']);
 $router->post('/events/{id}/edit', [EventController::class, 'update']);
-$router->post('/events/{id}/register', [EventController::class, 'register']);
-$router->post('/events/{id}/delete', [EventController::class, 'delete']);*/
+//$router->post('/events/{id}/register', [EventController::class, 'register']);
+$router->post('/events/{id}/delete', [EventController::class, 'delete']);
+$router->get('/calendar', [EventController::class, 'calendar']);
 // Blogposts
 $router->get('/blog', [BlogpostController::class, 'index']);
 $router->get('/blog/create', [BlogpostController::class, 'create']);

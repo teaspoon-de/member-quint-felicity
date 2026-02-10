@@ -23,6 +23,7 @@ services:
       - DB_PASSWORD=${DB_PASSWORD}
       - SPOTIFY_CLIENT_ID=${SPOTIFY_CLIENT_ID}
       - SPOTIFY_CLIENT_SECRET=${SPOTIFY_CLIENT_SECRET}
+      - ICS_TOKEN=${ICS_TOKEN}
     volumes:
       - ./public:/var/www/html/public:ro
       - ./src:/var/www/html/src:ro
