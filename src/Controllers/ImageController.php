@@ -21,7 +21,7 @@ class ImageController {
             default:
                 $pageTitle = "Bilder";
         }
-        $menuActive = "3";
+        $menuActive = "2";
 
         require __DIR__ . "/../Views/layout/main.php";
     }

@@ -1,6 +1,6 @@
 <?php
 $title = "Mitglieder";
-$add = "create";
+$add = $_SESSION["user_id"] === '0' ? "create": null;
 require __DIR__ . "/../layout/topIndex.php"
 ?>
 
