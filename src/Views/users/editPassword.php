@@ -7,17 +7,23 @@ require __DIR__ . "/../layout/topBarEdit.php";
 <link rel="stylesheet" href="/css/edit.css">
 
 <section class="section edit">
-    <form id="editForm" action="/account/edit/password" method="post">
-        <div class="inLong">
+    <form id="editForm" action="<?php echo $self ? '/account/edit/password' : '/members/' . $user['id'] . '/edit/password'; ?>" method="post">
+        <?php
+            if ($self) {
+                $errorString = $error ? 'class="error"' : '';
+                echo '<div class="inLong">
             <h3>Altes Passwort</h3>
-            <input <?php if ($error) echo 'class="error"'?> 
+            <input ' . $errorString . '
                 type="password" 
                 id="old" 
                 name="old"
                 autocomplete="current-password"
                 required
             >
-        </div>
+        </div>';
+            }
+        ?>
+        
         <?php if ($error) echo '<p class="errorMessage">'. $error .'</p>'?>
 
         <div class="inLong">
@@ -48,7 +54,11 @@ require __DIR__ . "/../layout/topBarEdit.php";
     <script>
         async function submit() {
             clearErrors();
-            if (inputIsEmpty("#old") || inputIsEmpty("#password") || inputIsEmpty("#again")) return;
+            if (
+                <?php if ($self) {
+                        echo 'inputIsEmpty("#old") || ';
+                    } ?>
+                inputIsEmpty("#password") || inputIsEmpty("#again")) return;
             if ($("#password").val().trim() != $("#again").val().trim()) {
                 inputError("#again", "Passwörter stimmen nicht überein, du Dulli");
                 return;

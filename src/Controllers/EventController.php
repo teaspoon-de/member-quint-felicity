@@ -21,7 +21,7 @@ class EventController {
             default:
                 $pageTitle = "Events";
         }
-        $menuActive = "1";
+        $menuActive = "2";
 
         require __DIR__ . "/../Views/layout/main.php";
     }
