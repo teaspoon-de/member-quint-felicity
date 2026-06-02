@@ -14,6 +14,29 @@ class UserController
         require __DIR__ . "/../Views/layout/main.php";
     }
 
+    public function confAdmin() {
+        $pdo = Database::getConnection();
+
+        // Check if privilege with id or title already exists
+        $check = $pdo->prepare("SELECT COUNT(*) FROM privileges WHERE id = ? OR title = ?");
+        $check->execute([1, "admin"]);
+        if ($check->fetchColumn() == 0) {
+            $stmt = $pdo->prepare("INSERT INTO privileges (id, title) VALUES (?, ?)");
+            $stmt->execute([1, "admin"]);
+        }
+
+        // Ensure user 1 has the admin privilege
+        $checkUp = $pdo->prepare("SELECT COUNT(*) FROM user_privileges WHERE user_id = ? AND privilege_id = ?");
+        $checkUp->execute([1, 1]);
+        if ($checkUp->fetchColumn() == 0) {
+            $stmt = $pdo->prepare("INSERT INTO user_privileges (user_id, privilege_id) VALUES (?, ?)");
+            $stmt->execute([1, 1]); // Assuming user_id 1 is the admin user
+        }
+    }
+
+    // TODO: Create standard admin account
+    // TODO sql ids beinhalten gelöschte Elemente, das nix gut
+
     public function login() {
             $error = null;
             $data = null;
@@ -66,7 +89,8 @@ class UserController
 
     public function index() {
         $users = User::all();
-        $this->render('users/index', compact('users'));
+        $curPrivs = User::getPrivsForUser($_SESSION["user_id"]);
+        $this->render('users/index', compact('users', 'curPrivs'));
     }
 
     public function show() {
@@ -91,13 +115,30 @@ class UserController
         }
     }
 
-    public function edit() {
+    public function editSelf() {
         $user = User::find($_SESSION["user_id"]);
+        $self = true;
         $error = false;
-        $this->render('users/edit', compact('user', 'error'));
+        $this->render('users/edit', compact('user', 'self', 'error'));
     }
 
-    public function update() {
+    public function edit($id) {
+        if ($id == $_SESSION["user_id"]) {
+            header("Location: /account/edit");
+            return;
+        }
+        $admin = in_array('admin', User::getPrivsForUser($_SESSION["user_id"]));
+        if (!$admin) {
+            header("Location: /members");
+            return;
+        }
+        $user = User::find($id);
+        $self = false;
+        $error = false;
+        $this->render('users/edit', compact('user', 'self', 'error'));
+    }
+
+    public function updateSelf() {
         $error = !User::update($_SESSION["user_id"], $_POST);
         if ($error) {
             $error = "Nutzername existiert bereits.";
@@ -108,20 +149,64 @@ class UserController
         header("Location: /members");
     }
 
-    public function editPassword() {
-        $error = false;
-        $this->render('users/editPassword', compact('error'));
+    public function update($id) {
+        $error = !User::update($id, $_POST);
+        if ($error) {
+            $error = "Nutzername existiert bereits.";
+            $user = $_POST;
+            $this->render("users/edit", compact('user', 'error'));
+            return;
+        }
+        header("Location: /members");
     }
 
-    public function updatePassword() {
+    public function editPasswordSelf() {
+        $self = true;
+        $error = false;
+        $this->render('users/editPassword', compact('error', 'self'));
+    }
+
+    public function editPassword($id) {
+        if ($id == $_SESSION["user_id"]) {
+            header("Location: /account/edit/password");
+            return;
+        }
+        $admin = in_array('admin', User::getPrivsForUser($_SESSION["user_id"]));
+        if (!$admin) {
+            header("Location: /members");
+            return;
+        }
+        $user = User::find($id);
+        $self = false;
+        $error = false;
+        $this->render('users/editPassword', compact('user', 'error', 'self'));
+    }
+
+    public function updatePasswordSelf() {
         $user = User::find($_SESSION["user_id"]);
 
         if (!password_verify($_POST["old"], $user["password"])) {
+            $self = true;
             $error = "Falsches Passwort.";
-            $this->render("users/editPassword", compact('error'));
+            $this->render("users/editPassword", compact('self', 'error'));
             return;
         }
         User::updatePassword($_SESSION["user_id"], $_POST['password']);
+        header("Location: /members");
+    }
+
+    public function updatePassword($id) {
+        if ($id == $_SESSION["user_id"]) {
+            header("Location: /account/edit");
+            return;
+        }
+        $admin = in_array('admin', User::getPrivsForUser($_SESSION["user_id"]));
+        if (!$admin) {
+            header("Location: /members");
+            return;
+        }
+        $user = User::find($id);
+        User::updatePassword($id, $_POST['password']);
         header("Location: /members");
     }
 

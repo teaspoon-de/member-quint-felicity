@@ -7,7 +7,8 @@ class User {
     public static function all(): array {
         $pdo = Database::getConnection();
         $stmt = $pdo->query("SELECT * FROM users ORDER BY name ASC");
-        return $stmt->fetchAll();
+        $users = $stmt->fetchAll();
+        return $users ?: null;
     }
 
     public static function find(int $id): ?array {
@@ -89,6 +90,24 @@ class User {
         $pdo = Database::getConnection();
         $stmt = $pdo->prepare("DELETE FROM auth_tokens WHERE user_id = ?;");
         return $stmt->execute([$userId]);
+    }
+
+    public static function getPrivsForUser(int $userId): array {
+        $pdo = Database::getConnection();
+        $p = $pdo->prepare("SELECT * FROM privileges ORDER BY id ASC");
+        $p->execute();
+        $priv = $p->fetchAll();
+        if (count($priv) === 0) return $priv;
+        for ($i = 0; $i < count($priv); $i++) {
+            $aPrivs[$priv[$i]["id"]] = $priv[$i]["title"];
+        }
+        $up = $pdo->prepare("SELECT * FROM user_privileges WHERE user_id=?");
+        $up->execute([$userId]);
+        $upriv = $up->fetchAll();
+        for ($i = 0; $i < count($upriv); $i++) {
+            $upriv[$i] = $aPrivs[$upriv[$i]["privilege_id"]];
+        }
+        return $upriv ?: null;
     }
 
 }

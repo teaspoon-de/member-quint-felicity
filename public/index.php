@@ -59,16 +59,21 @@ if (!isset($_SESSION["user_id"]) && $_SERVER['REQUEST_URI'] !== "/login") {
     exit;
 }
 $router->get('/login', [UserController::class, 'login']);
+$router->get('/confadmin123', [UserController::class, 'confAdmin']);
 $router->post('/login', [UserController::class, 'loginSubmit']);
 $router->get('/', [UserController::class, 'root']);
 $router->get('/members', [UserController::class, 'index']);
 $router->get('/members/create', [UserController::class, 'create']);
 $router->post('/members/create', [UserController::class, 'store']);
+$router->get('/members/{id}/edit', [UserController::class, 'edit']);
+$router->post('/members/{id}/edit', [UserController::class, 'update']);
+$router->get('/members/{id}/edit/password', [UserController::class, 'editPassword']);
+$router->post('/members/{id}/edit/password', [UserController::class, 'updatePassword']);
 //$router->get('/account', [UserController::class, 'show']);
-$router->get('/account/edit', [UserController::class, 'edit']);
-$router->post('/account/edit', [UserController::class, 'update']);
-$router->get('/account/edit/password', [UserController::class, 'editPassword']);
-$router->post('/account/edit/password', [UserController::class, 'updatePassword']);
+$router->get('/account/edit', [UserController::class, 'editSelf']);
+$router->post('/account/edit', [UserController::class, 'updateSelf']);
+$router->get('/account/edit/password', [UserController::class, 'editPasswordSelf']);
+$router->post('/account/edit/password', [UserController::class, 'updatePasswordSelf']);
 //$router->post('/members/{id}/delete', [UserController::class, 'delete']);
 // Songs
 $router->get('/songs', [SongController::class, 'index']);
