@@ -7,7 +7,7 @@ require __DIR__ . "/../layout/topIndex.php"
 <link rel="stylesheet" href="/css/user.css">
 
 <?php
-    $admin = in_array('admin', $curPrivs);
+    $admin = !$curPrivs? false : in_array('admin', $curPrivs);
 ?>
 <div id="userList">
     <?php foreach ($users as $user):?>
