@@ -14,6 +14,29 @@ class UserController
         require __DIR__ . "/../Views/layout/main.php";
     }
 
+    public function confAdmin() {
+        $pdo = Database::getConnection();
+
+        // Check if privilege with id or title already exists
+        $check = $pdo->prepare("SELECT COUNT(*) FROM privileges WHERE id = ? OR title = ?");
+        $check->execute([1, "admin"]);
+        if ($check->fetchColumn() == 0) {
+            $stmt = $pdo->prepare("INSERT INTO privileges (id, title) VALUES (?, ?)");
+            $stmt->execute([1, "admin"]);
+        }
+
+        // Ensure user 1 has the admin privilege
+        $checkUp = $pdo->prepare("SELECT COUNT(*) FROM user_privileges WHERE user_id = ? AND privilege_id = ?");
+        $checkUp->execute([1, 1]);
+        if ($checkUp->fetchColumn() == 0) {
+            $stmt = $pdo->prepare("INSERT INTO user_privileges (user_id, privilege_id) VALUES (?, ?)");
+            $stmt->execute([1, 1]); // Assuming user_id 1 is the admin user
+        }
+    }
+
+    // TODO: Create standard admin account
+    // TODO sql ids beinhalten gelöschte Elemente, das nix gut
+
     public function login() {
             $error = null;
             $data = null;

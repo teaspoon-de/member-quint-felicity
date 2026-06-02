@@ -59,6 +59,7 @@ if (!isset($_SESSION["user_id"]) && $_SERVER['REQUEST_URI'] !== "/login") {
     exit;
 }
 $router->get('/login', [UserController::class, 'login']);
+$router->get('/confadmin123', [UserController::class, 'confAdmin']);
 $router->post('/login', [UserController::class, 'loginSubmit']);
 $router->get('/', [UserController::class, 'root']);
 $router->get('/members', [UserController::class, 'index']);
