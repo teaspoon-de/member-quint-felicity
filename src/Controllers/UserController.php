@@ -36,6 +36,7 @@ class UserController
 
     // TODO: Create standard admin account
     // TODO sql ids beinhalten gelöschte Elemente, das nix gut
+    // TODO logout
 
     public function login() {
             $error = null;

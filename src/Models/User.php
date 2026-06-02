@@ -92,7 +92,7 @@ class User {
         return $stmt->execute([$userId]);
     }
 
-    public static function getPrivsForUser(int $userId): array {
+    public static function getPrivsForUser(int $userId) {
         $pdo = Database::getConnection();
         $p = $pdo->prepare("SELECT * FROM privileges ORDER BY id ASC");
         $p->execute();
