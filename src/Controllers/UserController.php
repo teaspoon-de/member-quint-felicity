@@ -128,7 +128,8 @@ class UserController
             header("Location: /account/edit");
             return;
         }
-        $admin = in_array('admin', User::getPrivsForUser($_SESSION["user_id"]));
+        $uPrivs = User::getPrivsForUser($_SESSION["user_id"]);
+        $admin = !$uPrivs? false : in_array('admin', $uPrivs);
         if (!$admin) {
             header("Location: /members");
             return;
@@ -172,7 +173,8 @@ class UserController
             header("Location: /account/edit/password");
             return;
         }
-        $admin = in_array('admin', User::getPrivsForUser($_SESSION["user_id"]));
+        $uPrivs = User::getPrivsForUser($_SESSION["user_id"]);
+        $admin = !$uPrivs? false : in_array('admin', $uPrivs);
         if (!$admin) {
             header("Location: /members");
             return;
@@ -201,7 +203,8 @@ class UserController
             header("Location: /account/edit");
             return;
         }
-        $admin = in_array('admin', User::getPrivsForUser($_SESSION["user_id"]));
+        $uPrivs = User::getPrivsForUser($_SESSION["user_id"]);
+        $admin = !$uPrivs? false : in_array('admin', $uPrivs);
         if (!$admin) {
             header("Location: /members");
             return;
